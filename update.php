@@ -7,4 +7,4 @@
  */
 $ret= system("git fetch --all");
 $ret.="\n".system("git reset --hard origin/master");
-echo "<pre>".$ret.</pre>;
+echo "<pre>".$ret."</pre>";
