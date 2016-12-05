@@ -26,7 +26,7 @@
 		</cover>
 		<menu>
 			<entry title="活动详情" do="details" state="" direct="false" />
-			<entry title="活动管理" do="details" state="" direct="false" />
+			<entry title="活动管理" do="manager" state="" direct="false" />
 			<entry title="订单管理" do="order" state="" direct="false" />
 		</menu>
 		<home>
