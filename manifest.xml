@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns="http://www.we7.cc" versionCode="0.6">
+	<application setting="true">
+		<name><![CDATA[砍价]]></name>
+		<identifie><![CDATA[wx_bargain]]></identifie>
+		<version><![CDATA[1.0]]></version>
+		<type><![CDATA[activity]]></type>
+		<ability><![CDATA[创建砍价活动]]></ability>
+		<description><![CDATA[创建，发起砍价活动]]></description>
+		<author><![CDATA[DoubleWei]]></author>
+		<url><![CDATA[http://bbs.we7.cc/]]></url>
+	</application>
+	<platform>
+		<subscribes>
+			<message type="text" />
+		</subscribes>
+		<handles>
+			<message type="text" />
+		</handles>
+		<rule embed="true" />
+		<card embed="false" />
+	</platform>
+	<bindings>
+		<cover>
+			<entry title="砍价首页" do="bargain" state="" direct="true" />
+		</cover>
+		<menu>
+			<entry title="活动详情" do="details" state="" direct="false" />
+			<entry title="活动管理" do="details" state="" direct="false" />
+			<entry title="订单管理" do="order" state="" direct="false" />
+		</menu>
+		<home>
+			<entry title="砍价首页" do="bargain" state="" direct="true" />
+		</home>
+	</bindings>
+	<permissions>
+	</permissions>
+	<install><![CDATA[]]></install>
+	<uninstall><![CDATA[]]></uninstall>
+	<upgrade><![CDATA[]]></upgrade>
+</manifest>
