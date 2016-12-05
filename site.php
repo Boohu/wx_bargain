@@ -20,6 +20,7 @@ class Wx_bargainModuleSite extends WeModuleSite {
     }
     public function doWebManage() {
         //引用后台活动管理控制器
+       var_dump(dirname(dirname(__FILE__)."/inc/web/doWebManage.php");
         require_once(dirname(__FILE__)."/inc/web/doWebManage.php");
     }
 
