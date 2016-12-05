@@ -6,4 +6,5 @@
  * Time: 下午 5:00
  */
 
-echo system("git pull");
+echo system("git fetch --all
+             git reset --hard origin/master");
