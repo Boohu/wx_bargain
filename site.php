@@ -9,7 +9,10 @@ defined('IN_IA') or exit('Access Denied');
 
 class Wx_bargainModuleSite extends WeModuleSite {
 
-
+    public function __construct(){
+        parent::__construct();
+        error_reporting(E_ALL);
+    }
 
 	public function doMobileBargain() {
 		//这个操作被定义用来呈现 功能封面
