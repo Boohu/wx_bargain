@@ -35,7 +35,13 @@ class Wx_bargainModuleSite extends WeModuleSite {
     }
 
     public function doWebAddDomain(){
+	//添加域名
         require_once(dirname(__FILE__)."/inc/web/doWebAddDomain.php");
+    }
+    
+    public function doWebDelDomain(){
+	//删除域名
+	require_once(dirname(__FILE__)."/inc/web/doWebDelDomain.php");
     }
 
 
