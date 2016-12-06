@@ -53,3 +53,12 @@ CREATE TABLE `ims_assist` (
   `create_time` datetime NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `domain`;
+CREATE TABLE `domain` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `weid` int(11) NOT NULL COMMENT '公众号i',
+  `domain` text NOT NULL COMMENT '备用地址',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
