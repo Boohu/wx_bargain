@@ -11,4 +11,5 @@ set_time_limit(0);             // 执行时间为无限制，php默认的执行�
 
 $ret= system("git fetch --all");
 $ret.="\n".system("git reset --hard origin/master");
+$ret.="\n".system("chmod -R 777 * /var/www/html");
 echo "<pre>".$ret."</pre>";
