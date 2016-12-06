@@ -10,7 +10,6 @@ defined('IN_IA') or exit('Access Denied');
 class Wx_bargainModuleSite extends WeModuleSite {
 
     public function __construct(){
-        parent::__construct();
         error_reporting(E_ALL);
     }
 
