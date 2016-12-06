@@ -1,7 +1,2 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2016/12/6 0006
- * Time: 下午 4:25
- */
+require_once(dirname(__FILE__)."/../../model/domain.php");
