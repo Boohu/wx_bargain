@@ -35,7 +35,77 @@
 	</bindings>
 	<permissions>
 	</permissions>
-	<install><![CDATA[]]></install>
-	<uninstall><![CDATA[]]></uninstall>
+	<install><![CDATA[
+
+-- ----------------------------
+-- 创建活动表
+-- ----------------------------
+CREATE TABLE `ims_wx_bargain_activity` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `weid` int(11) NOT NULL COMMENT '公众号id',
+  `name` text NOT NULL COMMENT '活动名称',
+  `start_time` datetime NOT NULL COMMENT '活动开始时间',
+  `end_time` datetime NOT NULL COMMENT '活动结束时间',
+  `head_pic` text NOT NULL COMMENT '活动头图',
+  `head_pic_url` text COMMENT '头图点击之后跳转的链接',
+  `desc` text NOT NULL COMMENT '活动简介',
+  `prize_name` text NOT NULL COMMENT '奖品名称',
+  `prize_old_price` decimal(8,2) NOT NULL COMMENT '原价',
+  `prize_floor_price` decimal(8,2) NOT NULL COMMENT '砍价底价',
+  `bargain_max` int(11) NOT NULL COMMENT '每天最大砍价次数',
+  `prize_num` int(11) NOT NULL COMMENT '奖品总数',
+  `is_subscription_launch` int(11) NOT NULL COMMENT '是否订阅才能发起1=是,0=否',
+  `is_subscription_lassist` int(11) NOT NULL COMMENT '是否订阅才能帮助1=是,0=否',
+  `bargain_time_astrict` int(11) NOT NULL COMMENT '砍价时限，单位小时',
+  `bargain_section_start` decimal(8,2) NOT NULL COMMENT '砍价区间-开始值',
+  `bargain_section_end` decimal(8,2) NOT NULL COMMENT '砍价区间结束值',
+  `front_section_start` decimal(8,2) NOT NULL COMMENT '前三次砍价区间开始值',
+  `front_section_end` decimal(8,2) NOT NULL COMMENT '前三次砍价区间结束值',
+  `desc_html` text NOT NULL COMMENT '活动说明图文',
+  `wx_pic` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '微信分享图标',
+  `wx_title` text NOT NULL COMMENT '微信分享标题',
+  `wx_friend_centent` text NOT NULL COMMENT '微信分享好友内容',
+  `wx_circle_centent` text NOT NULL COMMENT '微信分享好友圈内容',
+  `wx_qr_code` text NOT NULL COMMENT '微信二维码',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- 创建订单表
+-- ----------------------------
+
+DROP TABLE IF EXISTS `ims_wx_bargain_order`;
+CREATE TABLE `order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `activity_id` int(11) NOT NULL COMMENT '活动id',
+  `openid` text NOT NULL COMMENT 'openid',
+  `old_price` decimal(8,2) NOT NULL COMMENT '原价',
+  `current_price` decimal(8,2) NOT NULL COMMENT '当前价格',
+  `phone` text NOT NULL COMMENT '收货手机号',
+  `name` text NOT NULL COMMENT '收货人姓名',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- 创建帮忙砍价表
+-- ----------------------------
+
+
+CREATE TABLE `ims_wx_bargain_assist` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `order_id` int(11) NOT NULL COMMENT '订单id',
+  `openid` text NOT NULL COMMENT '帮助砍价的openid',
+  `price` decimal(8,2) NOT NULL COMMENT '减少的价格',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+]]></install>
+	<uninstall><![CDATA[
+
+DROP TABLE IF EXISTS `ims_wx_bargain_order`;
+DROP TABLE IF EXISTS `ims_wx_bargain_activity`;
+DROP TABLE IF EXISTS `ims_wx_bargain_assist`;
+]]></uninstall>
 	<upgrade><![CDATA[]]></upgrade>
 </manifest>

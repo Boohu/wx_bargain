@@ -17,10 +17,12 @@ class Wx_bargainModuleSite extends WeModuleSite {
 	}
 	public function doWebOrder() {
     //这个操作被定义用来呈现 管理中心导航菜单
+        require_once(dirname(__FILE__)."/inc/web/doWebOrder.php");
     }
     public function doWebManager() {
         //引用后台活动管理控制器
-        require_once(dirname(__FILE__)."/inc/web/doWebManager.php");
+//        require_once(dirname(__FILE__)."/inc/web/doWebManager.php");
+        include $this->template('manager');
     }
 
 }

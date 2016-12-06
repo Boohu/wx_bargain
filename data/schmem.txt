@@ -45,7 +45,7 @@ CREATE TABLE `order` (
 
 
 DROP TABLE IF EXISTS `assist`;
-CREATE TABLE `assist` (
+CREATE TABLE `ims_assist` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `order_id` int(11) NOT NULL COMMENT '订单id',
   `openid` text NOT NULL COMMENT '帮助砍价的openid',
