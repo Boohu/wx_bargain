@@ -29,6 +29,11 @@ class Wx_bargainModuleSite extends WeModuleSite {
     }
 
 
+    public function doWebDomain(){
+        //多域名管理
+        require_once(dirname(__FILE__)."inc/web/doWebDomain.php");
+    }
+
 
     /*移动端测试页面*/
     public function doMobileTest(){
