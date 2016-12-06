@@ -9,6 +9,8 @@ defined('IN_IA') or exit('Access Denied');
 
 class Wx_bargainModuleSite extends WeModuleSite {
 
+
+
 	public function doMobileBargain() {
 		//这个操作被定义用来呈现 功能封面
 	}
@@ -21,6 +23,19 @@ class Wx_bargainModuleSite extends WeModuleSite {
     public function doWebManager() {
         //引用后台活动管理控制器
         require_once(dirname(__FILE__)."/inc/web/doWebManager.php");
+    }
+
+
+
+    /*移动端测试页面*/
+    public function doMobileTest(){
+        require_once  ( dirname(__FILE__)."/test/doMobileTest.php" );
+    }
+
+
+    /*手机端测试页面*/
+    public function doWebTest(){
+        require_once  ( dirname(__FILE__)."/test/doWebTest.php" );
     }
 
 }
