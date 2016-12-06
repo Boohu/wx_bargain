@@ -3,7 +3,7 @@
 <ul class="nav nav-tabs">
 
     <li {if $operation == 'display' && $status == '-1'}class="active"{/if}>
-        <a href="{php echo $this->createWebUrl('manager')，array('op'=>'display','status'=>-1)">活动管理</a>
+        <a href="{php echo $this->createWebUrl('manager')，array('op'=>'display','status'=>-1)}">活动管理</a>
     </li>
     <li {if $operation == 'display' && $status == '0'}class="active"{/if}>
         <a href="{php echo $this->createWebUrl('manager'),array('op'=>'display','status'=>0}">添加砍价</a></li>
@@ -14,7 +14,7 @@
     <div class="panel panel-info">
         <div class="panel-heading">搜索</div>
         <div class="panel-body">
-            <form action="{php echo $this->createWebUrl('manager',array('op' => 'display', 'status' => $status))}" method="get" class="form-horizontal" role="form">
+            <form action="{php echo $this->createWebUrl('manager',array('op' => 'display', 'status' => $status))}" method="post" class="form-horizontal" role="form">
                 <input type="hidden" name="c" value="site" />
                 <input type="hidden" name="a" value="entry" />
                 <input type="hidden" name="m" value="wx_bargain" />
