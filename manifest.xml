@@ -101,7 +101,6 @@ CREATE TABLE `ims_wx_bargain_assist` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 
-DROP TABLE IF EXISTS `ims_wx_bargain_domain`;
 CREATE TABLE `ims_wx_bargain_domain` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `weid` int(11) NOT NULL COMMENT '公众号i',
