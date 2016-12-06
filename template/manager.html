@@ -1,99 +1,281 @@
 <!--后台活动管理页面-->
 {template 'common/header'}
+<!--导航-->
 <ul class="nav nav-tabs">
 
-    <li {if $operation == 'display' && $status == '-1'}class="active"{/if}>
-        <a href="{php echo $this->createWebUrl('manager')，array('op'=>'display','status'=>-1)}">活动管理</a>
+    <li {if $operation=='display' && $status == 0}class="active"{/if}>
+    <a href="{php echo $this->createWebUrl('manager',array('op'=>'display','status'=>0))}">活动管理</a>
     </li>
-    <li {if $operation == 'display' && $status == '0'}class="active"{/if}>
-        <a href="{php echo $this->createWebUrl('manager'),array('op'=>'display','status'=>0}">添加砍价</a></li>
+    <li {if $operation=='display' && $status == 1}class="active"{/if}>
+    <a href="{php echo $this->createWebUrl('manager',array('op'=>'display','status'=>1));}">添加砍价</a></li>
 </ul>
 
-搜索
-<div class="clearfix">
-    <div class="panel panel-info">
-        <div class="panel-heading">搜索</div>
-        <div class="panel-body">
-            <form action="{php echo $this->createWebUrl('manager',array('op' => 'display', 'status' => $status))}" method="post" class="form-horizontal" role="form">
-                <input type="hidden" name="c" value="site" />
-                <input type="hidden" name="a" value="entry" />
-                <input type="hidden" name="m" value="wx_bargain" />
-                <input type="hidden" name="do" value="manager" />
-                <div class="form-group">
-                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">状态</label>
-                    <div class="col-sm-8 col-lg-9 col-xs-12">
-                        <div class="btn-group">
-                            <a href="{php echo $this->createWebUrl('manager', array('op' => 'display','status'=>-1,'type'=>-1))}"
-                               class="btn btn-primary">所有</a>
-                            <a href="{php echo $this->createWebUrl('manager', array('op' => 'display','status'=-1,'type'=>0))}"
-                               class="btn btn-default">正常</a>
-                            <a href="{php echo $this->createWebUrl('manager', array('op' => 'display','status'=>-1,'type'=>1))}"
-                               class="btn btn-default">禁用</a>
+<!--判断如果status为0进入活动管理界面-->
+{if $operation=='display'&& $status==0}
+    <!--搜索-->
+    <div class="clearfix">
+        <div class="panel panel-info">
+            <div class="panel-heading">搜索</div>
+            <div class="panel-body">
+                <form action="{php echo $this->createWebUrl('manager',array('op' => 'display', 'status' => $status))}"
+                      method="post" class="form-horizontal" role="form">
+                    <input type="hidden" name="c" value="site"/>
+                    <input type="hidden" name="a" value="entry"/>
+                    <input type="hidden" name="m" value="wx_bargain"/>
+                    <input type="hidden" name="do" value="manager"/>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">状态</label>
+                        <div class="col-sm-8 col-lg-9 col-xs-12">
+                            <div class="btn-group">
+                                <a href="#"
+                                   class="btn btn-primary">所有</a>
+                                <a href="#"
+                                   class="btn btn-default">正常</a>
+                                <a href="#"
+                                   class="btn btn-default">禁用</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">活动名称:</label>
-                    <div class="col-sm-8 col-xs-12">
-                        <input class="form-control" name="keyword" id="" type="text" value="">
-                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">活动名称:</label>
+                        <div class="col-sm-8 col-xs-12">
+                            <input class="form-control" name="keyword" id="" type="text" value="">
+                        </div>
 
-                    <div class="col-xs-12 col-sm-2 col-lg-1 text-right">
-                        <button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
-                    </div>
+                        <div class="col-xs-12 col-sm-2 col-lg-1 text-right">
+                            <button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+                        </div>
 
-                </div>
-            </form>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
-<!--列表-->
-<div class="panel panel-default">
-    <div class="panel-body table-responsive">
-        <table class="table table-hover">
-            <thead class="navbar-inner">
-            <tr>
-                <th style="width:180px;">活动名称</th>
-                <th style="width:100px;">开始时间</th>
-                <th style="width:120px;">结束时间</th>
-                <th style="width:50px;">状态</th>
-                <th style="width:180px;">查看</th>
-                <th style="width:90px;">兑奖</th>
-                <th style="width:100px; text-align:right;">操作</th>
-            </tr>
-            </thead>
-            <tbody>
+    <!--列表-->
+    <div class="panel panel-default">
+        <div class="panel-body table-responsive">
+            <table class="table table-hover">
+                <thead class="navbar-inner">
+                <tr>
+                    <th style="width:180px;">活动名称</th>
+                    <th style="width:100px;">开始时间</th>
+                    <th style="width:120px;">结束时间</th>
+                    <th style="width:50px;">状态</th>
+                    <th style="width:180px;">查看</th>
+                    <th style="width:90px;">兑奖</th>
+                    <th style="width:100px; text-align:right;">操作</th>
+                </tr>
+                </thead>
+                <tbody>
 
-            <tr>
-                <td>苹果3000砍价只要2000</td>
-                <td>2016-11-11 20:00</td>
-                <td>2016-11-12 20:00</td>
-                <td>
-                    <span style="display:block;text-align:center;padding:10px 0;font-size: 12px;line-height:1;color:#fff;width:46px;height:30px;border-radius:3px;background-color: #5cb85c">正常</span>
-                </td>
-                <td>
-                    <a href="{php echo $this->createWebUrl('#')}"
-                       class="btn btn-primary btn-sm">查看参与列表</a>
-                    <a href="{php echo $this->createWebUrl('#')}"
-                       class="btn btn-primary btn-sm">查看详情列表</a>
-                </td>
-                <td>
-                    <a href="{php echo $this->createWebUrl('#')}"
-                       class="btn btn-primary btn-sm">内部兑奖设置</a>
-                </td>
-                <td style="text-align:right;">
-                    <a href="{php echo $this->createWebUrl('#')}"
-                       class="btn btn-primary  btn-sm">修改</a>
-                    <a href="{php echo $this->createWebUrl('#')}"
-                       onclick="return confirm('确定要禁用本次活动么？');"
-                       class="btn btn-default btn-sm">禁用<!--<i class="fa fa-times"></i>-->
-                    </a>
-                </td>
-            </tr>
+                <tr>
+                    <td>苹果3000砍价只要2000</td>
+                    <td>2016-11-11 20:00</td>
+                    <td>2016-11-12 20:00</td>
+                    <td>
+                        <span style="display:block;text-align:center;padding:10px 0;font-size: 12px;line-height:1;color:#fff;width:46px;height:30px;border-radius:3px;background-color: #5cb85c">正常</span>
+                    </td>
+                    <td>
+                        <a href="#"
+                           class="btn btn-primary btn-sm">查看参与列表</a>
+                        <a href="#"
+                           class="btn btn-primary btn-sm">查看详情列表</a>
+                    </td>
+                    <td>
+                        <a href="#"
+                           class="btn btn-primary btn-sm">内部兑奖设置</a>
+                    </td>
+                    <td style="text-align:right;">
+                        <a href="#"
+                           class="btn btn-primary  btn-sm">修改</a>
+                        <a href="#"
+                           onclick="return confirm('确定要禁用本次活动么？');"
+                           class="btn btn-default btn-sm">禁用<!--<i class="fa fa-times"></i>-->
+                        </a>
+                    </td>
+                </tr>
 
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
+
+<!--判断如果status为0进入活动管理界面-->
+    {elseif $operation=='display'&& $status==1}
+<div class="clearfix">
+    <form action="" method="post" class="form-horizontal" role="form" enctype="multipart/form-data" id="form1">
+        <input type="hidden" name="step" value="2">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                添加活动
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> 活动名称</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="cname" class="form-control" value="" autocomplete="off">
+                        <span class="help-block">填写活动名称</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> 活动开始时间</label>
+                    <div class="input-group col-sm-8" style="padding-left:15px;padding-right:15px">
+                            <input type="text" id="start_time" name="start_time" value="" class="form-control" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:00'})" required="">
+                            <span class="input-group-addon">至</span>
+                            <input type="text" id="end_time" name="end_time" value="" class="form-control" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:59'})" required="">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动头图</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="file" name="headimg" value="" id="filestyle-2" tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);"><div class="bootstrap-filestyle input-group"><input type="text" class="form-control " disabled=""> <span class="group-span-filestyle input-group-btn" tabindex="0"><label for="filestyle-2" class="btn btn-default "><span class="glyphicon glyphicon-folder-open"></span> 上传图片</label></span></div>
+                        <span class="help-block">只支持JPG图片</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>跳转链接</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="cname" class="form-control" value="" autocomplete="off">
+                        <span class="help-block">头图点击之后跳转的链接</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动简介</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <textarea style="height: 80px;" class="form-control" name="description"></textarea>
+                        <span class="help-block">用于对此本次活动进行说明和介绍。</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>奖品名称</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="giftname" class="form-control" value="" autocomplete="off">
+                        <span class="help-block">填写奖品名称</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>奖品原价</label>
+                    <div class="input-group col-sm-3" style="padding-left:15px;padding-right:15px">
+                        <input type="text" class="form-control" id="" name="prize_price" value="" required="">
+                        <span class="input-group-addon">元</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>砍价底价</label>
+                    <div class="input-group col-sm-3" style="padding-left:15px;padding-right:15px">
+                        <input type="text" class="form-control" id="" name="prize_price" value="" required="">
+                        <span class="input-group-addon">元</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">每天最大砍价次数</label>
+                    <div class="input-group col-sm-3" style="padding-left:15px;padding-right:15px">
+                        <input type="text" class="form-control" id="" name="prize_price" value="" required="">
+                        <span class="input-group-addon">次</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>奖品总数</label>
+                    <div class="input-group col-sm-3" style="padding-left:15px;padding-right:15px">
+                        <input type="text" class="form-control" id="" name="prize_price" value="" required="">
+                        <span class="input-group-addon">份</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>是否订阅才能发起</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <label for="status_1" class="radio-inline"><input autocomplete="off" type="radio" name="level1" id="status_1" value="1" checked="">是</label>
+                        <label for="status_2" class="radio-inline"><input autocomplete="off" type="radio" name="level1" id="status_2" value="2">否</label>
+                        <span class="help-block">注意：xxxxx</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>是否订阅才能帮助</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <label for="status_3" class="radio-inline"><input autocomplete="off" type="radio" name="level2" id="status_3" value="1" checked="">是</label>
+                        <label for="status_4" class="radio-inline"><input autocomplete="off" type="radio" name="level2" id="status_4" value="2">否</label>
+                        <span class="help-block">注意：xxxxx</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>砍价时限</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="cname" class="form-control" value="" autocomplete="off">
+                        <span class="help-block">填写每次帮忙砍价时限</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>砍价区间</label>
+                    <div class="input-group col-sm-8" style="padding-left:15px;padding-right:15px">
+                        <input type="text" id="start_num" name="start_time" value="" class="form-control"  required="">
+                        <span class="input-group-addon">至</span>
+                        <input type="text" id="end_num" name="end_time" value="" class="form-control"  required="">
+                        <span class="input-group-addon">元</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">前三次砍价区间</label>
+                    <div class="input-group col-sm-8" style="padding-left:15px;padding-right:15px">
+                        <input type="text" id="start3_num" name="start_time" value="" class="form-control"  required="">
+                        <span class="input-group-addon">至</span>
+                        <input type="text" id="end3_num" name="end_time" value="" class="form-control"  required="">
+                        <span class="input-group-addon">元</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动说明图文</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <textarea style="height: 80px;" class="form-control" name="description"></textarea>
+                        <span class="help-block">用于对此本次活动进行说明和介绍。</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>微信分享图标</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="file" name="qrcode" value="" id="filestyle-0" tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);"><div class="bootstrap-filestyle input-group"><input type="text" class="form-control " disabled=""> <span class="group-span-filestyle input-group-btn" tabindex="0"><label for="filestyle-0" class="btn btn-default "><span class="glyphicon glyphicon-folder-open"></span> 上传图片</label></span></div>
+                        <span class="help-block">只支持JPG图片</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>微信分享标题</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="cname" class="form-control" value="" autocomplete="off">
+                        <span class="help-block">填写微信分享标题</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>微信分享好友内容</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="cname" class="form-control" value="" autocomplete="off">
+                        <span class="help-block">填写微信分享好友内容</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>微信分享好友圈内容</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="text" name="cname" class="form-control" value="" autocomplete="off">
+                        <span class="help-block">填写微信分享好友圈内容</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>微信二维码</label>
+                    <div class="col-sm-9 col-xs-12">
+                        <input type="file" name="qrcode" value="" id="filestyle-1" tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);"><div class="bootstrap-filestyle input-group"><input type="text" class="form-control " disabled=""> <span class="group-span-filestyle input-group-btn" tabindex="0"><label for="filestyle-1" class="btn btn-default "><span class="glyphicon glyphicon-folder-open"></span> 上传图片</label></span></div>
+                        <span class="help-block">只支持JPG图片</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <input name="submit" type="submit" value="保存" class="btn btn-primary">
+                <input type="hidden" name="token" value="d1737a17">
+            </div>
+        </div>
+    </form>
 </div>
+{/if}
 {template 'common/footer'}
