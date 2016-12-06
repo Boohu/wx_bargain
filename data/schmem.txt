@@ -28,3 +28,16 @@ CREATE TABLE `activity` (
   `wx_qr_code` text NOT NULL COMMENT '微信二维码',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `order`;
+CREATE TABLE `order` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `activity_id` int(11) NOT NULL COMMENT '活动id',
+  `openid` text NOT NULL COMMENT 'openid',
+  `old_price` decimal(8,2) NOT NULL COMMENT '原价',
+  `current_price` decimal(8,2) NOT NULL COMMENT '当前价格',
+  `phone` text NOT NULL COMMENT '收货手机号',
+  `name` text NOT NULL COMMENT '收货人姓名',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
