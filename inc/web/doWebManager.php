@@ -9,5 +9,4 @@
 global $_GPC,$_W;
 $weid=$_W['uniacid'];               //获取当前公众号ID
 $operation=!empty($_GPC['op'])?$_GPC['op']:'display';   //附判断值
-echo 1111;
-include $this->template('web/manager');                              //打开后台活动管理页面
+include $this->template('manager');                              //打开后台活动管理页面
