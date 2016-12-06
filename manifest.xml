@@ -74,8 +74,7 @@ CREATE TABLE `ims_wx_bargain_activity` (
 -- 创建订单表
 -- ----------------------------
 
-DROP TABLE IF EXISTS `ims_wx_bargain_order`;
-CREATE TABLE `order` (
+CREATE TABLE `ims_wx_bargain_order` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `activity_id` int(11) NOT NULL COMMENT '活动id',
   `openid` text NOT NULL COMMENT 'openid',

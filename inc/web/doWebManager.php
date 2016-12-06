@@ -8,5 +8,6 @@
 
 global $_GPC,$_W;
 $weid=$_W['uniacid'];               //获取当前公众号ID
-$operation=!empty($_GPC['op'])?$_GPC['op']:'display';   //附判断值
+$operation=!empty($_GPC['op'])?$_GPC['op']:'display';//附判断值
+$status=$_GPC['status'];
 include $this->template('manager');                              //打开后台活动管理页面
