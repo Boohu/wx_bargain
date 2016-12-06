@@ -1,2 +1,2 @@
 <?php
-include $this->template('web-test.html');
+include $this->template('webtest.html');
