@@ -7,7 +7,9 @@ class ActiveModel{
      * @param $id 要删除的活动id
      */
     static function del($id){
-
+        global $_W;
+        $weid=$_W['uniacid'];               //获取当前公众号ID
+        return pdo_delete('wx_bargain_active',array('id'=>$id,'weid'=>$weid));
     }
 
     /***
@@ -15,10 +17,16 @@ class ActiveModel{
      * @param $data 要保存的信息，包含id字段为修改操作，不包含id字段为添加操作
      */
     static function save($data){
+        global $_W;
+        $weid=$_W['uniacid'];               //获取当前公众号ID
         if(isset($data['id'])){
             /*修改操作*/
+            if($weid!=$data['weid']) return false;
+            return pdo_update('wx_bargain_active',$data,array('id'=>$data['id'],'weid'=>$weid));
         }else{
             /*添加操作*/
+            $data[weid]=$weid;
+            return pdo_insert('wx_bargain_active', $data);
         }
     }
 
