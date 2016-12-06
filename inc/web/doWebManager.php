@@ -6,6 +6,8 @@
  * Time: 17:58
  */
 
+require_once(dirname(__FILE__)."../../model/active.php");
+
 global $_GPC,$_W;
 $weid=$_W['uniacid'];               //获取当前公众号ID
 $operation=!empty($_GPC['op'])?$_GPC['op']:'display';//附判断值
