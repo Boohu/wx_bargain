@@ -1,5 +1,9 @@
 {template 'common/header'}
 <div class="panel panel-default">
-    {php echo tpl_form_field_image('single-image');}
+
+
+    {php load()->func('tpl'); }
+
+    {php echo tpl_ueditor('content',"111111111");}
 </div>
 {template 'common/footer'}
