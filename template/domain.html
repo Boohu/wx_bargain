@@ -14,7 +14,7 @@
             <tr>
                 <td  style="text-align: center">{$item['domain']}</td>
                 <td  style="text-align: right;width: 100px;">
-                    <input type="button" class="btn  btn-warning" value="删除" />
+                    <a type="button" class="btn  btn-warning" href="{php echo $this->createWebUrl('delDomain',array('id'=>$item['id']))}">删除</a>
                 </td>
             </tr>
             {/loop}
