@@ -34,6 +34,10 @@ class Wx_bargainModuleSite extends WeModuleSite {
         require_once(dirname(__FILE__)."/inc/web/doWebDomain.php");
     }
 
+    public function doWebAddDomain(){
+        require_once(dirname(__FILE__)."/inc/web/doWebAddDomain.php");
+    }
+
 
     /*移动端测试页面*/
     public function doMobileTest(){
