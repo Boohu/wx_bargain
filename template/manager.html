@@ -227,8 +227,8 @@
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动说明图文</label>
                     <div class="col-sm-9 col-xs-12">
-                        <textarea style="height: 80px;" class="form-control" name="description"></textarea>
-                        <span class="help-block">用于对此本次活动进行说明和介绍。</span>
+                        {php echo tpl_ueditor('content', $value = '', $options = array('height'=>350));}
+                        <span class="help-block">用于对此本次活动添加图文说明。</span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -277,5 +277,6 @@
         </div>
     </form>
 </div>
+
 {/if}
 {template 'common/footer'}
