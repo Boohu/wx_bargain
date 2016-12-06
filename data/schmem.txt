@@ -41,3 +41,15 @@ CREATE TABLE `order` (
   `name` text NOT NULL COMMENT '收货人姓名',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+DROP TABLE IF EXISTS `assist`;
+CREATE TABLE `assist` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `order_id` int(11) NOT NULL COMMENT '订单id',
+  `openid` text NOT NULL COMMENT '帮助砍价的openid',
+  `price` decimal(8,2) NOT NULL COMMENT '减少的价格',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
