@@ -10,7 +10,7 @@ defined('IN_IA') or exit('Access Denied');
 class Wx_bargainModuleSite extends WeModuleSite {
 
     public function __construct(){
-        error_reporting(E_ALL);
+        error_reporting(E_ALL ^ E_NOTICE );
     }
 
 	public function doMobileBargain() {
