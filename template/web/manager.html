@@ -1,0 +1,207 @@
+<!--后台活动管理页面-->
+{template 'common/header'}
+
+<!--<ul class="nav nav-tabs">-->
+
+    <!--<li {if $operation == 'display' && $status == '-1'}class="active"{/if}>-->
+        <!--<a href="{php echo $this->createWebUrl('manager')，array('op'=>'display','status'=>-1)">活动管理</a>-->
+    <!--</li>-->
+    <!--<li {if $operation == 'display' && $status == '0'}class="active"{/if}>-->
+        <!--<a href="{php echo $this->createWebUrl('manager'),array('op'=>'display','status'=>0}">添加砍价</a></li>-->
+<!--</ul>-->
+
+搜索
+<div class="clearfix">
+    <div class="panel panel-info">
+        <div class="panel-heading">搜索</div>
+        <div class="panel-body">
+            <form action="./doWebManager.php" method="get" class="form-horizontal" role="form">
+                <input type="hidden" name="c" value="site" />
+                <input type="hidden" name="a" value="entry" />
+                <input type="hidden" name="m" value="wx_bargain" />
+                <input type="hidden" name="do" value="manager" />
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">状态</label>
+                    <div class="col-sm-8 col-lg-9 col-xs-12">
+                        <div class="btn-group">
+                            <a href="{php echo $this->createWebUrl('manager', array('op' => 'display','status'=>-1,'type'=>-1))}"
+                               class="btn btn-primary">所有</a>
+                            <a href="{php echo $this->createWebUrl('manager', array('op' => 'display','status'=-1,'type'=>0))}"
+                               class="btn btn-default">正常</a>
+                            <a href="{php echo $this->createWebUrl('manager', array('op' => 'display','status'=>-1,'type'=>1))}"
+                               class="btn btn-default">禁用</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">活动名称:</label>
+                    <div class="col-sm-8 col-xs-12">
+                        <input class="form-control" name="keyword" id="" type="text" value="">
+                    </div>
+
+                    <div class="col-xs-12 col-sm-2 col-lg-1 text-right">
+                        <button class="btn btn-default"><i class="fa fa-search"></i> 搜索</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+<!--    <form action="./index.php?c=platform&amp;a=reply&amp;do=delete&amp;" method="post" class="form-horizontal"
+          role="form" id="form1">
+        <input type="hidden" name="m" value="wx_bargain">
+    </form>-->
+</div>
+
+<!--列表-->
+<div class="panel panel-default">
+    <div class="panel-body table-responsive">
+        <table class="table table-hover">
+            <thead class="navbar-inner">
+            <tr>
+                <th style="width:180px;">活动名称</th>
+                <th style="width:100px;">开始时间</th>
+                <th style="width:120px;">结束时间</th>
+                <th style="width:50px;">状态</th>
+                <th style="width:180px;">查看</th>
+                <th style="width:90px;">兑奖</th>
+                <th style="width:100px; text-align:right;">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr>
+                <td>苹果3000砍价只要2000</td>
+                <td>2016-11-11 20:00</td>
+                <td>2016-11-12 20:00</td>
+                <td>
+                    <span style="display:block;text-align:center;padding:10px 0;font-size: 12px;line-height:1;color:#fff;width:46px;height:30px;border-radius:3px;background-color: #5cb85c">正常</span>
+                </td>
+                <td>
+                    <a href="{php echo $this->createWebUrl('#')}"
+                       class="btn btn-primary btn-sm">查看参与列表</a>
+                    <a href="{php echo $this->createWebUrl('#')}"
+                       class="btn btn-primary btn-sm">查看详情列表</a>
+                </td>
+                <td>
+                    <a href="{php echo $this->createWebUrl('#')}"
+                       class="btn btn-primary btn-sm">内部兑奖设置</a>
+                </td>
+                <td style="text-align:right;">
+                    <a href="{php echo $this->createWebUrl('order')}"
+                       class="btn btn-primary  btn-sm">修改</a>
+                    <a href="{php echo $this->createWebUrl('order')}"
+                       onclick="return confirm('确定要禁用本次活动么？');"
+                       class="btn btn-default btn-sm">禁用<!--<i class="fa fa-times"></i>-->
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>苹果3000砍价只要2000</td>
+                <td>2016-11-11 20:00</td>
+                <td>2016-11-12 20:00</td>
+                <td>
+                    <span style="display:block;text-align:center;padding:10px 0;font-size: 12px;line-height:1;color:#333;width:46px;height:30px;border-radius:3px;border: 1px solid #adadad">禁用</span>
+                </td>
+                <td>
+                    <a href="{php echo $this->createWebUrl('order', array('op' => 'detail', 'id' => $item['id']))}"
+                       class="btn btn-primary btn-sm">查看参与列表</a>
+                    <a href="{php echo $this->createWebUrl('order', array('op' => 'detail', 'id' => $item['id']))}"
+                       class="btn btn-primary btn-sm">查看详情列表</a>
+                </td>
+                <td>
+                    <a href="{php echo $this->createWebUrl('order', array('op' => 'detail', 'id' => $item['id']))}"
+                       class="btn btn-primary btn-sm">内部兑奖设置</a>
+                </td>
+                <td style="text-align:right;">
+                    <a href="{php echo $this->createWebUrl('order', array('op' => 'detail', 'id' => $item['id']))}"
+                       class="btn btn-primary  btn-sm">修改</a>
+                    <a href="{php echo $this->createWebUrl('order', array('id' => $item['id'], 'op' => 'delete'))}"
+                       onclick="return confirm('确定要禁用本次活动么？');"
+                       class="btn btn-default btn-sm">禁用<!--<i class="fa fa-times"></i>-->
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>苹果3000砍价只要2000</td>
+                <td>2016-11-11 20:00</td>
+                <td>2016-11-12 20:00</td>
+                <td>
+                    <span style="display:block;text-align:center;padding:10px 0;font-size: 12px;line-height:1;color:#fff;width:46px;height:30px;border-radius:3px;background-color: #5cb85c">正常</span>
+                </td>
+                <td>
+                    <a href="{php echo $this->createWebUrl('order', array('op' => 'detail', 'id' => $item['id']))}"
+                       class="btn btn-primary btn-sm">查看参与列表</a>
+                    <a href="{php echo $this->createWebUrl('order', array('op' => 'detail', 'id' => $item['id']))}"
+                       class="btn btn-primary btn-sm">查看详情列表</a>
+                </td>
+                <td>
+                    <a href="{php echo $this->createWebUrl('order', array('op' => 'detail', 'id' => $item['id']))}"
+                       class="btn btn-primary btn-sm">内部兑奖设置</a>
+                </td>
+                <td style="text-align:right;">
+                    <a href="{php echo $this->createWebUrl('order', array('op' => 'detail', 'id' => $item['id']))}"
+                       class="btn btn-primary  btn-sm">修改</a>
+                    <a href="{php echo $this->createWebUrl('order', array('id' => $item['id'], 'op' => 'delete'))}"
+                       onclick="return confirm('确定要禁用本次活动么？');"
+                       class="btn btn-default btn-sm">禁用<!--<i class="fa fa-times"></i>-->
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>苹果3000砍价只要2000</td>
+                <td>2016-11-11 20:00</td>
+                <td>2016-11-12 20:00</td>
+                <td>
+                    <span style="display:block;text-align:center;padding:10px 0;font-size: 12px;line-height:1;color:#fff;width:46px;height:30px;border-radius:3px;background-color: #5cb85c">正常</span>
+                </td>
+                <td>
+                    <a href="{php echo $this->createWebUrl('order', array('op' => 'detail', 'id' => $item['id']))}"
+                       class="btn btn-primary btn-sm">查看参与列表</a>
+                    <a href="{php echo $this->createWebUrl('order', array('op' => 'detail', 'id' => $item['id']))}"
+                       class="btn btn-primary btn-sm">查看详情列表</a>
+                </td>
+                <td>
+                    <a href="{php echo $this->createWebUrl('order', array('op' => 'detail', 'id' => $item['id']))}"
+                       class="btn btn-primary btn-sm">内部兑奖设置</a>
+                </td>
+                <td style="text-align:right;">
+                    <a href="{php echo $this->createWebUrl('order', array('op' => 'detail', 'id' => $item['id']))}"
+                       class="btn btn-primary  btn-sm">修改</a>
+                    <a href="{php echo $this->createWebUrl('order', array('id' => $item['id'], 'op' => 'delete'))}"
+                       onclick="return confirm('确定要禁用本次活动么？');"
+                       class="btn btn-default btn-sm">禁用<!--<i class="fa fa-times"></i>-->
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <td>苹果3000砍价只要2000</td>
+                <td>2016-11-11 20:00</td>
+                <td>2016-11-12 20:00</td>
+                <td>
+                    <span style="display:block;text-align:center;padding:10px 0;font-size: 12px;line-height:1;color:#333;width:46px;height:30px;border-radius:3px;border: 1px solid #adadad">禁用</span>
+                </td>
+                <td>
+                    <a href="{php echo $this->createWebUrl('order', array('op' => 'detail', 'id' => $item['id']))}"
+                       class="btn btn-primary btn-sm">查看参与列表</a>
+                    <a href="{php echo $this->createWebUrl('order', array('op' => 'detail', 'id' => $item['id']))}"
+                       class="btn btn-primary btn-sm">查看详情列表</a>
+                </td>
+                <td>
+                    <a href="{php echo $this->createWebUrl('order', array('op' => 'detail', 'id' => $item['id']))}"
+                       class="btn btn-primary btn-sm">内部兑奖设置</a>
+                </td>
+                <td style="text-align:right;">
+                    <a href="{php echo $this->createWebUrl('order', array('op' => 'detail', 'id' => $item['id']))}"
+                       class="btn btn-primary  btn-sm">修改</a>
+                    <a href="{php echo $this->createWebUrl('order', array('id' => $item['id'], 'op' => 'delete'))}"
+                       onclick="return confirm('确定要禁用本次活动么？');"
+                       class="btn btn-default btn-sm">禁用<!--<i class="fa fa-times"></i>-->
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+{template 'common/footer'}

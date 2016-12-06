@@ -14,16 +14,13 @@ class Wx_bargainModuleSite extends WeModuleSite {
 	}
 	public function doWebDetails() {
 		//这个操作被定义用来呈现 管理中心导航菜单
-        var_dump(dirname(__FILE__)."/inc/web/doWebManage.php");
-        require_once(dirname(__FILE__)."/inc/web/doWebManage.php");
 	}
 	public function doWebOrder() {
     //这个操作被定义用来呈现 管理中心导航菜单
     }
-    public function doWebManage() {
+    public function doWebManager() {
         //引用后台活动管理控制器
-       var_dump(dirname(__FILE__)."/inc/web/doWebManage.php");
-        require_once(dirname(__FILE__)."/inc/web/doWebManage.php");
+        require_once(dirname(__FILE__)."/inc/web/doWebManager.php");
     }
 
 }
