@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-1111
-</body>
-</html>
+{template 'common/header'}
+
+<div class="panel panel-default">
+    <div class="panel-heading">域名列表</div>
+    <form method="post" action="{php echo $this->createWebUrl('addDomain')}">
+        <table class="table">
+            <tbody>
+            <tr>
+                <th class="active" style="text-align: center">域名</th>
+                <th class="active" style="text-align: center">操作</th>
+            </tr>
+            <tr>
+                <th class="active" style="text-align: center"><input class="form-control"/> </th>
+                <th class="active" style="text-align: right"> <button id="sb" class="btn btn-primary">添加</button> </th>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+</div>
+<script>
+    $("#sb").click(function(){
+        alert(111);
+    })
+</script>
+{template 'common/footer'}
