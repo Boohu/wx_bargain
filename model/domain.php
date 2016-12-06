@@ -8,7 +8,7 @@ class Domain{
         $weid=$_W['uniacid'];               //获取当前公众号ID
         return pdo_insert('wx_bargain_domain', array('domain'=>$url,'weid'=>$weid));
     }
-
+    
 
     /**
      * 删除域名
@@ -17,7 +17,7 @@ class Domain{
     static function del($id){
         global $_W;
         $weid=$_W['uniacid'];               //获取当前公众号ID
-
+        return  pdo_delete('wx_bargain_domain',array('domain'=>$id,'weid'=>$weid))
     }
 
     /**
