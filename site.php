@@ -25,8 +25,7 @@ class Wx_bargainModuleSite extends WeModuleSite {
     }
     public function doWebManager() {
         //引用后台活动管理控制器
-//        require_once(dirname(__FILE__)."/inc/web/doWebManager.php");
-        include $this->template('manager');
+        require_once(dirname(__FILE__)."/inc/web/doWebManager.php");
     }
 
 
