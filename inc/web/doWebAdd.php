@@ -8,7 +8,7 @@
 require_once(dirname(__FILE__) . "/../../model/active.php");
 global $_GPC, $_W;
 
-
+$weid=$_GPC['content'];            //获取当前公众号ID
 $id=$_GPC['id'];                //获取id值
 $name = $_GPC['name'];          //获取活动名称
 $start_time = $_GPC['time'];        //获取活动开始和结束时间
@@ -37,9 +37,10 @@ $wx_qr_code = $_GPC['qr_code'];                   //获取微信二维码
 
 $data = array(
     'id'=>$id,
+    'weid'=>$weid,
     'name' => $name,
-//    'start_time' => $start_time,
-//    'end_time'=>$end_time,
+    'start_time' => $start_time['start'],
+    'end_time'=>$end_time['end'],
     'head_pic' => $head_pic,
     'head_pic_url' => $head_pic_url,
     'desc' => $desc,
@@ -62,10 +63,10 @@ $data = array(
     'wx_circle_centent' => $wx_circle_centent,
     'wx_qr_code' => $wx_qr_code
 );
-var_dump($start_time);
-//if(ActiveModel::save($data)){
-//    message('操作成功');
-//} else{
-//    message('操作失败');
-//}
+var_dump($id);
+if(ActiveModel::save($data)){
+    message('操作成功！', '../../web/' .  $this->createWebUrl('manager'));
+} else{
+    message('操作失败');
+}
 

@@ -67,12 +67,15 @@
                     <th style="width:100px; text-align:right;">操作</th>
                 </tr>
                 </thead>
+                <?php
+var_dump($datas);
+?>
                 <tbody>
-
+                {loop $datas $data}
                 <tr>
-                    <td>苹果3000砍价只要2000</td>
-                    <td>2016-11-11 20:00</td>
-                    <td>2016-11-12 20:00</td>
+                    <td>{$data['name']}</td>
+                    <td>{$data['start_time']}</td>
+                    <td>{$data['end_time']}</td>
                     <td>
                         <span style="display:block;text-align:center;padding:10px 0;font-size: 12px;line-height:1;color:#fff;width:46px;height:30px;border-radius:3px;background-color: #5cb85c">正常</span>
                     </td>
@@ -87,7 +90,7 @@
                            class="btn btn-primary btn-sm">内部兑奖设置</a>
                     </td>
                     <td style="text-align:right;">
-                        <a href="{php echo $this->createWebUrl('manager',array('op'=>'display','status'=>1,'id'=>'-1'))}"
+                        <a href="{php echo $this->createWebUrl('manager',array('op'=>'display','status'=>2,'id'=>$data['id']))}"
                            class="btn btn-primary  btn-sm">修改</a>
                         <a href="#"
                            onclick="return confirm('确定要禁用本次活动么？');"
@@ -95,6 +98,7 @@
                         </a>
                     </td>
                 </tr>
+                {/loop}
 
                 </tbody>
             </table>
@@ -104,8 +108,12 @@
 <!--判断如果status为0进入活动管理界面-->
     {elseif $operation=='display'&& $status==1}
 <div class="clearfix">
-    <form action="{php echo $this->createWebUrl('add')}" method="post" class="form-horizontal" role="form" id="form">
-        <div class="panel panel-default">
+    {if $operation=='display' && $status == 1 && $id=="" }
+    <form action="{php echo $this->createWebUrl('add')}" method="post" class="form-horizontal" role="form1" id="form1">
+        {else}
+    <form action="{php echo $this->createWebUrl('updata')}" method="post" class="form-horizontal" role="form2" id="form2">
+    {/if}
+    <div class="panel panel-default">
             <div class="panel-heading">
                 添加活动
             </div>

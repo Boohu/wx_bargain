@@ -8,9 +8,16 @@
 
 require_once(dirname(__FILE__) . "/../../model/active.php");
 global $_GPC, $_W;
-
+$id=$_GPC['id'];            //获取跳转传过来的ID
+$weid=$_GPC['content'];     //获取公众号ID
 $operation = !empty($_GPC['op']) ? $_GPC['op'] : 'display';//附判断值
 $status = $_GPC['status'];            //获取判断值status
 load()->func('tpl');            //调用模板
 
+//判断状态为0时调用查询语句
+if($status==0){
+    $datas=ActiveModel::get($weid);
+}
+
+var_dump($datas);
 include $this->template('manager');                              //打开后台活动管理页面

@@ -22,7 +22,7 @@ class ActiveModel
     {
         global $_GPC, $_W;
         $weid = $_W['uniacid'];               //获取当前公众号ID
-        if (!isset($data['id'])) {
+        if (!empty($data['id'])) {
             /*修改操作*/
             return b;
         } else {
@@ -40,7 +40,8 @@ class ActiveModel
          */
         static function get($id)
         {
-
+            $datas=pdo_getall('wx_bargain_activity',array('weid'=>$id));
+            return $datas;
         }
 
         /***
