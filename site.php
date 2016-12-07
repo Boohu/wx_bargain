@@ -28,15 +28,12 @@ class Wx_bargainModuleSite extends WeModuleSite {
         require_once(dirname(__FILE__)."/inc/web/doWebManager.php");
     }
     public function doWebAddActivity() {
-        //引用后台活动管理添加数据控制器控制器
+        //引用后台活动管理添加更新数据控制器控制器
         require_once(dirname(__FILE__) . "/inc/web/doWebAddActivity.php");
     }
-    public function doWebUpdataActivity() {
-        //引用后台活动管理添加数据控制器控制器
-        require_once(dirname(__FILE__)."/inc/web/doWebUpdataActivity.php");
-    }
+
     public function doWebDelActivity() {
-        //引用后台活动管理添加数据控制器控制器
+        //引用后台活动管理删除数据控制器控制器
         require_once(dirname(__FILE__)."/inc/web/doWebDelActivity.php");
     }
 

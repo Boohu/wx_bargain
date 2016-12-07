@@ -96,7 +96,7 @@
                     <td style="text-align:right;">
                         <a href="{php echo $this->createWebUrl('manager',array('op'=>'display','status'=>2,'id'=>$data['id']))}"
                            class="btn btn-primary  btn-sm">修改</a>
-                        <a href="{php echo $this->createWebUrl('manager',array('op'=>'display','status'=>2,'id'=>$data['id']))}"
+                        <a href="{php echo $this->createWebUrl('delActivity',array('id'=>$data['id']))}"
                            class="btn btn-danger  btn-sm">删除</a>
                         <a href="#"
                            onclick="return confirm('确定要禁用本次活动么？');"
@@ -114,13 +114,7 @@
 <!--判断如果status不为0进入活动添加或修改界面-->
     {elseif ($operation=='display'&& $status==1)||($operation=='display'&& $status==2)}
 <div class="clearfix">
-    <!--判断是无ID传入进入添加活动页面-->
-    {if $operation=='display' && $status == 1 && empty($id) }
     <form action="{php echo $this->createWebUrl('addActivity')}" method="post" class="form-horizontal" role="form1" id="form1">
-        {else}
-        <!--判断有ID传入进入修改活动界面-->
-    <form action="{php echo $this->createWebUrl('updata')}" method="post" class="form-horizontal" role="form2" id="form2">
-    {/if}
     <div class="panel panel-default">
             <div class="panel-heading">
                 添加活动
@@ -200,16 +194,16 @@
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>是否订阅才能发起</label>
                     <div class="col-sm-9 col-xs-12">
-                        <label for="status_1" class="radio-inline"><input autocomplete="off" type="radio" name="is_subscription_launch" id="is_subscription_launch_1" value="1" {if $data[0]['is_subscription_launch']!=2}checked=""{/if}>是</label>
-                        <label for="status_2" class="radio-inline"><input autocomplete="off" type="radio" name="is_subscription_launch" id="is_subscription_launch_2" value="2" {if $data[0]['is_subscription_launch']==2}checked=""{/if}>否</label>
+                        <label for="status_1" class="radio-inline"><input autocomplete="off" type="radio" name="is_subscription_launch" id="is_subscription_launch_1" value="1" {if $data[0]['is_subscription_launch']==1}checked=""{/if}>是</label>
+                        <label for="status_2" class="radio-inline"><input autocomplete="off" type="radio" name="is_subscription_launch" id="is_subscription_launch_2" value="0" {if $data[0]['is_subscription_launch']==0}checked=""{/if}>否</label>
                         <span class="help-block">注意：xxxxx</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>是否订阅才能帮助</label>
                     <div class="col-sm-9 col-xs-12">
-                        <label for="status_3" class="radio-inline"><input autocomplete="off" type="radio" name="is_subscription_lassist" id="is_subscription_lassist_1" value="1" {if $data[0]['is_subscription_lassist']!=2}checked=""{/if}>是</label>
-                        <label for="status_4" class="radio-inline"><input autocomplete="off" type="radio" name="is_subscription_lassist" id="is_subscription_lassist_2" value="2" {if $data[0]['is_subscription_lassist']!=2}checked=""{/if}>否</label>
+                        <label for="status_3" class="radio-inline"><input autocomplete="off" type="radio" name="is_subscription_lassist" id="is_subscription_lassist_1" value="1" {if $data[0]['is_subscription_lassist']==1}checked=""{/if}>是</label>
+                        <label for="status_4" class="radio-inline"><input autocomplete="off" type="radio" name="is_subscription_lassist" id="is_subscription_lassist_2" value="0" {if $data[0]['is_subscription_lassist']==0}checked=""{/if}>否</label>
                         <span class="help-block">注意：xxxxx</span>
                     </div>
                 </div>

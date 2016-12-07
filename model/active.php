@@ -11,7 +11,7 @@ class ActiveModel
     {
         global $_W;
         $weid = $_W['uniacid'];               //获取当前公众号ID
-        return pdo_delete('wx_bargain_active', array('id' => $id, 'weid' => $weid));
+        return pdo_delete('wx_bargain_activity', array('id' => $id, 'weid' => $weid));
     }
 
     /***
@@ -24,14 +24,13 @@ class ActiveModel
         $weid = $_W['uniacid'];               //获取当前公众号ID
         if (!empty($data['id'])) {
             /*修改操作*/
-            return b;
+            $result = pdo_update('wx_bargain_activity', $data,array('id'=>$data['id'],'weid'=>$weid));
         } else {
             /*添加操作*/
             $result = pdo_insert('wx_bargain_activity', $data);
-            return $result;
-            global $_W;
-            $weid = $_W['uniacid'];               //获取当前公众号ID
+
         }
+        return $result;
     }
 
         /***

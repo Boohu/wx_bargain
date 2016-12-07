@@ -6,4 +6,11 @@
  * Time: 21:54
  */
 require_once(dirname(__FILE__) . "/../../model/active.php");
-echo "删除";
+global $_GPC, $_W;
+$id=$_GPC['id'];
+var_dump($id);
+if(ActiveModel::del($id)){
+    message('操作成功');
+} else{
+    message('操作失败');
+}
