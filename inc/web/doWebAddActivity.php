@@ -63,7 +63,6 @@ $data = array(
     'wx_circle_centent' => $wx_circle_centent,
     'wx_qr_code' => $wx_qr_code
 );
-var_dump($id);
 if(ActiveModel::save($data)){
     message('操作成功！', '../../web/' .  $this->createWebUrl('manager'));
 } else{
