@@ -6,8 +6,8 @@
     <li {if $operation=='display' && $status == 0}class="active"{/if}>
     <a href="{php echo $this->createWebUrl('manager',array('op'=>'display','status'=>0))}">活动管理</a>
     </li>
-    <li {if $operation=='display' && $status == 1}class="active"{/if}>
-    <a href="{php echo $this->createWebUrl('manager',array('op'=>'display','status'=>1));}">添加砍价</a></li>
+    <li {if $operation=='display' && $status == 1 }class="active"{/if}>
+    <a href="{php echo $this->createWebUrl('manager',array('op'=>'display','status'=>1));}">添加活动</a></li>
 </ul>
 
 <!--判断如果status为0进入活动管理界面-->
@@ -87,7 +87,7 @@
                            class="btn btn-primary btn-sm">内部兑奖设置</a>
                     </td>
                     <td style="text-align:right;">
-                        <a href="#"
+                        <a href="{php echo $this->createWebUrl('manager',array('op'=>'display','status'=>1,'id'=>'-1'))}"
                            class="btn btn-primary  btn-sm">修改</a>
                         <a href="#"
                            onclick="return confirm('确定要禁用本次活动么？');"
@@ -104,123 +104,121 @@
 <!--判断如果status为0进入活动管理界面-->
     {elseif $operation=='display'&& $status==1}
 <div class="clearfix">
-    <form action="" method="post" class="form-horizontal" role="form" enctype="multipart/form-data" id="form1">
-        <input type="hidden" name="step" value="2">
+    <form action="{php echo $this->createWebUrl('add')}" method="post" class="form-horizontal" role="form" id="form">
         <div class="panel panel-default">
             <div class="panel-heading">
                 添加活动
             </div>
+            <input type="hidden" name="id" id="id" class="form-control" value="{$id}" >
             <div class="panel-body">
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> 活动名称</label>
                     <div class="col-sm-9 col-xs-12">
-                        <input type="text" name="cname" class="form-control" value="" autocomplete="off">
+                        <input type="text" name="name" id="name" class="form-control" value="" autocomplete="off">
                         <span class="help-block">填写活动名称</span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> 活动开始时间</label>
-                    <div class="input-group col-sm-8" style="padding-left:15px;padding-right:15px">
-                            <input type="text" id="start_time" name="start_time" value="" class="form-control" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:00'})" required="">
-                            <span class="input-group-addon">至</span>
-                            <input type="text" id="end_time" name="end_time" value="" class="form-control" onfocus="WdatePicker({dateFmt: 'yyyy-MM-dd HH:mm:59'})" required="">
+                    <label for="inputPassword3" class="col-sm-2 control-label"><span style="color:red">*</span>活动时间</label>
+                    <div class="col-sm-10">
+                        {php echo tpl_form_field_daterange('time',array('start'=>$baoming['stime'],'end'=>$baoming['etime']));}
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动头图</label>
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>活动头图</label>
                     <div class="col-sm-9 col-xs-12">
-                        <input type="file" name="headimg" value="" id="filestyle-2" tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);"><div class="bootstrap-filestyle input-group"><input type="text" class="form-control " disabled=""> <span class="group-span-filestyle input-group-btn" tabindex="0"><label for="filestyle-2" class="btn btn-default "><span class="glyphicon glyphicon-folder-open"></span> 上传图片</label></span></div>
-                        <span class="help-block">只支持JPG图片</span>
+                        {php echo tpl_form_field_image('event_head');}
+                        <span class="help-block">添加活动头图</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>跳转链接</label>
                     <div class="col-sm-9 col-xs-12">
-                        <input type="text" name="cname" class="form-control" value="" autocomplete="off">
+                        <input type="text" name="link" id="link" class="form-control" value="" autocomplete="off">
                         <span class="help-block">头图点击之后跳转的链接</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动简介</label>
                     <div class="col-sm-9 col-xs-12">
-                        <textarea style="height: 80px;" class="form-control" name="description"></textarea>
+                        <textarea style="height: 80px;" class="form-control" name="desc" id="desc"></textarea>
                         <span class="help-block">用于对此本次活动进行说明和介绍。</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>奖品名称</label>
                     <div class="col-sm-9 col-xs-12">
-                        <input type="text" name="giftname" class="form-control" value="" autocomplete="off">
+                        <input type="text" name="prize_name" id="prize_name" class="form-control" value="" autocomplete="off">
                         <span class="help-block">填写奖品名称</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>奖品原价</label>
                     <div class="input-group col-sm-3" style="padding-left:15px;padding-right:15px">
-                        <input type="text" class="form-control" id="" name="prize_price" value="" required="">
+                        <input type="text" class="form-control" id="prize_old_price" name="prize_old_price" value="" >
                         <span class="input-group-addon">元</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>砍价底价</label>
                     <div class="input-group col-sm-3" style="padding-left:15px;padding-right:15px">
-                        <input type="text" class="form-control" id="" name="prize_price" value="" required="">
+                        <input type="text" class="form-control" id="prize_floor_price" name="prize_floor_price" value="" >
                         <span class="input-group-addon">元</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label">每天最大砍价次数</label>
                     <div class="input-group col-sm-3" style="padding-left:15px;padding-right:15px">
-                        <input type="text" class="form-control" id="" name="prize_price" value="" required="">
+                        <input type="text" class="form-control" id="bargain_max" name="bargain_max" value="" >
                         <span class="input-group-addon">次</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>奖品总数</label>
                     <div class="input-group col-sm-3" style="padding-left:15px;padding-right:15px">
-                        <input type="text" class="form-control" id="" name="prize_price" value="" required="">
+                        <input type="text" class="form-control" id="prize_num" name="prize_num" value="" >
                         <span class="input-group-addon">份</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>是否订阅才能发起</label>
                     <div class="col-sm-9 col-xs-12">
-                        <label for="status_1" class="radio-inline"><input autocomplete="off" type="radio" name="level1" id="status_1" value="1" checked="">是</label>
-                        <label for="status_2" class="radio-inline"><input autocomplete="off" type="radio" name="level1" id="status_2" value="2">否</label>
+                        <label for="status_1" class="radio-inline"><input autocomplete="off" type="radio" name="is_subscription_launch" id="is_subscription_launch_1" value="1" checked="">是</label>
+                        <label for="status_2" class="radio-inline"><input autocomplete="off" type="radio" name="is_subscription_launch" id="is_subscription_launch_2" value="2">否</label>
                         <span class="help-block">注意：xxxxx</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>是否订阅才能帮助</label>
                     <div class="col-sm-9 col-xs-12">
-                        <label for="status_3" class="radio-inline"><input autocomplete="off" type="radio" name="level2" id="status_3" value="1" checked="">是</label>
-                        <label for="status_4" class="radio-inline"><input autocomplete="off" type="radio" name="level2" id="status_4" value="2">否</label>
+                        <label for="status_3" class="radio-inline"><input autocomplete="off" type="radio" name="is_subscription_lassist" id="is_subscription_lassist_1" value="1" checked="">是</label>
+                        <label for="status_4" class="radio-inline"><input autocomplete="off" type="radio" name="is_subscription_lassist" id="is_subscription_lassist_2" value="2">否</label>
                         <span class="help-block">注意：xxxxx</span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>砍价时限</label>
-                    <div class="col-sm-9 col-xs-12">
-                        <input type="text" name="cname" class="form-control" value="" autocomplete="off">
-                        <span class="help-block">填写每次帮忙砍价时限</span>
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">砍价限时</label>
+                    <div class="input-group col-sm-3" style="padding-left:15px;padding-right:15px">
+                        <input type="text" class="form-control" id="bargain_time_astrict" name="bargain_time_astrict" value="" >
+                        <span class="input-group-addon">小时</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>砍价区间</label>
                     <div class="input-group col-sm-8" style="padding-left:15px;padding-right:15px">
-                        <input type="text" id="start_num" name="start_time" value="" class="form-control"  required="">
+                        <input type="text" id="bargain_section_start" name="bargain_section_start" value="" class="form-control"  >
                         <span class="input-group-addon">至</span>
-                        <input type="text" id="end_num" name="end_time" value="" class="form-control"  required="">
+                        <input type="text" id="bargain_section_end" name="bargain_section_end" value="" class="form-control"  >
                         <span class="input-group-addon">元</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label">前三次砍价区间</label>
                     <div class="input-group col-sm-8" style="padding-left:15px;padding-right:15px">
-                        <input type="text" id="start3_num" name="start_time" value="" class="form-control"  required="">
+                        <input type="text" id="front_section_start" name="front_section_start" value="" class="form-control"  >
                         <span class="input-group-addon">至</span>
-                        <input type="text" id="end3_num" name="end_time" value="" class="form-control"  required="">
+                        <input type="text" id="front_section_end" name="front_section_end" value="" class="form-control"  >
                         <span class="input-group-addon">元</span>
                     </div>
                 </div>
@@ -232,38 +230,38 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>微信分享图标</label>
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">微信分享图标</label>
                     <div class="col-sm-9 col-xs-12">
-                        <input type="file" name="qrcode" value="" id="filestyle-0" tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);"><div class="bootstrap-filestyle input-group"><input type="text" class="form-control " disabled=""> <span class="group-span-filestyle input-group-btn" tabindex="0"><label for="filestyle-0" class="btn btn-default "><span class="glyphicon glyphicon-folder-open"></span> 上传图片</label></span></div>
-                        <span class="help-block">只支持JPG图片</span>
+                        {php echo tpl_form_field_image('wx_icon');}
+                        <span class="help-block">添加微信分享图标</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>微信分享标题</label>
                     <div class="col-sm-9 col-xs-12">
-                        <input type="text" name="cname" class="form-control" value="" autocomplete="off">
+                        <input type="text" name="wx_title" id="wx_title" class="form-control" value="" autocomplete="off">
                         <span class="help-block">填写微信分享标题</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>微信分享好友内容</label>
                     <div class="col-sm-9 col-xs-12">
-                        <input type="text" name="cname" class="form-control" value="" autocomplete="off">
+                        <input type="text" name="wx_friend_centent" id="wx_friend_centent" class="form-control" value="" autocomplete="off">
                         <span class="help-block">填写微信分享好友内容</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>微信分享好友圈内容</label>
                     <div class="col-sm-9 col-xs-12">
-                        <input type="text" name="cname" class="form-control" value="" autocomplete="off">
+                        <input type="text" name="wx_circle_centent" id="wx_circle_centent" class="form-control" value="" autocomplete="off">
                         <span class="help-block">填写微信分享好友圈内容</span>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>微信二维码</label>
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label">微信二维码</label>
                     <div class="col-sm-9 col-xs-12">
-                        <input type="file" name="qrcode" value="" id="filestyle-1" tabindex="-1" style="position: absolute; clip: rect(0px 0px 0px 0px);"><div class="bootstrap-filestyle input-group"><input type="text" class="form-control " disabled=""> <span class="group-span-filestyle input-group-btn" tabindex="0"><label for="filestyle-1" class="btn btn-default "><span class="glyphicon glyphicon-folder-open"></span> 上传图片</label></span></div>
-                        <span class="help-block">只支持JPG图片</span>
+                        {php echo tpl_form_field_image('qr_code');}
+                        <span class="help-block">添加微信二维码</span>
                     </div>
                 </div>
 

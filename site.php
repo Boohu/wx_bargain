@@ -27,6 +27,11 @@ class Wx_bargainModuleSite extends WeModuleSite {
         //引用后台活动管理控制器
         require_once(dirname(__FILE__)."/inc/web/doWebManager.php");
     }
+    public function doWebAdd() {
+        //引用后台活动管理添加数据控制器控制器
+        require_once(dirname(__FILE__)."/inc/web/doWebAdd.php");
+    }
+
 
 
     public function doWebDomain(){

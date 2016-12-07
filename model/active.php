@@ -15,10 +15,15 @@ class ActiveModel{
      * @param $data 要保存的信息，包含id字段为修改操作，不包含id字段为添加操作
      */
     static function save($data){
-        if(isset($data['id'])){
+        global $_GPC,$_W;
+        $weid=$_W['uniacid'];               //获取当前公众号ID
+        if(!isset($data['id'])){
             /*修改操作*/
+            return b;
         }else{
             /*添加操作*/
+            $result = pdo_insert('wx_bargain_activity', $data);
+            return $result;
         }
     }
 
