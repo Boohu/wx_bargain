@@ -65,7 +65,7 @@ $data = array(
 );
 if(ActiveModel::save($data)){
     message('操作成功！', '../../web/' .  $this->createWebUrl('manager'));
-} else{
+}else{
     message('操作失败');
 }
 

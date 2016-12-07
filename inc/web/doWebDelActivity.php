@@ -10,7 +10,7 @@ global $_GPC, $_W;
 $id=$_GPC['id'];
 var_dump($id);
 if(ActiveModel::del($id)){
-    message('操作成功');
-} else{
+    message('操作成功！', '../../web/' .  $this->createWebUrl('manager'));
+}else{
     message('操作失败');
 }
