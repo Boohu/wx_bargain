@@ -6,8 +6,15 @@
     <li {if $operation=='display' && $status == 0}class="active"{/if}>
     <a href="{php echo $this->createWebUrl('manager',array('op'=>'display','status'=>0))}">活动管理</a>
     </li>
-    <li {if $operation=='display' && $status == 1 }class="active"{/if}>
-    <a href="{php echo $this->createWebUrl('manager',array('op'=>'display','status'=>1));}">添加活动</a></li>
+    <li {if ($operation=='display' && $status == 1)||($operation=='display' && $status == 2) }class="active"{/if}>
+    <a href="{php echo $this->createWebUrl('manager',array('op'=>'display','status'=>1));}">
+        {if $operation=='display' && $status==2}
+        修改活动
+        {else}
+        添加活动
+        {/if}
+    </a></li>
+
 </ul>
 
 <!--判断如果status为0进入活动管理界面-->
@@ -67,9 +74,6 @@
                     <th style="width:100px; text-align:right;">操作</th>
                 </tr>
                 </thead>
-                <?php
-var_dump($datas);
-?>
                 <tbody>
                 {loop $datas $data}
                 <tr>
@@ -105,12 +109,14 @@ var_dump($datas);
         </div>
     </div>
 
-<!--判断如果status为0进入活动管理界面-->
-    {elseif $operation=='display'&& $status==1}
+<!--判断如果status不为0进入活动添加或修改界面-->
+    {elseif ($operation=='display'&& $status==1)||($operation=='display'&& $status==2)}
 <div class="clearfix">
-    {if $operation=='display' && $status == 1 && $id=="" }
-    <form action="{php echo $this->createWebUrl('add')}" method="post" class="form-horizontal" role="form1" id="form1">
+    <!--判断是无ID传入进入添加活动页面-->
+    {if $operation=='display' && $status == 1 && empty($id) }
+    <form action="{php echo $this->createWebUrl('addActivity')}" method="post" class="form-horizontal" role="form1" id="form1">
         {else}
+        <!--判断有ID传入进入修改活动界面-->
     <form action="{php echo $this->createWebUrl('updata')}" method="post" class="form-horizontal" role="form2" id="form2">
     {/if}
     <div class="panel panel-default">
@@ -122,70 +128,70 @@ var_dump($datas);
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> 活动名称</label>
                     <div class="col-sm-9 col-xs-12">
-                        <input type="text" name="name" id="name" class="form-control" value="" autocomplete="off">
+                        <input type="text" name="name" id="name" class="form-control" value="{$datas[0]['name']}" autocomplete="off">
                         <span class="help-block">填写活动名称</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="inputPassword3" class="col-sm-2 control-label"><span style="color:red">*</span>活动时间</label>
                     <div class="col-sm-10">
-                        {php echo tpl_form_field_daterange('time',array('start'=>$baoming['stime'],'end'=>$baoming['etime']));}
+                        {php echo tpl_form_field_daterange('time',array('start'=>$datas[0]['start_time'],'end'=>$datas[0]['end_time']));}
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>活动头图</label>
                     <div class="col-sm-9 col-xs-12">
-                        {php echo tpl_form_field_image('event_head');}
+                        {php echo tpl_form_field_image('event_head',$datas[0]['head_pic']);}
                         <span class="help-block">添加活动头图</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>跳转链接</label>
                     <div class="col-sm-9 col-xs-12">
-                        <input type="text" name="link" id="link" class="form-control" value="" autocomplete="off">
+                        <input type="text" name="link" id="link" class="form-control" value="{$datas[0]['head_pic_url']}" autocomplete="off">
                         <span class="help-block">头图点击之后跳转的链接</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动简介</label>
                     <div class="col-sm-9 col-xs-12">
-                        <textarea style="height: 80px;" class="form-control" name="desc" id="desc"></textarea>
+                        <textarea style="height: 80px;" class="form-control" name="desc" id="desc">{$datas[0]['desc']}</textarea>
                         <span class="help-block">用于对此本次活动进行说明和介绍。</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>奖品名称</label>
                     <div class="col-sm-9 col-xs-12">
-                        <input type="text" name="prize_name" id="prize_name" class="form-control" value="" autocomplete="off">
+                        <input type="text" name="prize_name" id="prize_name" class="form-control" value="{$datas[0]['prize_name']}" autocomplete="off">
                         <span class="help-block">填写奖品名称</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>奖品原价</label>
                     <div class="input-group col-sm-3" style="padding-left:15px;padding-right:15px">
-                        <input type="text" class="form-control" id="prize_old_price" name="prize_old_price" value="" >
+                        <input type="text" class="form-control" id="prize_old_price" name="prize_old_price" value="{$datas[0]['prize_old_price']}" >
                         <span class="input-group-addon">元</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>砍价底价</label>
                     <div class="input-group col-sm-3" style="padding-left:15px;padding-right:15px">
-                        <input type="text" class="form-control" id="prize_floor_price" name="prize_floor_price" value="" >
+                        <input type="text" class="form-control" id="prize_floor_price" name="prize_floor_price" value="{$datas[0]['prize_floor_price']}" >
                         <span class="input-group-addon">元</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label">每天最大砍价次数</label>
                     <div class="input-group col-sm-3" style="padding-left:15px;padding-right:15px">
-                        <input type="text" class="form-control" id="bargain_max" name="bargain_max" value="" >
+                        <input type="text" class="form-control" id="bargain_max" name="bargain_max" value="{$datas[0]['bargain_max']}" >
                         <span class="input-group-addon">次</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>奖品总数</label>
                     <div class="input-group col-sm-3" style="padding-left:15px;padding-right:15px">
-                        <input type="text" class="form-control" id="prize_num" name="prize_num" value="" >
+                        <input type="text" class="form-control" id="prize_num" name="prize_num" value="{$datas[0]['prize_num']}" >
                         <span class="input-group-addon">份</span>
                     </div>
                 </div>
@@ -208,67 +214,67 @@ var_dump($datas);
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label">砍价限时</label>
                     <div class="input-group col-sm-3" style="padding-left:15px;padding-right:15px">
-                        <input type="text" class="form-control" id="bargain_time_astrict" name="bargain_time_astrict" value="" >
+                        <input type="text" class="form-control" id="bargain_time_astrict" name="bargain_time_astrict" value="{$datas[0]['bargain_time_astrict']}" >
                         <span class="input-group-addon">小时</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>砍价区间</label>
                     <div class="input-group col-sm-8" style="padding-left:15px;padding-right:15px">
-                        <input type="text" id="bargain_section_start" name="bargain_section_start" value="" class="form-control"  >
+                        <input type="text" id="bargain_section_start" name="bargain_section_start" value="{$datas[0]['bargain_section_start']}" class="form-control"  >
                         <span class="input-group-addon">至</span>
-                        <input type="text" id="bargain_section_end" name="bargain_section_end" value="" class="form-control"  >
+                        <input type="text" id="bargain_section_end" name="bargain_section_end" value="{$datas[0]['bargain_section_end']}" class="form-control"  >
                         <span class="input-group-addon">元</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label">前三次砍价区间</label>
                     <div class="input-group col-sm-8" style="padding-left:15px;padding-right:15px">
-                        <input type="text" id="front_section_start" name="front_section_start" value="" class="form-control"  >
+                        <input type="text" id="front_section_start" name="front_section_start" value="{$datas[0]['front_section_start']}" class="form-control"  >
                         <span class="input-group-addon">至</span>
-                        <input type="text" id="front_section_end" name="front_section_end" value="" class="form-control"  >
+                        <input type="text" id="front_section_end" name="front_section_end" value="{$datas[0]['front_section_end']}" class="form-control"  >
                         <span class="input-group-addon">元</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动说明图文</label>
                     <div class="col-sm-9 col-xs-12">
-                        {php echo tpl_ueditor('content', $value = '', $options = array('height'=>350));}
+                        {php echo tpl_ueditor('content',$datas[0]['desc_html'], $options = array('height'=>350));}
                         <span class="help-block">用于对此本次活动添加图文说明。</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label">微信分享图标</label>
                     <div class="col-sm-9 col-xs-12">
-                        {php echo tpl_form_field_image('wx_icon');}
+                        {php echo tpl_form_field_image('wx_icon',$datas[0]['wx_pic']);}
                         <span class="help-block">添加微信分享图标</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>微信分享标题</label>
                     <div class="col-sm-9 col-xs-12">
-                        <input type="text" name="wx_title" id="wx_title" class="form-control" value="" autocomplete="off">
+                        <input type="text" name="wx_title" id="wx_title" class="form-control" value="{$datas[0]['wx_title']}" autocomplete="off">
                         <span class="help-block">填写微信分享标题</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>微信分享好友内容</label>
                     <div class="col-sm-9 col-xs-12">
-                        <input type="text" name="wx_friend_centent" id="wx_friend_centent" class="form-control" value="" autocomplete="off">
+                        <input type="text" name="wx_friend_centent" id="wx_friend_centent" class="form-control" value="{$datas[0]['wx_friend_centent']}" autocomplete="off">
                         <span class="help-block">填写微信分享好友内容</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>微信分享好友圈内容</label>
                     <div class="col-sm-9 col-xs-12">
-                        <input type="text" name="wx_circle_centent" id="wx_circle_centent" class="form-control" value="" autocomplete="off">
+                        <input type="text" name="wx_circle_centent" id="wx_circle_centent" class="form-control" value="{$datas[0]['wx_circle_centent']}" autocomplete="off">
                         <span class="help-block">填写微信分享好友圈内容</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label">微信二维码</label>
                     <div class="col-sm-9 col-xs-12">
-                        {php echo tpl_form_field_image('qr_code');}
+                        {php echo tpl_form_field_image('qr_code',$datas[0]['wx_qr_code']);}
                         <span class="help-block">添加微信二维码</span>
                     </div>
                 </div>

@@ -40,8 +40,15 @@ class ActiveModel
          */
         static function get($id)
         {
-            $datas=pdo_getall('wx_bargain_activity',array('weid'=>$id));
+            global $_GPC, $_W;
+            $weid=$_W['uniacid'];            //获取当前公众号ID
+            if(empty($id)) {
+                $datas = pdo_getall('wx_bargain_activity', array('weid' => $weid));
+            }else{
+                $datas = pdo_getall('wx_bargain_activity', array('weid' => $weid, 'id' => $id));
+            }
             return $datas;
+
         }
 
         /***

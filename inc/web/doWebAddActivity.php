@@ -8,7 +8,7 @@
 require_once(dirname(__FILE__) . "/../../model/active.php");
 global $_GPC, $_W;
 
-$weid=$_GPC['content'];            //获取当前公众号ID
+$weid=$_W['uniacid'];;            //获取当前公众号ID
 $id=$_GPC['id'];                //获取id值
 $name = $_GPC['name'];          //获取活动名称
 $start_time = $_GPC['time'];        //获取活动开始和结束时间
