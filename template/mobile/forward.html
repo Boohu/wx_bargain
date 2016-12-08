@@ -1,38 +1,41 @@
 {template 'common/header'}
 
-<body style="margin: 0;padding: 0;background-color: #eeeeee">
-<div class="mui-card-content">
-    <img src="http://sc.jb51.net/uploads/allimg/140518/10-14051R31Z5264.jpg" alt="" width="100%">
-</div>
-<div style="padding: 15px;background-color: #ffffff">
-    <div><h3>{$activity[0]['name']}</h3></div>
-    <div style="margin:5px 5px auto">原价<strike>{$activity[0]['prize_old_price']}</strike></div>
-    <div style="margin:5px 5px auto">当前价格<strong style="color:#f0ad4e;">{$order[0]['current_price']}</strong>元</div>
-    <div style="display:inline-block;width:100%;background-color: #eee;padding:3px;margin-top:5px;border-radius: 3px;">
-        <strong style="color:#f0ad4e;">Site</strong>正在参与“xxx”活动，把价格砍到底价，Ta就可以特惠抢购
+<div style="margin: 0;padding: 0;background-color: #eeeeee">
+    <div class="mui-card-content">
+        <img src="http://sc.jb51.net/uploads/allimg/140518/10-14051R31Z5264.jpg" alt="" width="100%">
     </div>
-    <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
-        <h3 style="color:#f0ad4e;line-height: 30px;">帮TA砍价</h3>
-        <a href="{php echo $this->createMobileUrl('index',array('aid'=>$aid,'op'=>'join'));}">
-            <input type="button" style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; " value="砍价">
-        </a>
-    </div>
-</div>
-<div style="padding: 3px;">
-    <div style="background-color: #eeeeee;width: 100%;text-align: center;margin:5px auto; ">
-        <h3 style="line-height:55px;">砍价记录</h3>
-        <div style="text-align: left;padding:2px 5px"><strong style="color: #f0ad4e">DoubleWei</strong>砍掉了<strong
-                style="color: #f0ad4e">100</strong>元，只需<strong style="color: #f0ad4e">0</strong>元了
+    <div style="padding: 15px;background-color: #ffffff">
+        <div><h3>{$activity[0]['name']}</h3></div>
+        <div style="margin:5px 5px auto">原价<strike>{$activity[0]['prize_old_price']}</strike></div>
+        <div style="margin:5px 5px auto">当前价格<strong style="color:#f0ad4e;">{$order[0]['current_price']}</strong>元</div>
+        <div style="display:inline-block;width:100%;background-color: #eee;padding:3px;margin-top:5px;border-radius: 3px;">
+            <strong style="color:#f0ad4e;">Site</strong>正在参与“xxx”活动，把价格砍到底价，Ta就可以特惠抢购
         </div>
-        <span style="display:block;width:100%;height:20px;color: #333333;overflow: hidden;">-----------------------------------------------------------------------------------------------------------</span>
+        <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
+            <h3 style="color:#f0ad4e;line-height: 30px;">帮TA砍价</h3>
+            <a href="{php echo $this->createMobileUrl('forward');}">
+                <input type="button"
+                       style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; "
+                       value="砍价">
+            </a>
+        </div>
     </div>
-    <div style="text-align: center;padding: 5px;background-color: #ffffff">
-        <h3 style="line-height: 50px;">活动规则</h3>
-        {$html}
+    <div style="padding: 3px;">
+        <div style="background-color: #eeeeee;width: 100%;text-align: center;margin:5px auto; ">
+            <h3 style="line-height:55px;">砍价记录</h3>
+            <div style="text-align: left;padding:2px 5px"><strong style="color: #f0ad4e">DoubleWei</strong>砍掉了<strong
+                    style="color: #f0ad4e">100</strong>元，只需<strong style="color: #f0ad4e">0</strong>元了
+            </div>
+            <span style="display:block;width:100%;height:20px;color: #333333;overflow: hidden;">-----------------------------------------------------------------------------------------------------------</span>
+        </div>
+        <div style="text-align: center;padding: 5px;background-color: #ffffff">
+            <h3 style="line-height: 50px;">活动规则</h3>
+            {$html}
+        </div>
+        <!--<div style="margin: 10px auto;background-color: #ffffff;text-align: center;padding: 10px;">-->
+        <!--<input type="button" style="outline: none;width:240px;height:30px;color:#ffffff;text-align:center;border-radius: 10px;background-color: #333333;" value="返回活动列表">-->
+        <!--</div>-->
     </div>
-    <!--<div style="margin: 10px auto;background-color: #ffffff;text-align: center;padding: 10px;">-->
-    <!--<input type="button" style="outline: none;width:240px;height:30px;color:#ffffff;text-align:center;border-radius: 10px;background-color: #333333;" value="返回活动列表">-->
-    <!--</div>-->
-</div>
 
-</body>
+</div>
+{template 'common/footer'}

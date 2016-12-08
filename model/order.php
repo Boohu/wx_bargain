@@ -9,16 +9,24 @@
 class OrderModel
 {
     /**
-     * 查询订单
+     * 查询订单是否存在
      * @param $id 要查询的活动id
      */
-    static function get($id)
+    static function getExistence($openid)
     {
-        global $_W,$_GPC;
-        $weid = $_W['uniacid'];               //获取当前公众号ID
+        global $_GPC;
         $aid=$_GPC['aid'];                  //获取当前活动ID
-        return pdo_getall('wx_bargain_order', array('openid' => $id,'activity_id'=>$aid));
+        return pdo_getall('wx_bargain_order', array('openid' => $openid,'activity_id'=>$aid));
     }
+    /**
+     * 获取帮忙砍价订单信息
+     * @param $id 要查询的活动id
+     */
+    static function getOrder($oid)
+    {
+        return pdo_getall('wx_bargain_order', array('id' => $oid));
+    }
+
     /**
      * 添加订单
      * @param $id 要查询的数据$data

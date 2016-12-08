@@ -86,8 +86,9 @@ CREATE TABLE `ims_wx_bargain_order` (
   `current_price` decimal(8,2) NOT NULL COMMENT '当前价格',
   `phone` text NOT NULL COMMENT '收货手机号',
   `name` text NOT NULL COMMENT '收货人姓名',
+  `nickname` varchar(255) NOT NULL COMMENT '昵称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- 创建帮忙砍价表
@@ -100,8 +101,10 @@ CREATE TABLE `ims_wx_bargain_assist` (
   `openid` text NOT NULL COMMENT '帮助砍价的openid',
   `price` decimal(8,2) NOT NULL COMMENT '减少的价格',
   `create_time` datetime NOT NULL COMMENT '创建时间',
+  `nickname` varchar(255) NOT NULL COMMENT '昵称',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 
 CREATE TABLE `ims_wx_bargain_domain` (
