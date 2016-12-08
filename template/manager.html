@@ -81,7 +81,11 @@
                     <td>{$data['start_time']}</td>
                     <td>{$data['end_time']}</td>
                     <td>
+                        {if $data['active_state']==1}
                         <span style="display:block;text-align:center;padding:10px 0;font-size: 12px;line-height:1;color:#fff;width:46px;height:30px;border-radius:3px;background-color: #5cb85c">正常</span>
+                        {elseif $data['active_state']==0}
+                        <span style="display:block;text-align:center;padding:10px 0;font-size: 12px;line-height:1;color:#333;width:46px;height:30px;border-radius:3px;border:1px solid #adadad;">禁用</span>
+                        {/if}
                     </td>
                     <td>
                         <a href="#"
@@ -98,10 +102,17 @@
                            class="btn btn-primary  btn-sm">修改</a>
                         <a href="{php echo $this->createWebUrl('delActivity',array('id'=>$data['id']))}"
                            class="btn btn-danger  btn-sm">删除</a>
-                        <a href="#"
+                        {if $data['active_state']==1}
+                        <a href="{php echo $this->createWebUrl('disActivity',array('id'=>$data['id']))}"
                            onclick="return confirm('确定要禁用本次活动么？');"
                            class="btn btn-default btn-sm">禁用<!--<i class="fa fa-times"></i>-->
                         </a>
+                        {elseif $data['active_state']==0}
+                        <a href="{php echo $this->createWebUrl('disActivity',array('id'=>$data['id']))}"
+                           onclick="return confirm('确定要恢复本次活动么？');"
+                           class="btn btn-default btn-sm">恢复
+                        </a>
+                        {/if}
                     </td>
                 </tr>
                 {/loop}

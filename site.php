@@ -36,7 +36,10 @@ class Wx_bargainModuleSite extends WeModuleSite {
         //引用后台活动管理删除数据控制器控制器
         require_once(dirname(__FILE__)."/inc/web/doWebDelActivity.php");
     }
-
+    public function doWebDisActivity() {
+        //引用后台活动管理禁用恢复活动的控制器控制器
+        require_once(dirname(__FILE__)."/inc/web/doWebDisActivity.php");
+    }
 
     public function doWebDomain(){
     //多域名管理

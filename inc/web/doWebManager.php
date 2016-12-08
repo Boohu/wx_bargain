@@ -18,6 +18,7 @@ load()->func('tpl');            //调用模板
 if($status==0){
     $datas=ActiveModel::get($id);
 }
+//判断状态为2时调用更新语句
 if($status==2){
     $datas=ActiveModel::get($id);
 }

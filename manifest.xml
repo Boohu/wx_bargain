@@ -44,7 +44,7 @@
 CREATE TABLE `ims_wx_bargain_activity` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `weid` int(11) NOT NULL COMMENT '公众号id',
-  `active_state` int(11) NOT NULL COMMENT '活动开启状态1=正常,0=禁用',
+  `active_state` int(11) NOT NULL DEFAULT '1' COMMENT '活动开启状态1=正常,0=禁用',
   `create_time` datetime NOT NULL COMMENT '活动创建时间',
   `update_time` datetime NOT NULL COMMENT '活动更新时间',
   `name` text NOT NULL COMMENT '活动名称',
