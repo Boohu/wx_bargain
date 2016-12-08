@@ -14,7 +14,7 @@ class ActiveModel
         return pdo_delete('wx_bargain_activity', array('id' => $id, 'weid' => $weid));
     }
     /**
-     * 禁用活动活动
+     * 禁用活动
      * @param $state 要删除的活动id
      */
     static function disable($id)
