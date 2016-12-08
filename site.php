@@ -62,6 +62,12 @@ class Wx_bargainModuleSite extends WeModuleSite {
         require_once(dirname(__FILE__)."/inc/mobile/doMobileIndex.php");
 
     }
+    public function doMobileForward(){
+        //个人活动主页
+        require_once(dirname(__FILE__) . "/inc/mobile/doMobileForward.php");
+
+    }
+
 
 
     /*移动端测试页面*/
