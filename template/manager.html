@@ -20,7 +20,7 @@
 <!--判断如果status为0进入活动管理界面-->
 {if $operation=='display'&& $status==0}
     <!--搜索-->
-    <div class="clearfix">
+   <!-- <div class="clearfix">
         <div class="panel panel-info">
             <div class="panel-heading">搜索</div>
             <div class="panel-body">
@@ -57,7 +57,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    </div>-->
 
     <!--列表-->
     <div class="panel panel-default">
@@ -205,16 +205,16 @@
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>是否订阅才能发起</label>
                     <div class="col-sm-9 col-xs-12">
-                        <label for="status_1" class="radio-inline"><input autocomplete="off" type="radio" name="is_subscription_launch" id="is_subscription_launch_1" value="1" {if $data[0]['is_subscription_launch']==1}checked=""{/if}>是</label>
-                        <label for="status_2" class="radio-inline"><input autocomplete="off" type="radio" name="is_subscription_launch" id="is_subscription_launch_2" value="0" {if $data[0]['is_subscription_launch']==0}checked=""{/if}>否</label>
+                        <label  class="radio-inline"><input autocomplete="off" type="radio" name="is_subscription_launch" id="is_subscription_launch_1" value="1" {if $datas[0]['is_subscription_launch']==1}checked=""{/if}>是</label>
+                        <label  class="radio-inline"><input autocomplete="off" type="radio" name="is_subscription_launch" id="is_subscription_launch_2" value="0" {if $datas[0]['is_subscription_launch']==0}checked=""{/if}>否</label>
                         <span class="help-block">注意：xxxxx</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>是否订阅才能帮助</label>
                     <div class="col-sm-9 col-xs-12">
-                        <label for="status_3" class="radio-inline"><input autocomplete="off" type="radio" name="is_subscription_lassist" id="is_subscription_lassist_1" value="1" {if $data[0]['is_subscription_lassist']==1}checked=""{/if}>是</label>
-                        <label for="status_4" class="radio-inline"><input autocomplete="off" type="radio" name="is_subscription_lassist" id="is_subscription_lassist_2" value="0" {if $data[0]['is_subscription_lassist']==0}checked=""{/if}>否</label>
+                        <label  class="radio-inline"><input autocomplete="off" type="radio" name="is_subscription_lassist" id="is_subscription_lassist_1" value="1" {if $datas[0]['is_subscription_lassist']==1}checked=""{/if}>是</label>
+                        <label  class="radio-inline"><input autocomplete="off" type="radio" name="is_subscription_lassist" id="is_subscription_lassist_2" value="0" {if $datas[0]['is_subscription_lassist']==0}checked=""{/if}>否</label>
                         <span class="help-block">注意：xxxxx</span>
                     </div>
                 </div>
