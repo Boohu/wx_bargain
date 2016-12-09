@@ -11,16 +11,46 @@ global $_GPC, $_W;
 $weid=$_W['uniacid'];;            //获取当前公众号ID
 $id=$_GPC['id'];                //获取id值
 $name = $_GPC['name'];          //获取活动名称
-$start_time = $_GPC['time'];        //获取活动开始和结束时间
-$end_time=$_GPC['time'];                //获取活动开始和结束时间
+if(trim($name)==""){
+  message('操作失败,套餐名称不能为空');exit;
+}
+$start_time = $_GPC['time']['start'];        //获取活动开始和结束时间
+if(trim($start_time)==""){
+  message('操作失败,活动开始时间不能为空');exit;
+}
+$end_time=$_GPC['time']['end'];                //获取活动开始和结束时间
+if(trim($end_time)==""){
+  message('操作失败,活动结束时间不能为空');exit;
+}
 $head_pic = $_GPC['event_head'];        //获取活动头像
+if(trim($head_pic)==""){
+  message('操作失败,活动头像必须上传');exit;
+}
 $head_pic_url = $_GPC['link'];   //获取头图点击之后跳转的链接
 $desc = $_GPC['desc'];            //获取活动简介
+if(trim($desc)==""){
+  message('操作失败,活动简介必须填写');exit;
+}
 $prize_name = $_GPC['prize_name'];    //获取奖品名称
+if(trim($prize_name)==""){
+  message('操作失败,奖品名称必须填写');exit;
+}
 $prize_old_price = $_GPC['prize_old_price']; //获取活动奖品原价
+if(trim($prize_old_price)==""){
+  message('操作失败,活动奖品原价必须填写');exit;
+}
 $prize_floor_price = $_GPC['prize_floor_price']; //获取活动底价
+if(trim($prize_floor_price)==""){
+  message('操作失败,活动奖品底价必须填写');exit;
+}
 $bargain_max = $_GPC['bargain_max'];              //获取最大砍价次数
+if(trim($bargain_max)==""){
+  message('操作失败,最大砍价次数必须填写');exit;
+}
 $prize_num = $_GPC['prize_num'];              //获取活动奖品总数
+if(trim($bargain_max)==""){
+  message('操作失败,活动奖品总数必须填写');exit;
+}
 $is_subscription_launch = $_GPC['is_subscription_launch'];  //获取订阅才发起是否开启
 $is_subscription_lassist = $_GPC['is_subscription_lassist']; //获取订阅才发起帮助是否开启
 /*$bargain_time_astrict = $_GPC['bargain_time_astrict']; */  //获取砍价限时
