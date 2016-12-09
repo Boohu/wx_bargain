@@ -14,8 +14,18 @@ class AssistModel
      */
     static function add($data)
     {
-        global $_W;
-        $weid = $_W['uniacid'];               //获取当前公众号ID
+        return $result = pdo_insert('wx_bargain_assist', $data);
+
+    }
+    /**
+     * 要查询的帮忙砍价记录
+     * @param $state 要添加的$openid
+     */
+    static function get($openid)
+    {
+        global $_GPC;
+        $oid=$_GPC['oid'];//获取帮助用户订单ID
+        return  pdo_getall('wx_bargain_assist', array('order_id' => $oid, 'openid' => $openid));
 
     }
 }

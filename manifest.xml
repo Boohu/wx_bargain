@@ -87,8 +87,11 @@ CREATE TABLE `ims_wx_bargain_order` (
   `phone` text NOT NULL COMMENT '收货手机号',
   `name` text NOT NULL COMMENT '收货人姓名',
   `nickname` varchar(255) NOT NULL COMMENT '昵称',
+  `create_time` datetime NOT NULL COMMENT '创建订单时间',
+  `update_time` datetime NOT NULL COMMENT '更新订单时间',
+  `order_status` int(11) NOT NULL DEFAULT '0' COMMENT '订单状态 0=订单进行砍价中 1=待付款 2=已付款 3=待核销 4=已核销 5=订单砍价超时结束',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- 创建帮忙砍价表
@@ -105,7 +108,20 @@ CREATE TABLE `ims_wx_bargain_assist` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
+-- ----------------------------
+-- 创建支付表
+-- ----------------------------
+CREATE TABLE `ims_wx_bargain_pay` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `weid` int(11) NOT NULL COMMENT '公众号id',
+  `openid` text NOT NULL COMMENT 'openid',
+  `order_id` int(11) NOT NULL COMMENT '订单id',
+  `num` decimal(8,2) NOT NULL COMMENT '支付金额',
+  `status` int(11) NOT NULL COMMENT '支付状态',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 CREATE TABLE `ims_wx_bargain_domain` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
@@ -116,7 +132,7 @@ CREATE TABLE `ims_wx_bargain_domain` (
 
 ]]></install>
 	<uninstall><![CDATA[
-
+DROP TABLE IF EXISTS `ims_wx_bargain_assist`;
 DROP TABLE IF EXISTS `ims_wx_bargain_order`;
 DROP TABLE IF EXISTS `ims_wx_bargain_activity`;
 DROP TABLE IF EXISTS `ims_wx_bargain_assist`;
