@@ -60,7 +60,6 @@ CREATE TABLE `ims_wx_bargain_activity` (
   `prize_num` int(11) NOT NULL COMMENT '奖品总数',
   `is_subscription_launch` int(11) NOT NULL COMMENT '是否订阅才能发起1=是,0=否',
   `is_subscription_lassist` int(11) NOT NULL COMMENT '是否订阅才能帮助1=是,0=否',
-  `bargain_time_astrict` int(11) NOT NULL COMMENT '砍价时限，单位小时',
   `bargain_section_start` decimal(8,2) NOT NULL COMMENT '砍价区间-开始值',
   `bargain_section_end` decimal(8,2) NOT NULL COMMENT '砍价区间结束值',
   `front_section_start` decimal(8,2) NOT NULL COMMENT '前三次砍价区间开始值',
