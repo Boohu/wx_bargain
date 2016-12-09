@@ -1,31 +1,57 @@
 {template 'common/header'}
 <style>
-    .footer{
+    .footer {
         display: none;
     }
+
+    .main {
+        position: fixed;
+        z-index: 99;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .esc {
+        display: inline-block;
+        border-radius: 50%;
+        width: 30px;
+        height: 30px;
+        background-color: #adadad;
+        color: #333333;
+        position: relative;
+        left: 279px;
+        top: -10px;
+        text-align: center;
+        line-height: 30px;
+        font-weight: bold;
+        opacity: 1;
+    }
+
+    .code {
+        background-color: ghostwhite;
+        border-radius: 5px;
+        position: fixed;
+        z-index: 90;
+        top: 200px;
+        left: 30px;
+        width: 300px;
+        height: 200px;
+    }
+
+    .code img {
+        display: inline-block;
+        position: absolute;
+        left: 75px;
+        top: 37px;
+        width: 150px;
+        height: 150px;
+    }
+
+    .code
 </style>
 
-
-<script>
-    wx.ready(function () {
-        sharedata = {
-            title: '微信JS-SDK Demo',
-            desc: '微信JS-SDK,帮助第三方为用户提供更优质的移动web服务',
-            link: 'http://demo.open.weixin.qq.com/jssdk/',
-            imgUrl: 'http://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRt8Qia4lv7k3M9J1SKqKCImxJCt7j9rHYicKDI45jRPBxdzdyREWnk0ia0N5TMnMfth7SdxtzMvVgXg/0',
-            success: function(){
-            },
-            cancel: function(){
-            }
-        };
-        wx.onMenuShareAppMessage(sharedata);
-
-        wx.hideMenuItems({
-            menuList: ["menuItem:copyUrl","menuItem:share:qq","menuItem:originPage","menuItem:share:QZone","menuItem:openWithQQBrowser","menuItem:openWithSafari" ] // 要显示的菜单项，所有menu项见附录3
-        });
-
-    });
-</script>
 
 <div style="margin: 0;padding: 0;background-color: #eeeeee">
     <div class="mui-card-content">
@@ -52,21 +78,28 @@
         {else}
         <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
             <h3 style="color:#f0ad4e;line-height: 30px;">Ta已经砍价成功</h3>
-            <a href="{php echo $this->createMobileUrl('index',array('aid'=>$aid,'op'=>'join'));}"><input type="button"
-                                                                                                         style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; "
-                                                                                                         value="我也要砍价">
+            <a href="#">
+                <input id="btn" type="button"
+                       style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; "
+                       value="我也要砍价">
+                <input id="sub" type="hidden" value="{$activity[0]['is_subscription_launch']}">
+                <input id="follow" type="hidden" value="{$information['follow']}">
             </a>
         </div>
         {/if}
     </div>
     <div style="padding: 3px;">
-        <!--    <div style="background-color: #eeeeee;width: 100%;text-align: center;margin:5px auto; ">
-                <h3 style="line-height:55px;">砍价记录</h3>
-                <div style="text-align: left;padding:2px 5px"><strong style="color: #f0ad4e">DoubleWei</strong>砍掉了<strong
-                        style="color: #f0ad4e">100</strong>元，只需<strong style="color: #f0ad4e">0</strong>元了
-                </div>
-                <span style="display:block;width:100%;height:20px;color: #333333;overflow: hidden;">-&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</span>
-            </div>-->
+        {if !empty($order)}
+        <div style="background-color: #eeeeee;width: 100%;text-align: center;margin:5px auto; ">
+            <h3 style="line-height:55px;">砍价记录</h3>
+            {loop $assist_information $data}
+            <div style="text-align: left;padding:2px 5px"><strong style="color: #f0ad4e">{$data['nickname']}</strong>帮你砍掉了<strong
+                    style="color: #f0ad4e">{$data['price']}</strong>元。
+            </div>
+            {/loop}
+            <span style="display:block;width:100%;height:20px;color: #333333;overflow: hidden;">-----------------------------------------------------------------------------------------------------------</span>
+        </div>
+        {/if}
         <div style="text-align: center;padding: 5px;background-color: #ffffff">
             <h3 style="line-height: 50px;">活动规则</h3>
             {$html}
@@ -76,4 +109,51 @@
         <!--</div>-->
     </div>
 </div>
+<div class="main">
+    <div class="code">
+        <div class="esc" >X</div>
+        <label>请先关注公众号</label>
+        <img class="img" src="http://admin.codestorm.cn/attachment/{$activity[0]['wx_qr_code']}">
+    </div>
+</div>
+
+<script>
+    /*分享链接JS*/
+    wx.ready(function () {
+        sharedata = {
+            title: '{$activity[0]["name"]}',
+            desc: '{$activity[0]["wx_friend_centent"]}',
+            link: 'http://admin.codestorm.cn/app/index.php?i=6&c=entry&oid={$order[0]["id"]}&do=forward&m=wx_bargain',
+            imgUrl: 'http://admin.codestorm.cn/attachment/{$activity[0]["head_pic"]}',
+            success: function () {
+            },
+            cancel: function () {
+            }
+        };
+        wx.onMenuShareAppMessage(sharedata);
+
+        wx.hideMenuItems({
+            menuList: ["menuItem:copyUrl", "menuItem:share:qq", "menuItem:originPage", "menuItem:share:QZone", "menuItem:openWithQQBrowser", "menuItem:openWithSafari"] // 要显示的菜单项，所有menu项见附录3
+        });
+
+    });
+    /*未订阅提示JS*/
+    $('.main').hide();
+    $('#btn').bind('click', function () {
+        var sub = $('#sub').val();
+        var follow = $('#follow').val();
+        //判断是否需要关注公众号才能发起活动
+        if (sub == 1 && follow == 0) {
+            $('.main').slideDown(500)
+
+        } else {
+            window.location = "{php echo $this->createMobileUrl('index',array('aid'=>$aid,'op'=>'join'));}";
+        }
+    })
+    //关闭提示框按钮
+    $('.esc').bind('click', function () {
+        $('.main').slideUp(500);
+    })
+
+</script>
 {template 'common/footer'}

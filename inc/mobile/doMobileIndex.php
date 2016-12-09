@@ -27,13 +27,12 @@ if ($judge==0){
 }
 $html=htmlspecialchars_decode($activity[0]["desc_html"]);//将富文本内容转化为html
 $order = OrderModel::getExistence($openid); //查询当前用户是否存在当前活动订单
+$assist_information=AssistModel::getNum($order[0]['id']); //获取本次订单已被帮忙砍价的信息
 $op = $_GPC['op']; //获取操作类型
+
 //判断如果操作为join 执行
 if ($op == 'join') {
-    //判断是否需要关注公众号才能发起活动
-    if($activity[0]['is_subscription_launch']==1&&$information['follow']==0){
-        echo "请先关注公众号";
-    }else{
+
         //判断该用户是否已经参与过该活动
         if (!empty($order)) {
             message('你已经加入过了！', '../../app/' . $this->createMobileUrl('index',array('aid'=>$aid), 'error'));
@@ -53,7 +52,6 @@ if ($op == 'join') {
         } else {
             message('操作失败');
         }
-    }
 
 }
-include $this->template("index");
+include $this->template("index");//读取模板

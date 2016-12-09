@@ -36,10 +36,7 @@ $assist_information=AssistModel::getNum($oid); //获取本次订单已被帮忙�
 
 //判断操作类型如果为help
 if ($op=='help'){
-    //判断是否需要订阅才能发起帮助
-    if($activity[0]['is_subscription_lassist']==1&&$information['follow']==0){
-        echo "请先关注公众号";
-    }elseif(false){
+    if(false){
         echo "今天帮助已达上限";
     } else {
         //判断该用户是否帮忙该砍价过,为空则没有帮助过
@@ -68,13 +65,13 @@ if ($op=='help'){
                 $new_price = $order[0]['current_price'] - $price;//计算砍价后最新的当前价格
             }
 
-            if (AssistModel::add($data) && OrderModel::update(array('current_price' => $new_price))) {
-                message('砍价成功！', '../../app/' . $this->createMobileUrl('forward', array('oid' => $oid), 'success'));
+            $updata=array('current_price' => $new_price);//将最新价格传给数组
 
+            if (AssistModel::add($data)&&OrderModel::update($updata)) {
+                message('砍价成功！', '../../app/' . $this->createMobileUrl('forward', array('oid' => $oid), 'success'));
             }
         }
     }
 }
-
 
 include $this->template('forward');
