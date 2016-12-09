@@ -1,4 +1,31 @@
 {template 'common/header'}
+<style>
+    .footer{
+        display: none;
+    }
+</style>
+
+
+<script>
+    wx.ready(function () {
+        sharedata = {
+            title: '微信JS-SDK Demo',
+            desc: '微信JS-SDK,帮助第三方为用户提供更优质的移动web服务',
+            link: 'http://demo.open.weixin.qq.com/jssdk/',
+            imgUrl: 'http://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRt8Qia4lv7k3M9J1SKqKCImxJCt7j9rHYicKDI45jRPBxdzdyREWnk0ia0N5TMnMfth7SdxtzMvVgXg/0',
+            success: function(){
+            },
+            cancel: function(){
+            }
+        };
+        wx.onMenuShareAppMessage(sharedata);
+
+        wx.hideMenuItems({
+            menuList: ["menuItem:copyUrl","menuItem:share:qq","menuItem:originPage","menuItem:share:QZone","menuItem:openWithQQBrowser","menuItem:openWithSafari" ] // 要显示的菜单项，所有menu项见附录3
+        });
+
+    });
+</script>
 
 <div style="margin: 0;padding: 0;background-color: #eeeeee">
     <div class="mui-card-content">
