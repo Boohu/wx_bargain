@@ -14,14 +14,8 @@ $name = $_GPC['name'];          //获取活动名称
 if(trim($name)==""){
   message('操作失败,套餐名称不能为空');exit;
 }
-$start_time = $_GPC['time']['start'];        //获取活动开始和结束时间
-if(trim($start_time)==""){
-  message('操作失败,活动开始时间不能为空');exit;
-}
-$end_time=$_GPC['time']['end'];                //获取活动开始和结束时间
-if(trim($end_time)==""){
-  message('操作失败,活动结束时间不能为空');exit;
-}
+$start_time = $_GPC['time'];        //获取活动开始和结束时间
+$end_time=$_GPC['time'];                //获取活动开始和结束时间
 $head_pic = $_GPC['event_head'];        //获取活动头像
 if(trim($head_pic)==""){
   message('操作失败,活动头像必须上传');exit;
