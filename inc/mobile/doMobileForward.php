@@ -11,34 +11,39 @@ require_once(dirname(__FILE__) . "/../../model/assist.php");
 global $_GPC, $_W;
 $openid=$_W['openid'];//获取帮忙砍价用户openid
 $op=$_GPC['op'];//获取操作类型
-//判断用户是否是微信端打开
+/*判断用户是否是微信端打开*/
 if (empty($openid)) {
     echo " 该平台只能在微信端打开";
-    exit();
+    exit;
 }
 $information=$_W['fans'];//获取帮忙砍价用户信息
 $nickname=$information['nickname'];//获取帮忙砍价用户昵称
 $oid = isset($_GPC['oid']) ? trim($_GPC['oid']) : ''; /*获取订单id*/
 $order = OrderModel::getOrder($oid); //根据订单ID查询需要帮助用户的订单信息
+//判断如果是该订单用户点开分享链接则跳到主页
+if($openid==$order[0]['openid']){
+    $_GPC['aid']=$order[0]['activity_id'];
+    $this->doMobileIndex();
+    exit;
+}
 $activity = ActiveModel::get($order[0]['activity_id']); /*取出当前活动*/
 $html=htmlspecialchars_decode($activity[0]["desc_html"]);//将富文本内容转化为html
+
 $timestamp=$_W['timestamp'];//获得当前时间戳
+$date=date("Y-m-d");//获得当天日期
 $time=date('Y-m-d H:i:s', $timestamp);//将当前时间戳转化为时间格式
 $activity_end_time=strtotime($activity[0]['end_time']);//获得本次活动结束时间
 $judge=$timestamp>$activity_end_time?1:0;//判断活动是否超时 1=未超时 0=超时
-//活动超时结束
+/*活动超时结束*/
 if ($judge==0){
     echo "该活动已结束";
-    exit();
+    exit;
 }
 $assist_record=AssistModel::getRecord($openid);//获取是否存在被当前用户砍价记录
 $assist_information=AssistModel::getNum($oid); //获取本次订单已被帮忙砍价的信息
-
+$result=AssistModel::getCount($date);//获得今天砍价次数
 //判断操作类型如果为help
 if ($op=='help'){
-    if(false){
-        echo "今天帮助已达上限";
-    } else {
         //判断该用户是否帮忙该砍价过,为空则没有帮助过
         if (empty($assist_record)) {
             $count = count($assist_information);//统计本次订单被帮助的次数
@@ -71,7 +76,6 @@ if ($op=='help'){
                 message('砍价成功！', '../../app/' . $this->createMobileUrl('forward', array('oid' => $oid), 'success'));
             }
         }
-    }
 }
 
 include $this->template('forward');

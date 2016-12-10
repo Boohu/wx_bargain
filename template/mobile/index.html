@@ -3,7 +3,7 @@
     .footer {
         display: none;
     }
-
+    /*未关注提示框样式*/
     .main {
         position: fixed;
         z-index: 99;
@@ -28,34 +28,38 @@
         font-weight: bold;
         opacity: 1;
     }
-
     .code {
-        background-color: ghostwhite;
+        background-color: #fff;
         border-radius: 5px;
         position: fixed;
+        margin: auto;
         z-index: 90;
-        top: 200px;
-        left: 30px;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
         width: 300px;
-        height: 200px;
+        height: 305px;
+        box-shadow: #666 0px 0px 10px;
     }
 
     .code img {
         display: inline-block;
         position: absolute;
-        left: 75px;
-        top: 37px;
-        width: 150px;
-        height: 150px;
+        margin: auto;
+        left: 0;
+        right: 0;
+        top: 25px;
+        width: 270px;
+        height: 270px;
     }
 
-    .code
 </style>
 
 
 <div style="margin: 0;padding: 0;background-color: #eeeeee">
     <div class="mui-card-content">
-        <img src="http://admin.codestorm.cn/attachment/{$activity[0]['head_pic']}" alt="" width="100%">
+        <img src="{php echo   'http://'.$_SERVER['SERVER_NAME'].'/attachment/'.$activity[0]['head_pic'] }" alt="" width="100%">
     </div>
     <div style="padding: 15px;background-color: #ffffff">
         <div><h3>{$activity[0]['name']}</h3></div>
@@ -93,7 +97,7 @@
         <div style="background-color: #eeeeee;width: 100%;text-align: center;margin:5px auto; ">
             <h3 style="line-height:55px;">砍价记录</h3>
             {loop $assist_information $data}
-            <div style="text-align: left;padding:2px 5px"><strong style="color: #f0ad4e">{$data['nickname']}</strong>帮你砍掉了<strong
+            <div style="text-align: left;padding:2px 10px"><strong style="color: #f0ad4e">{$data['nickname']}</strong>帮你砍掉了<strong
                     style="color: #f0ad4e">{$data['price']}</strong>元。
             </div>
             {/loop}
@@ -113,7 +117,7 @@
     <div class="code">
         <div class="esc" >X</div>
         <label>请先关注公众号</label>
-        <img class="img" src="http://admin.codestorm.cn/attachment/{$activity[0]['wx_qr_code']}">
+        <img class="img" src="{php echo   'http://'.$_SERVER['SERVER_NAME'].'/attachment/'.$activity[0]['wx_qr_code'] }">
     </div>
 </div>
 
@@ -123,7 +127,8 @@
         sharedata = {
             title: '{$activity[0]["name"]}',
             desc: '{$activity[0]["wx_friend_centent"]}',
-            link: 'http://admin.codestorm.cn/app/index.php?i=6&c=entry&oid={$order[0]["id"]}&do=forward&m=wx_bargain',
+
+            link: "{php echo   'http://'.$_SERVER['SERVER_NAME'] . str_replace('./','/',$this->createMobileUrl('forward',array('oid'=>$order[0]['id'])))  }",
             imgUrl: 'http://admin.codestorm.cn/attachment/{$activity[0]["head_pic"]}',
             success: function () {
             },

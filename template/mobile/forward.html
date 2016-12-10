@@ -3,7 +3,7 @@
     .footer {
         display: none;
     }
-
+/*未关注提示框样式*/
     .main {
         position: fixed;
         z-index: 99;
@@ -30,30 +30,35 @@
     }
 
     .code {
-        background-color: ghostwhite;
+        background-color: #ffffff;
         border-radius: 5px;
         position: fixed;
+        margin: auto;
         z-index: 90;
-        top: 200px;
-        left: 30px;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
         width: 300px;
-        height: 200px;
+        height: 305px;
+        box-shadow: #666 0px 0px 10px;
     }
 
     .code img {
         display: inline-block;
         position: absolute;
-        left: 75px;
-        top: 37px;
-        width: 150px;
-        height: 150px;
+        margin: auto;
+        left: 0;
+        right: 0;
+        top: 25px;
+        width: 270px;
+        height: 270px;
     }
 
-    .code
 </style>
 <div style="margin: 0;padding: 0;background-color: #eeeeee">
     <div class="mui-card-content">
-        <img src="http://admin.codestorm.cn/attachment/{$activity[0]['head_pic']}" alt="" width="100%">
+        <img src="{php echo   'http://'.$_SERVER['SERVER_NAME'].'/attachment/'.$activity[0]['head_pic'] }" alt="" width="100%">
     </div>
     <div style="padding: 15px;background-color: #ffffff">
         <div><h3>{$activity[0]['name']}</h3></div>
@@ -65,13 +70,13 @@
         {if empty($assist_record)}
         <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
             <h3 style="color:#f0ad4e;line-height: 30px;">帮TA砍价</h3>
-            <a href="#">
-                <input type="button"
+                <input id="btn" type="button"
                        style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; "
                        value="砍价">
-                <input id="sub" type="hidden" value="{$activity[0]['is_subscription_launch']}">
+                <input id="sub" type="hidden" value="{$activity[0]['is_subscription_lassist']}">
                 <input id="follow" type="hidden" value="{$information['follow']}">
-            </a>
+                <input id="bargain_num" type="hidden" value="{$result['count']}">
+                <input id="bargain_max" type="hidden" value="{$activity[0]['bargain_max']}">
         </div>
         {else}
         <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
@@ -80,11 +85,14 @@
         </div>
         {/if}
     </div>
+    <div style="width: 100%;padding:15px;background-color: white;margin: 5px auto;border-radius: 3px;text-align: center">
+        <a style="font-size: 30px;font-weight: bold;text-decoration:none;" href="{php echo $this->createMobileUrl('index',array('aid'=>$activity[0]['id']))}">我要参加砍价活动</a>
+    </div>
     <div style="padding: 3px;">
         <div style="background-color: #eeeeee;width: 100%;text-align: center;margin:5px auto; ">
             <h3 style="line-height:55px;">砍价记录</h3>
             {loop $assist_information $data}
-            <div style="text-align: left;padding:2px 5px"><strong style="color: #f0ad4e">{$data['nickname']}</strong>砍掉了<strong
+            <div style="text-align: left;padding:2px 10px"><strong style="color: #f0ad4e">{$data['nickname']}</strong>砍掉了<strong
                     style="color: #f0ad4e">{$data['price']}</strong>元。
             </div>
             {/loop}
@@ -100,11 +108,22 @@
     </div>
 
 </div>
-<div class="main">
+<!--为订阅提示框-->
+<div class="main" id="subscription">
     <div class="code">
         <div class="esc" >X</div>
         <label>请先关注公众号</label>
-        <img class="img" src="http://admin.codestorm.cn/attachment/{$activity[0]['wx_qr_code']}">
+        <img class="img" src="{php echo   'http://'.$_SERVER['SERVER_NAME'].'/attachment/'.$activity[0]['wx_qr_code'] }">
+    </div>
+</div>
+<!--砍价次数上限提示框-->
+<div class="main" id="bargain">
+    <div class="code" style="height: 160px;padding: 5px;">
+        <div class="esc" >X</div>
+        <h3 style="color: red;text-align: center">提示</h3>
+        <div style="width: 100%;height: 30px;margin-top: 30px">
+            <p style="font-size: 18px;">今日砍价次数已达上限，小伙伴明天再来吧</p>
+        </div>
     </div>
 </div>
 <script>
@@ -113,17 +132,22 @@
     $('#btn').bind('click', function () {
         var sub = $('#sub').val();
         var follow = $('#follow').val();
+        var bargain_num=$('#bargain_num').val();
+        var bargain_max=$('#bargain_max').val();
         //判断是否需要关注公众号才能发起活动
         if (sub == 1 && follow == 0) {
-            $('.main').slideDown(500)
+            $('#subscription').slideDown(500)
 
-        } else {
+        }else if(parseInt(bargain_num)>=parseInt(bargain_max)){
+            //今日砍价次数以达上限
+            $('#bargain').slideDown(500)
+        }else {
             window.location = "{php echo $this->createMobileUrl('forward',array('op'=>'help','oid'=>$order[0]['id']));}";
         }
     })
     //关闭提示框按钮
     $('.esc').bind('click', function () {
-        $('.main').slideUp(500);
+        $(this).parent().parent().slideUp(500);
     })
 
 </script>

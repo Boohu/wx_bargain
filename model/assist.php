@@ -37,4 +37,16 @@ class AssistModel
         return  pdo_getall('wx_bargain_assist', array('order_id' => $oid));
 
     }
+    /**
+     * 查询查询本订单当天被帮忙砍价的次数
+     * $date 要添加的日期
+     */
+    static function getCount($date)
+    {
+        $today_start=$date." 00:00:00";//获得当天0点时间
+        $today_end=$date." 23:59:59";//获得当天23:59:59时间
+        $result=pdo_fetch("select count(*) as count from".tablename('wx_bargain_assist')."where  create_time>= '$today_start' and create_time<='$today_end'");
+        return $result;
+
+    }
 }
