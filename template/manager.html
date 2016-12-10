@@ -132,12 +132,12 @@
             <div class="panel-heading">
                 添加活动
             </div>
-            <input type="hidden" name="id" id="id" class="form-control" value="{$id}" required="required" >
+            <input type="hidden" name="id" id="id" class="form-control" value="{$id}"  >
             <div class="panel-body">
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> 活动名称</label>
                     <div class="col-sm-9 col-xs-12">
-                        <input type="text" name="name" id="name" class="form-control" value="{$datas[0]['name']}" autocomplete="off">
+                        <input type="text" name="name" id="name" class="form-control" value="{$datas[0]['name']}" autocomplete="off" required="required">
                         <span class="help-block">填写活动名称</span>
                     </div>
                 </div>
