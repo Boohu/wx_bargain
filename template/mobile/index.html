@@ -73,7 +73,15 @@
         <!--   <div style="display:inline-block;width:100%;background-color: #eee;padding:3px;margin-top:5px;border-radius: 3px;">
             <strong style="color:#f0ad4e;">Site</strong>正在参与“xxx”活动，把价格砍到底价，Ta就可以特惠抢购
         </div>-->
-        {if !empty($order)}
+        {if $order[0]['order_status']!=0&&!empty($order)}
+        <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
+            <h3 style="color:#f0ad4e;line-height: 30px;">恭喜你砍价成功</h3>
+            <input id="success" type="button"
+                   style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; "
+                   value="填写资料">
+            </a>
+        </div>
+        {elseif !empty($order)&&$order[0]['order_status']==0}
         <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
             <h3 style="color:#f0ad4e;line-height: 30px;">你已经参与砍价</h3>
             <p>你可以点击右上角将链接分享给别人帮忙砍价</p>
@@ -82,13 +90,11 @@
         {else}
         <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
             <h3 style="color:#f0ad4e;line-height: 30px;">Ta已经砍价成功</h3>
-            <a href="#">
                 <input id="btn" type="button"
                        style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; "
                        value="我也要砍价">
                 <input id="sub" type="hidden" value="{$activity[0]['is_subscription_launch']}">
                 <input id="follow" type="hidden" value="{$information['follow']}">
-            </a>
         </div>
         {/if}
     </div>

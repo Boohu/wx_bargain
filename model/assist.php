@@ -18,7 +18,7 @@ class AssistModel
 
     }
     /**
-     * 要查询的帮忙砍价记录
+     * 要查询的是否被该用户帮忙砍价记录
      * @param $state 要添加的$openid
      */
     static function getRecord($openid)
@@ -43,9 +43,11 @@ class AssistModel
      */
     static function getCount($date)
     {
+        global $_GPC;
+        $oid=$_GPC['oid'];
         $today_start=$date." 00:00:00";//获得当天0点时间
         $today_end=$date." 23:59:59";//获得当天23:59:59时间
-        $result=pdo_fetch("select count(*) as count from".tablename('wx_bargain_assist')."where  create_time>= '$today_start' and create_time<='$today_end'");
+        $result=pdo_fetch("select count(*) as count from".tablename('wx_bargain_assist')."where order_id=$oid and create_time>= '$today_start' and create_time<='$today_end'");
         return $result;
 
     }

@@ -9,7 +9,7 @@ $nickname=$information['nickname'];//获取当前用户昵称
 //判断用户是否是微信端打开
 if (empty($openid)) {
     echo " 该平台只能在微信端打开";
-    exit();
+    exit;
 }
 
 $aid = isset($_GPC['aid']) ? trim($_GPC['aid']) : ''; /*获取活动id*/
@@ -23,7 +23,7 @@ $judge=$timestamp>$activity_end_time?1:0;//判断活动是否超时 1=未超时 
 //活动超时结束
 if ($judge==0){
     echo "该活动已结束";
-    exit();
+    exit;
 }
 $html=htmlspecialchars_decode($activity[0]["desc_html"]);//将富文本内容转化为html
 $order = OrderModel::getExistence($openid); //查询当前用户是否存在当前活动订单

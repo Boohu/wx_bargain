@@ -26,6 +26,7 @@ if($openid==$order[0]['openid']){
     $this->doMobileIndex();
     exit;
 }
+
 $activity = ActiveModel::get($order[0]['activity_id']); /*取出当前活动*/
 $html=htmlspecialchars_decode($activity[0]["desc_html"]);//将富文本内容转化为html
 
@@ -73,6 +74,22 @@ if ($op=='help'){
             $updata=array('current_price' => $new_price);//将最新价格传给数组
 
             if (AssistModel::add($data)&&OrderModel::update($updata)) {
+                $order = OrderModel::getOrder($oid); //根据订单ID查询帮忙砍价后的最新订单信息
+                $current_price=$order[0]['current_price'];//获得砍价后最新的当前价格
+                $floor_price=$activity[0]['prize_floor_price'];//取出活动 底价
+                //判断如果低于底价则修改订单状态
+                if($current_price<=$floor_price){
+                    $updata=array('current_price'=>$floor_price);//将该活动底价添加到数组
+                    OrderModel::update($updata);//更新订单当前价格价格为底价
+                    //判断如果底价为0
+                    if($activity[0]['prize_floor_price']==0){
+                        $updata=array('order_status' =>2 );//将订单状态2=已付款传给数组
+                        OrderModel::update($updata);//更新订单状态
+                    }else{
+                        $updata=array('order_status' =>1 );//将订单状态1=待付款传给数组
+                        OrderModel::update($updata);//更新订单状态
+                    }
+                }
                 message('砍价成功！', '../../app/' . $this->createMobileUrl('forward', array('oid' => $oid), 'success'));
             }
         }
