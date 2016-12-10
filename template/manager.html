@@ -132,12 +132,12 @@
             <div class="panel-heading">
                 添加活动
             </div>
-            <input type="hidden" name="id" id="id" class="form-control" value="{$id}" >
+            <input type="hidden" name="id" id="id" class="form-control" value="{$id}"  >
             <div class="panel-body">
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span> 活动名称</label>
                     <div class="col-sm-9 col-xs-12">
-                        <input type="text" name="name" id="name" class="form-control" value="{$datas[0]['name']}" autocomplete="off">
+                        <input type="text" name="name" id="name" class="form-control" value="{$datas[0]['name']}" autocomplete="off" required="required">
                         <span class="help-block">填写活动名称</span>
                     </div>
                 </div>
@@ -165,7 +165,7 @@
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label">活动简介</label>
                     <div class="col-sm-9 col-xs-12">
-                        <textarea style="height: 80px;" class="form-control" name="desc" id="desc">{$datas[0]['desc']}</textarea>
+                        <textarea style="height: 80px;" class="form-control" name="desc" id="desc" required="required">{$datas[0]['desc']}</textarea>
                         <span class="help-block">用于对此本次活动进行说明和介绍。</span>
                     </div>
                 </div>
@@ -179,28 +179,28 @@
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>奖品原价</label>
                     <div class="input-group col-sm-3" style="padding-left:15px;padding-right:15px">
-                        <input type="text" class="form-control" id="prize_old_price" name="prize_old_price" value="{$datas[0]['prize_old_price']}" >
+                        <input type="text" class="form-control" id="prize_old_price" name="prize_old_price" value="{$datas[0]['prize_old_price']}" required="required">
                         <span class="input-group-addon">元</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>砍价底价</label>
                     <div class="input-group col-sm-3" style="padding-left:15px;padding-right:15px">
-                        <input type="text" class="form-control" id="prize_floor_price" name="prize_floor_price" value="{$datas[0]['prize_floor_price']}" >
+                        <input type="text" class="form-control" id="prize_floor_price" name="prize_floor_price" value="{$datas[0]['prize_floor_price']}" required="required">
                         <span class="input-group-addon">元</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label">每天最大砍价次数</label>
                     <div class="input-group col-sm-3" style="padding-left:15px;padding-right:15px">
-                        <input type="text" class="form-control" id="bargain_max" name="bargain_max" value="{$datas[0]['bargain_max']}" >
+                        <input type="text" class="form-control" id="bargain_max" name="bargain_max" value="{$datas[0]['bargain_max']}"  required="required">
                         <span class="input-group-addon">次</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>奖品总数</label>
                     <div class="input-group col-sm-3" style="padding-left:15px;padding-right:15px">
-                        <input type="text" class="form-control" id="prize_num" name="prize_num" value="{$datas[0]['prize_num']}" >
+                        <input type="text" class="form-control" id="prize_num" name="prize_num" value="{$datas[0]['prize_num']}" required="required">
                         <span class="input-group-addon">份</span>
                     </div>
                 </div>
@@ -230,18 +230,18 @@
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>砍价区间</label>
                     <div class="input-group col-sm-8" style="padding-left:15px;padding-right:15px">
-                        <input type="text" id="bargain_section_start" name="bargain_section_start" value="{$datas[0]['bargain_section_start']}" class="form-control"  >
+                        <input type="text" id="bargain_section_start" name="bargain_section_start" value="{$datas[0]['bargain_section_start']}" class="form-control"  required="required">
                         <span class="input-group-addon">至</span>
-                        <input type="text" id="bargain_section_end" name="bargain_section_end" value="{$datas[0]['bargain_section_end']}" class="form-control"  >
+                        <input type="text" id="bargain_section_end" name="bargain_section_end" value="{$datas[0]['bargain_section_end']}" class="form-control"  required="required">
                         <span class="input-group-addon">元</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label">前三次砍价区间</label>
                     <div class="input-group col-sm-8" style="padding-left:15px;padding-right:15px">
-                        <input type="text" id="front_section_start" name="front_section_start" value="{$datas[0]['front_section_start']}" class="form-control"  >
+                        <input type="text" id="front_section_start" name="front_section_start" value="{$datas[0]['front_section_start']}" class="form-control"  required="required">
                         <span class="input-group-addon">至</span>
-                        <input type="text" id="front_section_end" name="front_section_end" value="{$datas[0]['front_section_end']}" class="form-control"  >
+                        <input type="text" id="front_section_end" name="front_section_end" value="{$datas[0]['front_section_end']}" class="form-control"  required="required">
                         <span class="input-group-addon">元</span>
                     </div>
                 </div>
@@ -262,21 +262,21 @@
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>微信分享标题</label>
                     <div class="col-sm-9 col-xs-12">
-                        <input type="text" name="wx_title" id="wx_title" class="form-control" value="{$datas[0]['wx_title']}" autocomplete="off">
+                        <input type="text" name="wx_title" id="wx_title" class="form-control" value="{$datas[0]['wx_title']}" autocomplete="off" required="required">
                         <span class="help-block">填写微信分享标题</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>微信分享好友内容</label>
                     <div class="col-sm-9 col-xs-12">
-                        <input type="text" name="wx_friend_centent" id="wx_friend_centent" class="form-control" value="{$datas[0]['wx_friend_centent']}" autocomplete="off">
+                        <input type="text" name="wx_friend_centent" id="wx_friend_centent" class="form-control" value="{$datas[0]['wx_friend_centent']}" autocomplete="off" required="required">
                         <span class="help-block">填写微信分享好友内容</span>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>微信分享好友圈内容</label>
                     <div class="col-sm-9 col-xs-12">
-                        <input type="text" name="wx_circle_centent" id="wx_circle_centent" class="form-control" value="{$datas[0]['wx_circle_centent']}" autocomplete="off">
+                        <input type="text" name="wx_circle_centent" id="wx_circle_centent" class="form-control" value="{$datas[0]['wx_circle_centent']}" autocomplete="off" required="required">
                         <span class="help-block">填写微信分享好友圈内容</span>
                     </div>
                 </div>
