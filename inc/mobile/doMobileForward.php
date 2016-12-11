@@ -83,7 +83,7 @@ if ($op=='help'){
                     OrderModel::update($updata);//更新订单当前价格价格为底价
                     //判断如果底价为0
                     if($activity[0]['prize_floor_price']==0){
-                        $updata=array('order_status' =>2 );//将订单状态2=已付款传给数组
+                        $updata=array('order_status' =>2 );//将订单状态2=待核销传给数组
                         OrderModel::update($updata);//更新订单状态
                     }else{
                         $updata=array('order_status' =>1 );//将订单状态1=待付款传给数组

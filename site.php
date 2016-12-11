@@ -67,6 +67,10 @@ class Wx_bargainModuleSite extends WeModuleSite {
         require_once(dirname(__FILE__) . "/inc/mobile/doMobileForward.php");
 
     }
+    /*web端付款放回结果*/
+    public function payResult($params){
+        require_once  (dirname(__FILE__)."/inc/mobile/doMobilePayResult.php" );
+    }
 
 
 
@@ -79,5 +83,6 @@ class Wx_bargainModuleSite extends WeModuleSite {
     public function doWebTest(){
         require_once  ( dirname(__FILE__)."/test/doWebTest.php" );
     }
+
 
 }

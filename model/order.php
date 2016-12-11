@@ -10,7 +10,7 @@ class OrderModel
 {
 
     /**
-     * 查询订单是否存在
+     * 根据openid查询当前用户是否有订单存在
      * @param $id 要查询的活动id
      */
     static function getExistence($openid)
@@ -20,7 +20,7 @@ class OrderModel
         return pdo_getall('wx_bargain_order', array('openid' => $openid,'activity_id'=>$aid));
     }
     /**
-     * 获取需要帮助用户订单的信息
+     * 根据订单ID获取需要帮助用户订单的信息
      * @param $id 要查询的活动id
      */
     static function getOrder($oid)
