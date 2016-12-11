@@ -3,7 +3,9 @@ global $_GPC, $_W;
 require_once(dirname(__FILE__) . "/../../model/active.php");
 require_once(dirname(__FILE__) . "/../../model/order.php");
 require_once(dirname(__FILE__) . "/../../model/assist.php");
+require_once(dirname(__FILE__) . "/../../model/pay.php");
 $openid = $_W['openid'];//获取单前用户ID
+$weid=$_W['uniacid'];//获取当前公众号ID
 $information=$_W['fans'];//获取单前用户信息
 $nickname=$information['nickname'];//获取当前用户昵称
 //判断用户是否是微信端打开
@@ -32,7 +34,6 @@ $op = $_GPC['op']; //获取操作类型
 
 //判断如果操作为join 执行
 if ($op == 'join') {
-
         //判断该用户是否已经参与过该活动
         if (!empty($order)) {
             message('你已经加入过了！', '../../app/' . $this->createMobileUrl('index',array('aid'=>$aid), 'error'));
@@ -56,8 +57,21 @@ if ($op == 'join') {
 }
 //判断如果操作为pay则调微擎支付
 if($op=='pay'){
+    //判断是否该支付是否已经完成
+    if ($order['order_status']===2){
+        message('该订单已经支付完成！', '../../app/' .  $this->createMobileUrl('index',array('aid'=>$aid, 'error')));
+        exit;
+    }else{
+    $pay_data = array(
+        'pay_id'=>$timestamp,
+        'openid' => $openid,
+        'weid' => $weid,
+        'order_id'=>$order[0]['id'],
+        'num'=>$order[0]['current_price'],
+    );
+    PayModel::add($pay_data);//添加一条支付记录
     $params = array(
-        'tid' =>$order[0]['id'],      //充值模块中的订单号，此号码用于业务模块中区分订单，交易的识别码
+        'tid' =>$timestamp,      //充值模块中的订单号，此号码用于业务模块中区分订单，交易的识别码
         'ordersn' =>$order[0]['id'],  //收银台中显示的订单号
         'title' => $activity[0]['prize_name'],          //收银台中显示的标题
         'fee' =>$order[0]['current_price'] ,      //收银台中显示需要支付的金额,只能大于 0
@@ -65,5 +79,6 @@ if($op=='pay'){
     );
     $this->pay($params);
     exit;
+    }
 }
 include $this->template("index");//读取模板
