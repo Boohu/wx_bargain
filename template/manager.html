@@ -342,7 +342,92 @@
 </script>
 <script>
     $("#form1").submit(function(){
-        return false
+        var event_head= $("input[name='event_head']").val()
+        if($.trim(event_head)==""){
+            alert("请先上传活动头图")
+            return false
+        }
+
+        var wx_icon= $("input[name='wx_icon']").val()
+        if($.trim(wx_icon)==""){
+            alert("微信分享图标必须上传")
+            return false
+        }
+
+        var qr_code= $("input[name='qr_code']").val()
+        if($.trim(qr_code)==""){
+            alert("微信二维码必须上传")
+            return false
+        }
+
+
+        var prize_old_price=  parseFloat($("input[name='prize_old_price']").val())
+        if(  isNaN(prize_old_price) || prize_old_price<=0 ){
+            alert("原价填写错误")
+            return false
+        }
+
+        var  prize_floor_price= parseFloat($("input[name='prize_floor_price']").val())
+        if(  isNaN(prize_floor_price) || prize_floor_price<=0 ){
+            alert("商品底价填写错误")
+            return false
+        }
+
+        if(prize_floor_price>= prize_old_price){
+            alert("商品底价不能大于原价")
+            return false
+        }
+
+        var bargain_max = parseInt($("input[name='bargain_max']").val())
+        if(  isNaN(bargain_max) || bargain_max<=0 ){
+            alert("每天最大砍价次数填写错误")
+            return false
+        }
+
+        var prize_num = parseInt($("input[name='prize_num']").val())
+        if(  isNaN(prize_num) || prize_num<=0 ){
+            alert("奖品总数填写错误")
+            return false
+        }
+
+        var bargain_section_start =parseFloat($("input[name='bargain_section_start']").val())
+        if(  isNaN(bargain_section_start) || bargain_section_start<=0 ){
+            alert("砍价区间开始值填写错误")
+            return false
+        }
+
+        var bargain_section_end =parseFloat($("input[name='bargain_section_end']").val())
+        if(  isNaN(bargain_section_end) || bargain_section_end<=0 ){
+            alert("砍价区间结束值填写错误")
+            return false
+        }
+
+        if(bargain_section_end<=bargain_section_start){
+            alert("砍价区间结束值必须大于开始值")
+            return false
+        }
+
+
+
+        var front_section_start =parseFloat($("input[name='front_section_start']").val())
+        if(  isNaN(front_section_start) || front_section_start<=0 ){
+            alert("前三次砍价区间开始值填写错误")
+            return false
+        }
+
+        var front_section_end =parseFloat($("input[name='front_section_end']").val())
+        if(  isNaN(front_section_end) || front_section_end<=0 ){
+            alert("前三次砍价区间结束值填写错误")
+            return false
+        }
+
+
+        if( front_section_end<=front_section_start){
+            alert("前三次砍价区间结束值必须大于开始值")
+            return false
+        }
+
+
     })
 </script>
 

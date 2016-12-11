@@ -22,9 +22,6 @@ if(trim($head_pic)==""){
 }
 $head_pic_url = $_GPC['link'];   //获取头图点击之后跳转的链接
 $desc = $_GPC['desc'];            //获取活动简介
-if(trim($desc)==""){
-  message('操作失败,活动简介必须填写');exit;
-}
 $prize_name = $_GPC['prize_name'];    //获取奖品名称
 if(trim($prize_name)==""){
   message('操作失败,奖品名称必须填写');exit;
