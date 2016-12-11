@@ -57,7 +57,7 @@ if ($op == 'join') {
 //判断如果操作为pay则调微擎支付
 if($op=='pay'){
     $params = array(
-        'tid' =>1222,      //充值模块中的订单号，此号码用于业务模块中区分订单，交易的识别码
+        'tid' =>$order[0]['id'],      //充值模块中的订单号，此号码用于业务模块中区分订单，交易的识别码
         'ordersn' =>$order[0]['id'],  //收银台中显示的订单号
         'title' => $activity[0]['prize_name'],          //收银台中显示的标题
         'fee' =>$order[0]['current_price'] ,      //收银台中显示需要支付的金额,只能大于 0

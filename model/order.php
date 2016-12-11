@@ -48,7 +48,7 @@ class OrderModel
     static function update($data)
     {
         global  $_GPC,$_W;
-        $oid=$_GPC;//获取当前订单ID
+        $oid=$_GPC['oid'];//获取当前订单ID
         $timestamp=$_W['timestamp'];//获得当前时间戳
         $time=date('Y-m-d H:i:s', $timestamp);//将当前时间戳转化为时间格式
         $data['update_time']=$time;//为新增订单添加更新时间
