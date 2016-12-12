@@ -51,4 +51,33 @@ class AssistModel
         return $result;
 
     }
+
+
+    static function getAssistListCount($condition){
+        $table_wx_bargain_assist=tablename("wx_bargain_assist");
+
+        $sql="select count(*) as count from  $table_wx_bargain_assist
+        WHERE $condition ";
+        return pdo_fetchall($sql);
+
+    }
+
+    static function getAssistList($oid){
+        global $_GPC;
+        $page= isset($_GPC['p'])?intval($_GPC['p']):1;
+        if(empty($page) || intval($page)<1) $page=1;
+        $page=($page-1)*10;
+        $table_wx_bargain_assist=tablename("wx_bargain_assist");
+        $condition="order_id= $oid";
+        $sql="select * from  $table_wx_bargain_assist
+         WHERE $condition
+         limit $page , 10";
+        $count=self::getAssistListCount($condition);
+        $count=$count[0]['count']; /*取出总的条数*/
+        return array(
+            'list'=>pdo_fetchall($sql),
+            'count'=>$count
+        );
+    }
+
 }

@@ -59,15 +59,27 @@ class OrderModel
 
     /*获得满足条件的订单条数*/
     static function queryOrderCount($condition){
-
+        $table_wx_bargain_order=tablename("wx_bargain_order");
+        $sql="select count(*) as count from $table_wx_bargain_order where $condition";
+        return pdo_fetchall($sql);
     }
 
 
     static function queryOrder($aid){
-
         $table_wx_bargain_order=tablename("wx_bargain_order");
-        $sql="select * from $table_wx_bargain_order where activity_id= $aid";
-        return pdo_fetchall($sql);
+        $condition="activity_id= $aid";
+        global  $_GPC;
+        $page= isset($_GPC['p'])?intval($_GPC['p']):1;
+        if(empty($page) || intval($page)<1) $page=1;
+        $page=($page-1)*10;
+        $count=self::queryOrderCount($condition);
+        $count=$count[0]['count']; /*取出总的条数*/
+        $sql="select * from $table_wx_bargain_order where $condition
+        limit $page , 10";
+        return array(
+            'list'=>pdo_fetchall($sql),
+            'count'=>$count
+        );
     }
 
 }
