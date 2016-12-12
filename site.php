@@ -57,6 +57,18 @@ class Wx_bargainModuleSite extends WeModuleSite {
     }
 
 
+    /*参与列表*/
+    public function doWebJoinList(){
+        require_once(dirname(__FILE__)."/inc/web/doWebJoinList.php");
+
+    }
+
+    /*详细列表*/
+    public function doWebDetailList(){
+        require_once(dirname(__FILE__)."/inc/web/doWebDetailList.php");
+    }
+
+
     public function doMobileIndex(){
     //活动主页
         require_once(dirname(__FILE__)."/inc/mobile/doMobileIndex.php");
@@ -71,6 +83,10 @@ class Wx_bargainModuleSite extends WeModuleSite {
     public function payResult($params){
         require_once  (dirname(__FILE__)."/inc/mobile/doMobilePayResult.php" );
     }
+
+
+
+
 
 
 
