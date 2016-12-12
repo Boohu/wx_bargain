@@ -75,8 +75,13 @@ class Wx_bargainModuleSite extends WeModuleSite {
 
     }
     public function doMobileForward(){
-        //个人活动主页
+        //分享活动主页
         require_once(dirname(__FILE__) . "/inc/mobile/doMobileForward.php");
+
+    }
+    public function doMobileInformation(){
+        //填写资料页面
+        require_once(dirname(__FILE__) . "/inc/mobile/doMobileInformation.php");
 
     }
     /*web端付款放回结果*/
