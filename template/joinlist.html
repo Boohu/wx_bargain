@@ -1,0 +1,34 @@
+{template 'common/header'}
+
+<div class="panel panel-default">
+    <div class="panel-body table-responsive">
+        <table class="table table-hover">
+            <thead class="navbar-inner">
+            <tr>
+                <th style="width:100px;">参与时间</th>
+                <th style="width:50px;">状态</th>
+                <th style="width:190px; text-align:right;">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {loop $order $data}
+            <tr>
+                <td>
+                    {$data['create_time']}
+                </td>
+                <td>
+                    {php echo $data['order_status']==0?'砍价中':''}
+                    {php echo $data['order_status']==1?'待付款':''}
+                    {php echo $data['order_status']==2?'已付款':''}
+                    {php echo $data['order_status']==3?'待核销':''}
+                    {php echo $data['order_status']==4?'已核销':''}
+                </td>
+                <td></td>
+            </tr>
+            {/loop}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{template 'common/footer'}
