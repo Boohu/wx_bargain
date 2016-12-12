@@ -60,7 +60,7 @@ if ($op == 'join') {
 if($op=='pay'){
         //判断是否该支付是否已经完成
     if ($order[0]['order_status']==2){
-        message('该订单已经支付完成！', '../../app/' .  $this->createMobileUrl('index',array('aid'=>$aid, 'error')));
+        message('该订单已经支付完成！', '../../app/' .  $this->createMobileUrl('index',array('aid'=>$aid), 'error'));
         exit;
     }
         $pay_data = array(
