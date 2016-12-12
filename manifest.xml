@@ -132,7 +132,7 @@ CREATE TABLE `ims_wx_bargain_domain` (
 
 ]]></install>
 	<uninstall><![CDATA[
-DROP TABLE IF EXISTS `ims_wx_bargain_assist`;
+DROP TABLE IF EXISTS `ims_wx_bargain_pay`;
 DROP TABLE IF EXISTS `ims_wx_bargain_order`;
 DROP TABLE IF EXISTS `ims_wx_bargain_activity`;
 DROP TABLE IF EXISTS `ims_wx_bargain_assist`;
