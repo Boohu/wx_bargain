@@ -204,7 +204,7 @@
     })
     //填写资料跳转
     $('#success').bind('click',function () {
-        window.location="{php echo $this->createMobileUrl('information');}";
+        window.location="{php echo $this->createMobileUrl('information',array('oid'=>$order[0]['id']));}";
     })
 
 </script>

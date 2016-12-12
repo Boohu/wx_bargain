@@ -81,17 +81,17 @@
     <h2>完善信息</h2>
 </div>
 
-    <form  class="form" role="form">
+    <form action="{php echo $this->createMobileUrl('addInformation')}" class="form" role="form">
         <div class="input">
-            <span>姓名</span><input type="text" placeholder="请输入姓名">
+            <span>姓名</span><input type="text" name="name"  placeholder="请输入姓名" value="{$order[0]['name']}">
         </div>
         <div style="margin: 0 auto;width: 90%;background-color: #adadad;height: 1px"></div>
         <div class="input">
-            <span>手机号</span><input type="text" placeholder="请输入手机号">
+            <span>手机号</span><input type="text" name="phone"  placeholder="请输入手机号" value="{$order[0]['phone']}">
         </div>
         <div style="margin: 0 auto;width: 90%;background-color: #adadad;height: 1px"></div>
         <div style="text-align: center">
-            <input type="button" value="保存" class="btn" style="border: 1px solid #007aff;background-color:#007aff ">
+            <input type="submit" value="保存" id="save" class="btn" style="border: 1px solid #007aff;background-color:#007aff ">
             <input class="btn" value="取消" type="button"style="border: 1px solid #dd524d;background-color:#dd524d">
         </div>
     </form>
@@ -100,6 +100,5 @@
     <p >请在填写真实姓名和有效手机号码，方便客服联系到您。</p>
     <p> 注：在客服联系您之后请勿更改个人信息</p>
 </div>
-
 
 {template 'common/footer'}

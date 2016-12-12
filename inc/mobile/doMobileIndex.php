@@ -29,6 +29,7 @@ if ($judge==0){
 }
 $html=htmlspecialchars_decode($activity[0]["desc_html"]);//将富文本内容转化为html
 $order = OrderModel::getExistence($openid); //查询当前用户是否存在当前活动订单
+$_GPC['oid']=$order[0]['id'];//将订单ID付给全局
 $assist_information=AssistModel::getNum($order[0]['id']); //获取本次订单已被帮忙砍价的信息
 $op = $_GPC['op']; //获取操作类型
 
