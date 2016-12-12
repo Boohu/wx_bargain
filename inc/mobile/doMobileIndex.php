@@ -57,31 +57,30 @@ if ($op == 'join') {
 }
 //判断如果操作为pay则调微擎支付
 if($op=='pay'){
-    $pay_data = array(
-        'pay_id'=>$timestamp,
-        'openid' => $openid,
-        'weid' => $weid,
-        'order_id'=>$order[0]['id'],
-        'num'=>$order[0]['current_price'],
-    );
+        //判断是否该支付是否已经完成
+    if ($order[0]['order_status']==2){
+        message('该订单已经支付完成！', '../../app/' .  $this->createMobileUrl('index',array('aid'=>$aid, 'error')));
+        exit;
+    }
+        $pay_data = array(
+            'pay_id' => $timestamp,
+            'openid' => $openid,
+            'weid' => $weid,
+            'order_id' => $order[0]['id'],
+            'num' => $order[0]['current_price'],
+        );
 
-    $params = array(
-        'tid' =>$timestamp,      //充值模块中的订单号，此号码用于业务模块中区分订单，交易的识别码
-        'ordersn' =>$order[0]['id'],  //收银台中显示的订单号
-        'title' => $activity[0]['prize_name'],          //收银台中显示的标题
-        'fee' =>$order[0]['current_price'] ,      //收银台中显示需要支付的金额,只能大于 0
-        'user' => $_W['member']['uid'],     //付款用户, 付款的用户名(选填项)
-    );
-//    //判断是否该支付是否已经完成
-//    if ($order['order_status']===2){
-//        $this->pay($params);
-//        message('该订单已经支付完成！', '../../app/' .  $this->createMobileUrl('index',array('aid'=>$aid, 'error')));
-//
-//    }else{
-    message($timestamp);
-    $this->pay($params);
-    PayModel::add($pay_data);//添加一条支付记录
+        $params = array(
+            'tid' => $timestamp,      //充值模块中的订单号，此号码用于业务模块中区分订单，交易的识别码
+            'ordersn' => $order[0]['id'],  //收银台中显示的订单号
+            'title' => $activity[0]['prize_name'],          //收银台中显示的标题
+            'fee' => $order[0]['current_price'],      //收银台中显示需要支付的金额,只能大于 0
+            'user' => $_W['member']['uid'],     //付款用户, 付款的用户名(选填项)
+        );
 
+        $status = $order[0]['order_status'];
+        $this->pay($params);
+        PayModel::add($pay_data);//添加一条支付记录
     exit;
 }
 include $this->template("index");//读取模板
