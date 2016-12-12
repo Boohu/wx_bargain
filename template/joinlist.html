@@ -29,6 +29,21 @@
             </tbody>
         </table>
     </div>
-</div>
+    <div style="width: 100px; float: right; margin: 25px;">
+        <select id="pages" class="form-control">
+            {php for($i=1;$i<=$pages;$i++)  { }
+            <option     {php echo $p==$i?'selected':''}    value="{php echo $this->createWebUrl('joinList',array('aid'=>$aid,'p'=>$i))}" >第 {$i} 页 </option>
+            {php } }
+        </select>
+    </div>
+    <div style="clear: both">
 
+    </div>
+</div>
+<script>
+    $("#pages").change(function () {
+        var url=$(this).val().trim()
+        window.location.href=url
+    })
+</script>
 {template 'common/footer'}
