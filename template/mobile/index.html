@@ -173,6 +173,10 @@
     $('#pay').bind('click',function () {
         window.location="{php echo $this->createMobileUrl('index',array('aid'=>$aid,'op'=>'pay'));}";
     })
+    //填写资料跳转
+    $('#success').bind('click',function () {
+        window.location="{php echo $this->createMobileUrl('information');}";
+    })
 
 </script>
 {template 'common/footer'}
