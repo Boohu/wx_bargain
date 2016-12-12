@@ -23,7 +23,10 @@
                     {php echo $data['order_status']==3?'待核销':''}
                     {php echo $data['order_status']==4?'已核销':''}
                 </td>
-                <td></td>
+                <td>
+                    <a href="{php echo $this->createWebUrl('detailList',array('oid'=>$data['id']))}"
+                       class="btn btn-primary  btn-sm">查看砍价详情</a>
+                </td>
             </tr>
             {/loop}
             </tbody>

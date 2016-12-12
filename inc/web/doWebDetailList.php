@@ -1,7 +1,3 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Administrator
- * Date: 2016/12/12 0012
- * Time: 上午 9:34
- */
+
+include $this->template('detaillist');                              //打开后台活动管理页面
