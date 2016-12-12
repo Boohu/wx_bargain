@@ -78,6 +78,7 @@ if($op=='pay'){
 //        message('该订单已经支付完成！', '../../app/' .  $this->createMobileUrl('index',array('aid'=>$aid, 'error')));
 //
 //    }else{
+    message($timestamp);
     $this->pay($params);
     PayModel::add($pay_data);//添加一条支付记录
 
