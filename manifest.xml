@@ -120,6 +120,7 @@ CREATE TABLE `ims_wx_bargain_pay` (
   `status` int(11) NOT NULL COMMENT '支付状态',
   `create_time` datetime NOT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `pay_id` int(11) NOT NULL COMMENT '支付编号',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
