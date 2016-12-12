@@ -54,4 +54,20 @@ class OrderModel
         $data['update_time']=$time;//为新增订单添加更新时间
         return $result = pdo_update('wx_bargain_order', $data,array('id'=>$oid));
     }
+
+
+
+    /*获得满足条件的订单条数*/
+    static function queryOrderCount($condition){
+
+    }
+
+
+    static function queryOrder($aid){
+
+        $table_wx_bargain_order=tablename("wx_bargain_order");
+        $sql="select * from $table_wx_bargain_order where activity_id= $aid";
+        return pdo_fetchall($sql);
+    }
+
 }
