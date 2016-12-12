@@ -1,0 +1,44 @@
+{template 'common/header'}
+<div class="panel panel-default">
+    <div class="panel-body table-responsive">
+        <table class="table table-hover">
+            <thead class="navbar-inner">
+            <tr>
+                <th style="width:100px;">时间</th>
+                <th style="width:100px;">金额</th>
+                <th style="width:100px;">昵称</th>
+            </tr>
+            </thead>
+            <tbody>
+            {loop $assist $data}
+            <tr>
+                <td>
+                    {$data['create_time']}
+                </td>
+                <td>
+                    {$data['price']}
+                </td>
+                <td>
+                    {$data['nickname']}
+                </td>
+            </tr>
+            {/loop}
+            </tbody>
+        </table>
+    </div>
+    <div style="width: 100px; float: right; margin: 25px;">
+        <select id="pages" class="form-control">
+            {php for($i=1;$i<=$pages;$i++)  { }
+            <option     {php echo $p==$i?'selected':''}    value="{php echo $this->createWebUrl('detailList',array('oid'=>$oid,'p'=>$i))}" >第 {$i} 页 </option>
+            {php } }
+        </select>
+    </div>
+    <div style="clear: both">
+</div>
+    <script>
+        $("#pages").change(function () {
+            var url=$(this).val().trim()
+            window.location.href=url
+        })
+    </script>
+{template 'common/footer'}

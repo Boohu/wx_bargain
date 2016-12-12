@@ -12,5 +12,5 @@ if(empty($p) || intval($p)<1) $p=1;
 $orderInfo=OrderModel::queryOrder($aid);
 $order=$orderInfo['list'];
 $count=$orderInfo['count'];
-$pages=intval((intval($count))/intval(10))+1;
+$pages=intval((intval($count-1))/intval(10))+1;
 include $this->template("joinlist");
