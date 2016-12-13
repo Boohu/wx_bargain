@@ -19,10 +19,10 @@ if (empty($openid)) {
     exit;
 }
 //判断如果是非认证服务号
-if($level!=4){
-    echo "请先关注公众号，并按公众号的提示帮忙砍价活动！";
-    exit;
-};
+//if($level!=4){
+//    echo "请先关注公众号，并按公众号的提示帮忙砍价活动！";
+//    exit;
+//};
 $information=$_W['fans'];//获取帮忙砍价用户信息
 $nickname=$information['nickname'];//获取帮忙砍价用户昵称
 $oid = isset($_GPC['oid']) ? trim($_GPC['oid']) : ''; /*获取订单id*/
