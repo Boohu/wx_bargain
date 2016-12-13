@@ -1,1 +1,75 @@
-22222
+{template 'common/header'}
+222
+<!--<div class="panel panel-default">
+    <div class="panel-body table-responsive">
+        <table class="table table-hover">
+            <thead class="navbar-inner">
+            <tr>
+                <th style="width:100px;">订单编号</th>
+                <th style="width:100px;">奖品名称</th>
+                <th style="width:100px;">参与时间</th>
+                <th style="width:50px;">状态</th>
+                <th style="width:190px; text-align:right;">操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            {loop $order $data}
+            <tr>
+                <td>
+                    {$data['name']}
+                </td>
+                <td>
+                    {$data['create_time']}
+                </td>
+                <td>
+
+                    {if $data['order_status']==0}
+                    <span style="display:block;text-align:center;padding:10px 0;font-size: 12px;line-height:1;color:#fff;width:46px;height:30px;border-radius:3px;background-color: red">
+                            砍价中
+                        </span>
+                    {/if}
+
+                    {if $data['order_status']==1}
+                    <span style="display:block;text-align:center;padding:10px 0;font-size: 12px;line-height:1;color:#fff;width:46px;height:30px;border-radius:3px;background-color: blue">
+                            待付款
+                        </span>
+                    {/if}
+
+                    {if $data['order_status']==2}
+                    <span style="display:block;text-align:center;padding:10px 0;font-size: 12px;line-height:1;color:#fff;width:46px;height:30px;border-radius:3px;background-color:#456789">
+                            待核销
+                        </span>
+                    {/if}
+
+
+                    {if $data['order_status']==3}
+                    <span style="display:block;text-align:center;padding:10px 0;font-size: 12px;line-height:1;color:#fff;width:46px;height:30px;border-radius:3px;background-color: green">
+                            已核销
+                        </span>
+                    {/if}
+
+                </td>
+                <td>
+                    <a href="{php echo $this->createWebUrl('detailList',array('oid'=>$data['id']))}"
+                       class="btn btn-primary  btn-sm">查看砍价详情</a>
+                </td>
+            </tr>
+            {/loop}
+            </tbody>
+        </table>
+    </div>
+    <div style="width: 100px; float: right; margin: 25px;">
+        <select id="pages" class="form-control">
+            {php for($i=1;$i<=$pages;$i++)  { }
+            <option     {php echo $p==$i?'selected':''}    value="{php echo $this->createWebUrl('joinList',array('aid'=>$aid,'p'=>$i))}" >第 {$i} 页 </option>
+            {php } }
+        </select>
+    </div>
+    <div style="clear: both">
+
+    </div>
+</div>
+<script>
+
+</script>-->
+{template 'common/footer'}

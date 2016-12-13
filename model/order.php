@@ -8,6 +8,14 @@
  */
 class OrderModel
 {
+    /**
+     *  查询所有订单
+     * @param
+     */
+    static function get()
+    {
+        return pdo_getall('wx_bargain_order');
+    }
 
     /**
      * 根据openid查询当前用户是否有订单存在

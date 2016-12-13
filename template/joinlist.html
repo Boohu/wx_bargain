@@ -5,16 +5,29 @@
         <table class="table table-hover">
             <thead class="navbar-inner">
             <tr>
+                <th style="width:100px;">昵称</th>
                 <th style="width:100px;">参与时间</th>
+                <th style="width:50px;">姓名</th>
+                <th style="width:100px;">手机号</th>
                 <th style="width:50px;">状态</th>
-                <th style="width:190px; text-align:right;">操作</th>
+                <th style="width:100px;">查看</th>
+                <th style="width:80px; text-align:right;">操作</th>
             </tr>
             </thead>
             <tbody>
             {loop $order $data}
             <tr>
                 <td>
+                    {$data['nickname']}
+                </td>
+                <td>
                     {$data['create_time']}
+                </td>
+                <td>
+                    {$data['name']}
+                </td>
+                <td>
+                    {$data['phone']}
                 </td>
                 <td>
 
@@ -48,6 +61,15 @@
                     <a href="{php echo $this->createWebUrl('detailList',array('oid'=>$data['id']))}"
                        class="btn btn-primary  btn-sm">查看砍价详情</a>
                 </td>
+                <td style="text-align: right">
+                    {if $data['order_status']==2}
+                    <a href="{php echo $this->createWebUrl('verificationOrder',array('oid'=>$data['id'],'aid'=>$aid))}"
+                       class="btn btn-success  btn-sm">核销</a>
+                    {/if}
+                    <input id="btn" type="button" class="btn btn-default  btn-sm" data-toggle="modal" data-target="#remarks" value="备注" >
+                    <input type="hidden" value="{$data['remarks']}">
+                </td>
+
             </tr>
             {/loop}
             </tbody>
@@ -64,6 +86,36 @@
 
     </div>
 </div>
+<div class="modal fade" id="remarks" role="dialog" aria-labelledby="gridSystemModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="">备注</h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form action="{php echo $this->createWebUrl('addRemarks',array('oid'=>$data['id']))}" method="post" class="form-horizontal">
+                        <div class="form-group ">
+                            <label for="add_remarks" class="col-xs-3 control-label">备注：</label>
+                            <div class="col-xs-8 ">
+                                <textarea id="add_remarks"  class="form-control input-sm duiqi" >{$oid}</textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
+                <button type="submit"  id="save" class="btn btn-xs btn-green" >保 存</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
 <script>
     $("#pages").change(function () {
         var url=$(this).val().trim()
