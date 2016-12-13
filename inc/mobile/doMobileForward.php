@@ -10,12 +10,19 @@ require_once(dirname(__FILE__) . "/../../model/order.php");
 require_once(dirname(__FILE__) . "/../../model/assist.php");
 global $_GPC, $_W;
 $openid=$_W['openid'];//获取帮忙砍价用户openid
+$weid=$_W['uniacid'];//获取当前公众号ID
+$level=$_W['account']['level'];//获取公众号类型
 $op=$_GPC['op'];//获取操作类型
 /*判断用户是否是微信端打开*/
 if (empty($openid)) {
     echo " 该平台只能在微信端打开";
     exit;
 }
+//判断如果是非认证服务号
+if($level!=4){
+    echo "请先关注公众号，并按公众号的提示帮忙砍价活动！";
+    exit;
+};
 $information=$_W['fans'];//获取帮忙砍价用户信息
 $nickname=$information['nickname'];//获取帮忙砍价用户昵称
 $oid = isset($_GPC['oid']) ? trim($_GPC['oid']) : ''; /*获取订单id*/

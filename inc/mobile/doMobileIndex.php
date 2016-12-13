@@ -6,6 +6,7 @@ require_once(dirname(__FILE__) . "/../../model/assist.php");
 require_once(dirname(__FILE__) . "/../../model/pay.php");
 $openid = $_W['openid'];//获取单前用户ID
 $weid=$_W['uniacid'];//获取当前公众号ID
+$level=$_W['account']['level'];//获取公众号类型
 $information=$_W['fans'];//获取单前用户信息
 $nickname=$information['nickname'];//获取当前用户昵称
 //判断用户是否是微信端打开
@@ -13,7 +14,11 @@ if (empty($openid)) {
     echo " 该平台只能在微信端打开";
     exit;
 }
-
+//判断如果是非认证服务号
+if($level!=4){
+    echo "请先关注公众号，并按公众号的提示参加活动！";
+    exit;
+};
 $aid = isset($_GPC['aid']) ? trim($_GPC['aid']) : ''; /*获取活动id*/
 if ($aid == "") exit; /*活动id不存在*/
 $activity = ActiveModel::get($aid); /*取出当前活动*/
