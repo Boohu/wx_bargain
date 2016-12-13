@@ -17,7 +17,7 @@ $data = array(
 );
 //判断更新成功
 if(OrderModel::update($data)){
-    message('信息保存成功！', '../../app/' .  $this->createMobleUrl('index',array('aid'=>$aid),'success'));
+    message('信息保存成功！', '../../app/'.$this->createMobileUrl('index',array('aid'=>$aid),'success'));
 }else{
     message('保存失败失败');
 }
