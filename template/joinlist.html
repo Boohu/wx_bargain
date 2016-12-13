@@ -66,8 +66,9 @@
                     <a href="{php echo $this->createWebUrl('verificationOrder',array('oid'=>$data['id'],'aid'=>$aid))}"
                        class="btn btn-success  btn-sm">核销</a>
                     {/if}
-                    <input id="btn" type="button" class="btn btn-default  btn-sm" data-toggle="modal" data-target="#remarks" value="备注" >
-                    <input type="hidden" value="{$data['remarks']}">
+                    <input b id="btn" type="button" class="remarks-btn btn btn-default  btn-sm" data-toggle="modal" value="备注" >
+                    <textarea  class="remarks-text" hidden="hidden" style="display: none">{$data['remarks']}</textarea>
+                    <input type="hidden" class="remarks-id" value="{$data['id']}"/>
                 </td>
 
             </tr>
@@ -95,19 +96,20 @@
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
-                    <form action="{php echo $this->createWebUrl('addRemarks',array('oid'=>$data['id']))}" method="post" class="form-horizontal">
+                    <form id="add_remarks_form" action="{php echo $this->createWebUrl('addRemarks')}" method="post" class="form-horizontal">
                         <div class="form-group ">
                             <label for="add_remarks" class="col-xs-3 control-label">备注：</label>
                             <div class="col-xs-8 ">
-                                <textarea id="add_remarks"  class="form-control input-sm duiqi" >{$oid}</textarea>
+                                <textarea name="remarks" id="add_remarks"  class="form-control input-sm duiqi" ></textarea>
+                                <input name="oid" id="id_remarks" type="hidden"/>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-xs btn-white" data-dismiss="modal">取 消</button>
-                <button type="submit"  id="save" class="btn btn-xs btn-green" >保 存</button>
+                <button type="button" class="btn btn-cancel" data-dismiss="modal">取 消</button>
+                <button type="submit"  id="save" class="btn btn-primary " >保 存</button>
             </div>
         </div>
         <!-- /.modal-content -->
@@ -121,5 +123,21 @@
         var url=$(this).val().trim()
         window.location.href=url
     })
+</script>
+<script>
+    $(".remarks-btn").click(function(){
+        var val=$(this).parent().find(".remarks-text").val().trim()
+        var id=  $(this).parent().find(".remarks-id").val().trim()
+        $("#add_remarks").val(val)
+        $("#id_remarks").val(id);
+        $('#remarks').modal({})
+
+    })
+
+    $("#save").click(function () {
+        $("#add_remarks_form").submit()
+    })
+
+    add_remarks_form
 </script>
 {template 'common/footer'}
