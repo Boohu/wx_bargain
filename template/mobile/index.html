@@ -3,27 +3,30 @@
     .footer {
         display: none;
     }
+
     /*未关注提示框样式*/
     .main {
-        position: fixed;   /* 使用绝对定位或固定定位  */
+        position: fixed; /* 使用绝对定位或固定定位  */
         left: 0px;
         top: 0px;
-        width:100%;
-        height:100%;
-        text-align:center;
+        width: 100%;
+        height: 100%;
+        text-align: center;
         z-index: 1000;
     }
+
     .background {
-        position: fixed;   /* 使用绝对定位或固定定位  */
+        position: fixed; /* 使用绝对定位或固定定位  */
         left: 0px;
         top: 0px;
-        width:100%;
-        height:100%;
-        text-align:center;
+        width: 100%;
+        height: 100%;
+        text-align: center;
         background: #333333;
         opacity: 0.5;
     }
-    .modal_main{
+
+    .modal_main {
         position: relative;
         z-index: 9999;
         display: block;
@@ -35,19 +38,21 @@
         box-shadow: #666 0px 0px 10px;
 
     }
-    .modal_head{
+
+    .modal_head {
         display: block;
         width: 300px;
-        height:57px;
-        padding:14px;
+        height: 57px;
+        padding: 14px;
     }
-    .modal_code{
+
+    .modal_code {
         display: block;
         width: 300px;
         padding: 10px;
     }
 
-    .modal_btn{
+    .modal_btn {
         display: block;
         width: 300px;
         height: 40px;
@@ -57,7 +62,8 @@
         color: #007aff;
         cursor: pointer;
     }
-    .line{
+
+    .line {
         display: block;
         margin: 0;
         height: 1px;
@@ -77,7 +83,8 @@
 
 <div style="margin: 0;padding: 0;background-color: #eeeeee">
     <div class="mui-card-content">
-        <img src="{php echo   'http://'.$_SERVER['SERVER_NAME'].'/attachment/'.$activity[0]['head_pic'] }" alt="" width="100%">
+        <img src="{php echo   'http://'.$_SERVER['SERVER_NAME'].'/attachment/'.$activity[0]['head_pic'] }" alt=""
+             width="100%">
     </div>
     <div style="padding: 15px;background-color: #ffffff">
         <div><h3>{$activity[0]['name']}</h3></div>
@@ -93,9 +100,13 @@
         <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
             <h3 style="color:#f0ad4e;line-height: 30px;">恭喜你砍价成功</h3>
             {if $order[0]['order_status']==1}
-            <input id="pay" type="button" style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; " value="支付">
+            <input id="pay" type="button"
+                   style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; "
+                   value="支付">
             {elseif $order[0]['order_status']==2}
-            <input id="success" type="button" style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; " value="完善资料">
+            <input id="success" type="button"
+                   style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; "
+                   value="完善资料">
             <p>请点击按钮填写或修改资料，耐心等待客服的联系</p>
             {else}
             <p>奖品已发出</p>
@@ -110,11 +121,12 @@
         {else}
         <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
             <h3 style="color:#f0ad4e;line-height: 30px;">Ta已经砍价成功</h3>
-                <input id="btn" type="button"
-                       style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; "
-                       value="我也要砍价">
-                <input id="sub" type="hidden" value="{$activity[0]['is_subscription_launch']}">
-                <input id="follow" type="hidden" value="{$information['follow']}">
+            <input id="btn" type="button"
+                   style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; "
+                   value="我也要砍价">
+            <input id="sub" type="hidden" value="{$activity[0]['is_subscription_launch']}">
+            <input id="follow" type="hidden" value="{$information['follow']}">
+            <input id="openid" type="hidden" value="{$openid}">
         </div>
         {/if}
     </div>
@@ -143,10 +155,12 @@
     <div class="modal_main">
         <div class="modal_head">
             <h4>请先关注公众号</h4>
+            <p>并按公众号提示参加活动</p>
         </div>
         <div class="line"></div>
         <div class="modal_code">
-            <img class="img" src="{php echo   'http://'.$_SERVER['SERVER_NAME'].'/attachment/'.$activity[0]['wx_qr_code'] }">
+            <img class="img"
+                 src="{php echo   'http://'.$_SERVER['SERVER_NAME'].'/attachment/'.$activity[0]['wx_qr_code'] }">
         </div>
 
         <div class="line"></div>
@@ -158,6 +172,8 @@
 </div>
 
 <script>
+    $('.main').hide() //隐藏提示框
+
     /*分享链接JS*/
     wx.ready(function () {
         sharedata = {
@@ -178,33 +194,41 @@
         });
 
     });
-    $('.main').hide()
-    /*未订阅提示JS*/
-    $('#btn').bind('click', function () {
-        var sub = $('#sub').val();
-        var follow = $('#follow').val();
-        //判断是否需要关注公众号才能发起活动
-        if (sub == 1 && follow == 0) {
-           $('.main').show()
-            $("body").css({overflow:"hidden"});
-        } else {
-            window.location = "{php echo $this->createMobileUrl('index',array('aid'=>$aid,'op'=>'join'));}";
-        }
-    })
+
+        /*未订阅提示JS*/
+        $('#btn').bind('click', function () {
+
+            var openid = $('#openid').val();//获取OPEIN
+                var sub = $('#sub').val();//获取是否需要关注
+                var follow = $('#follow').val();//获取是否有关注
+                //判断是否
+                //判断是否需要关注公众号或OEPENID 存在才能发起活动
+                if ((sub == 1 && follow == 0)||openid.length==0) {
+                    $('.main').show()
+                    $("body").css({overflow: "hidden"});
+                } else {
+                    window.location = "{php echo $this->createMobileUrl('index',array('aid'=>$aid,'op'=>'join'));}";
+                }
+        })
+
+
 
     //关闭提示框按钮
     $('.modal_btn').bind('click', function () {
         $('.main').hide();
-        $("body").css({overflow:"visible"});
+        $("body").css({overflow: "visible"});
     })
 
+
     //支付按钮跳转
-    $('#pay').bind('click',function () {
-        window.location="{php echo $this->createMobileUrl('index',array('aid'=>$aid,'op'=>'pay'));}";
+    $('#pay').bind('click', function () {
+        window.location = "{php echo $this->createMobileUrl('index',array('aid'=>$aid,'op'=>'pay'));}";
     })
+
+
     //填写资料跳转
-    $('#success').bind('click',function () {
-        window.location="{php echo $this->createMobileUrl('information',array('oid'=>$order[0]['id']));}";
+    $('#success').bind('click', function () {
+        window.location = "{php echo $this->createMobileUrl('information',array('oid'=>$order[0]['id']));}";
     })
 
 </script>
