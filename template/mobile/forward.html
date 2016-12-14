@@ -140,8 +140,10 @@
         <div class="line"></div>
         <div class="modal_code">
             <p style="color: red">
-                请扫码关注公众号<br />
+                请长按二维码关注公众号<br />
+                {if $level!=4}
                 回复kj{$oid}帮忙好友砍价
+                {/if}
             </p>
             <img class="img" src="{php echo   'http://'.$_SERVER['SERVER_NAME'].'/attachment/'.$activity[0]['wx_qr_code'] }">
         </div>
@@ -176,7 +178,7 @@
     $('#btn').bind('click', function () {
 
 
-
+        var openid = $('#openid').val();
         var sub = $('#sub').val();
         var follow = $('#follow').val();
 

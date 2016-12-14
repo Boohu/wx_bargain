@@ -42,8 +42,8 @@ $prize_num = $_GPC['prize_num'];              //获取活动奖品总数
 if(trim($bargain_max)==""){
   message('操作失败,活动奖品总数必须填写');exit;
 }
-$is_subscription_launch = $_GPC['is_subscription_launch'];  //获取订阅才发起是否开启
-$is_subscription_lassist = $_GPC['is_subscription_lassist']; //获取订阅才发起帮助是否开启
+/*$is_subscription_launch = $_GPC['is_subscription_launch'];  //获取订阅才发起是否开启
+$is_subscription_lassist = $_GPC['is_subscription_lassist']; //获取订阅才发起帮助是否开启*/
 /*$bargain_time_astrict = $_GPC['bargain_time_astrict']; */  //获取砍价限时
 $bargain_section_start = $_GPC['bargain_section_start'];  //获取砍价区间-开始值
 $bargain_section_end = $_GPC['bargain_section_end'];       //获取砍价区间-结束值
@@ -70,8 +70,8 @@ $data = array(
     'prize_floor_price' => $prize_floor_price,
     'bargain_max' => $bargain_max,
     'prize_num' => $prize_num,
-    'is_subscription_launch' => $is_subscription_launch,
-    'is_subscription_lassist' => $is_subscription_lassist,
+/*    'is_subscription_launch' => $is_subscription_launch,
+    'is_subscription_lassist' => $is_subscription_lassist,*/
  /*   'bargain_time_astrict' => $bargain_time_astrict,*/
     'bargain_section_start' => $bargain_section_start,
     'bargain_section_end' => $bargain_section_end,

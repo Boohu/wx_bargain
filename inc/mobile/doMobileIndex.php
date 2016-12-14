@@ -15,7 +15,6 @@ $nickname=$information['nickname'];//获取当前用户昵称
 
 
 
-
 //判断用户是否是微信端打开
 //if (empty($openid)) {
 //    echo "该平台只能在微信端打开";

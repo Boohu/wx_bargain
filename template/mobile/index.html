@@ -160,8 +160,10 @@
         <div class="line"></div>
         <div class="modal_code">
             <p style="color: red;">
-                请扫码关注公众号<br />
+                请长按二维码关注公众号<br />
+                {if $level!=4}
                 并按回复cj{$aid}发起发砍价
+                {/if}
             </p>
             <img class="img"
                  src="{php echo   'http://'.$_SERVER['SERVER_NAME'].'/attachment/'.$activity[0]['wx_qr_code'] }">
