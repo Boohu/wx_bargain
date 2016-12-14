@@ -73,7 +73,7 @@ class OrderModel
     }
 
 
-    static function queryOrder($aid){
+    static function queryOrder($aid,$st){
         $table_wx_bargain_order=tablename("wx_bargain_order");
         $condition="activity_id= $aid";
         global  $_GPC;
@@ -82,8 +82,13 @@ class OrderModel
         $page=($page-1)*10;
         $count=self::queryOrderCount($condition);
         $count=$count[0]['count']; /*取出总的条数*/
-        $sql="select * from $table_wx_bargain_order where $condition
-        limit $page , 10";
+        $sql="select * from $table_wx_bargain_order where $condition";
+        if($st!=-1){
+            $sql.= " and order_status= $st ";
+        }
+        $sql.=" limit $page , 10";
+
+
         return array(
             'list'=>pdo_fetchall($sql),
             'count'=>$count

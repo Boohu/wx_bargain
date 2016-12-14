@@ -2,6 +2,29 @@
 
 <div class="panel panel-default">
     <div class="panel-body table-responsive">
+
+
+        <div style="margin-bottom: 50px;">
+            <div class="form-group">
+                <label class="col-xs-12 col-sm-2 col-md-2 col-lg-1 control-label">状态</label>
+                <div class="col-sm-8 col-lg-9 col-xs-12">
+                    <div class="btn-group">
+                        <a href="{php echo $this->createWebUrl('joinList',array('aid'=>$aid,'st'=>-1))}"
+                           class="btn {php echo $st==(-1)?'btn-primary':'btn-default'} ">所有</a>
+                        <a href="{php echo $this->createWebUrl('joinList',array('aid'=>$aid,'st'=>0))}"
+                           class="btn {php echo $st==(0)?'btn-primary':'btn-default'} ">砍价中</a>
+                        <a href="{php echo $this->createWebUrl('joinList',array('aid'=>$aid,'st'=>1))}"
+                           class="btn {php echo $st==(1)?'btn-primary':'btn-default'} ">待付款</a>
+                        <a href="{php echo $this->createWebUrl('joinList',array('aid'=>$aid,'st'=>2))}"
+                           class="btn {php echo $st==(2)?'btn-primary':'btn-default'} ">待核销</a>
+                        <a href="{php echo $this->createWebUrl('joinList',array('aid'=>$aid,'st'=>3))}"
+                           class="btn {php echo $st==(3)?'btn-primary':'btn-default'} ">已核销</a>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <table class="table table-hover">
             <thead class="navbar-inner">
             <tr>
@@ -79,7 +102,7 @@
     <div style="width: 100px; float: right; margin: 25px;">
         <select id="pages" class="form-control">
             {php for($i=1;$i<=$pages;$i++)  { }
-            <option     {php echo $p==$i?'selected':''}    value="{php echo $this->createWebUrl('joinList',array('aid'=>$aid,'p'=>$i))}" >第 {$i} 页 </option>
+            <option     {php echo $p==$i?'selected':''}    value="{php echo $this->createWebUrl('joinList',array('aid'=>$aid,'st'=>$st, 'p'=>$i))}" >第 {$i} 页 </option>
             {php } }
         </select>
     </div>

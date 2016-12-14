@@ -4,6 +4,9 @@ require_once(dirname(__FILE__) . "/../../model/active.php");
 require_once(dirname(__FILE__) . "/../../model/order.php");
 require_once(dirname(__FILE__) . "/../../model/assist.php");
 require_once(dirname(__FILE__) . "/../../model/pay.php");
+
+var_dump($_W);
+
 $openid = $_W['openid'];//获取单前用户ID
 $weid=$_W['uniacid'];//获取当前公众号ID
 $level=$_W['account']['level'];//获取公众号类型
