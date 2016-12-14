@@ -10,10 +10,11 @@ $openid = $_W['openid'];//获取单前用户ID
 $weid=$_W['uniacid'];//获取当前公众号ID
 $level=$_W['account']['level'];//获取公众号类型
 $information=$_W['fans'];//获取单前用户信息
+if($level!=4)$information=mc_fansinfo($openid);
 $nickname=$information['nickname'];//获取当前用户昵称
 
 
-var_dump(mc_fansinfo($openid));
+
 
 //判断用户是否是微信端打开
 //if (empty($openid)) {

@@ -24,6 +24,7 @@ $op=$_GPC['op'];//获取操作类型
 //    exit;
 //};
 $information=$_W['fans'];//获取帮忙砍价用户信息
+if($level!=4)$information=mc_fansinfo($openid);
 $nickname=$information['nickname'];//获取帮忙砍价用户昵称
 $oid = isset($_GPC['oid']) ? trim($_GPC['oid']) : ''; /*获取订单id*/
 $order = OrderModel::getOrder($oid); //根据订单ID查询需要帮助用户的订单信息
