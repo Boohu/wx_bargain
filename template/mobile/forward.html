@@ -99,6 +99,7 @@
                 <input id="follow" type="hidden" value="{$information['follow']}">
                 <input id="bargain_num" type="hidden" value="{$result['count']}">
                 <input id="bargain_max" type="hidden" value="{$activity[0]['bargain_max']}">
+                <input id="openid" type="hidden" value="{$openid}">
         </div>
         {else}
         <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
@@ -183,7 +184,7 @@
         var bargain_num=$('#bargain_num').val();
         var bargain_max=$('#bargain_max').val();
         //判断是否需要关注公众号才能发起活动
-        if (sub == 1 && follow == 0) {
+        if ((sub == 1 && follow == 0)||openid.length==0) {
             $('#code').show();
             $("body").css({overflow:"hidden"});
 
