@@ -27,13 +27,12 @@
         position: relative;
         z-index: 9999;
         display: block;
-        margin: 110px auto;
+        margin: 50px auto;
         width: 300px;
         background-color: #ffffff;
         border-radius: 15px;
         overflow: hidden;
         box-shadow: #666 0px 0px 10px;
-
     }
     .modal_head{
         display: block;
@@ -96,7 +95,7 @@
                 <input id="btn" type="button"
                        style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; "
                        value="砍价">
-                <input id="sub" type="hidden" value="{$activity[0]['is_subscription_lassist']}">
+                <input id="sub" type="hidden" value="1">
                 <input id="follow" type="hidden" value="{$information['follow']}">
                 <input id="bargain_num" type="hidden" value="{$result['count']}">
                 <input id="bargain_max" type="hidden" value="{$activity[0]['bargain_max']}">
@@ -139,6 +138,10 @@
         </div>
         <div class="line"></div>
         <div class="modal_code">
+            <p style="color: red">
+                请扫码关注公众号<br />
+                回复kj{$oid}帮忙好友砍价
+            </p>
             <img class="img" src="{php echo   'http://'.$_SERVER['SERVER_NAME'].'/attachment/'.$activity[0]['wx_qr_code'] }">
         </div>
 
@@ -170,8 +173,13 @@
     /*未订阅提示JS*/
     $('.main').hide();
     $('#btn').bind('click', function () {
+
+
+
         var sub = $('#sub').val();
         var follow = $('#follow').val();
+
+
         var bargain_num=$('#bargain_num').val();
         var bargain_max=$('#bargain_max').val();
         //判断是否需要关注公众号才能发起活动

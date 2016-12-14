@@ -30,7 +30,7 @@
         position: relative;
         z-index: 9999;
         display: block;
-        margin: 110px auto;
+        margin: 50px auto;
         width: 300px;
         background-color: #ffffff;
         border-radius: 15px;
@@ -155,10 +155,14 @@
     <div class="modal_main">
         <div class="modal_head">
             <h4>请先关注公众号</h4>
-            <p>并按公众号提示参加活动</p>
+
         </div>
         <div class="line"></div>
         <div class="modal_code">
+            <p style="color: red;">
+                请扫码关注公众号<br />
+                并按回复cj{$aid}发起发砍价
+            </p>
             <img class="img"
                  src="{php echo   'http://'.$_SERVER['SERVER_NAME'].'/attachment/'.$activity[0]['wx_qr_code'] }">
         </div>

@@ -9,8 +9,6 @@ $weid=$_W['uniacid'];//获取当前公众号ID
 $level=$_W['account']['level'];//获取公众号类型
 $information=$_W['fans'];//获取单前用户信息
 $nickname=$information['nickname'];//获取当前用户昵称
-var_dump($information);
-exit;
 //判断用户是否是微信端打开
 //if (empty($openid)) {
 //    echo "该平台只能在微信端打开";
@@ -30,7 +28,7 @@ $timestamp=$_W['timestamp'];//获得当前时间戳
 $activity_end_time=strtotime($activity[0]['end_time']);//获得本次活动结束时间
 $judge=$timestamp>$activity_end_time?1:0;//判断活动是否超时 1=未超时 0=超时
 //活动超时结束
-if ($judge==0){
+if ($judge==1){
     echo "该活动已结束";
     exit;
 }

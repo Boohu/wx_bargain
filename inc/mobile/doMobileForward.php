@@ -14,10 +14,10 @@ $weid=$_W['uniacid'];//获取当前公众号ID
 $level=$_W['account']['level'];//获取公众号类型
 $op=$_GPC['op'];//获取操作类型
 /*判断用户是否是微信端打开*/
-if (empty($openid)) {
+/*if (empty($openid)) {
     echo " 该平台只能在微信端打开";
     exit;
-}
+}*/
 //判断如果是非认证服务号
 //if($level!=4){
 //    echo "请先关注公众号，并按公众号的提示帮忙砍价活动！";
@@ -41,9 +41,10 @@ $timestamp=$_W['timestamp'];//获得当前时间戳
 $date=date("Y-m-d");//获得当天日期
 $time=date('Y-m-d H:i:s', $timestamp);//将当前时间戳转化为时间格式
 $activity_end_time=strtotime($activity[0]['end_time']);//获得本次活动结束时间
+
 $judge=$timestamp>$activity_end_time?1:0;//判断活动是否超时 1=未超时 0=超时
 /*活动超时结束*/
-if ($judge==0){
+if ($judge==1){
     echo "该活动已结束";
     exit;
 }
