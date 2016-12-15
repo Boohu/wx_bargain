@@ -16,12 +16,18 @@ class clickModel{
         if( !$res){
             pdo_insert('wx_bargain_click',array('weid' => $weid, 'time_section' => $t,'num'=>1));
         }else{
-            $table_wx_bargain_click=tablename(wx_bargain_click);
+            $table_wx_bargain_click=tablename('wx_bargain_click');
             $id=$res['id'];
 
             pdo_fetch("update $table_wx_bargain_click set num=num+1
                               where id= $id ");
 
         }
+    }
+
+    static function getList(){
+        global $_W;
+        $weid = $_W['uniacid'];               //获取当前公众号ID
+        return pdo_getall('wx_bargain_click', array('weid' => $weid));
     }
 }
