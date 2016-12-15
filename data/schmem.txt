@@ -87,7 +87,7 @@ CREATE TABLE `domain` (
 
 DROP TABLE IF EXISTS `click`;
 CREATE TABLE `click` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL  AUTO_INCREMENT,
   `weid` int(11) NOT NULL,
   `time_section` datetime NOT NULL,
   `num` int(11) NOT NULL,

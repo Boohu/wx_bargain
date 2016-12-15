@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns="http://www.we7.cc" versionCode="0.6">
 	<application setting="true">
 		<name><![CDATA[砍价]]></name>
@@ -139,7 +139,7 @@ CREATE TABLE `ims_wx_bargain_domain` (
 
 
 CREATE TABLE `ims_wx_bargain_click` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT,
   `weid` int(11) NOT NULL,
   `time_section` datetime NOT NULL,
   `num` int(11) NOT NULL,
