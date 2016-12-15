@@ -192,7 +192,10 @@
         </div>
         <div class="line"></div>
         <div class="modal_code">
-            <p style="color: red">该活动将于{$activity_start_time}开始</p>
+            <p>该活动将于<strong style="color: red">{$activity[0]['start_time']}</strong>开始</p>
+            <p>请长按二维码，<span style="color: red">关注公众号</span>了解更多详情</p>
+            <img class="img"
+                 src="{php echo   'http://'.$_SERVER['SERVER_NAME'].'/attachment/'.$activity[0]['wx_qr_code'] }">
         </div>
         <div class="line"></div>
         <div class="modal_btn">

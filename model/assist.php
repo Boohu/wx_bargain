@@ -57,7 +57,7 @@ class AssistModel
         $openid=$_GPC['openid'];
         $today_start=$date." 00:00:00";//获得当天0点时间
         $today_end=$date." 23:59:59";//获得当天23:59:59时间
-        $result=pdo_fetch("select count(*) as count from".tablename('wx_bargain_assist')."where openid=$openid and create_time>= '$today_start' and create_time<='$today_end'");
+        $result=pdo_fetchall("select count(*) as count from".tablename('wx_bargain_assist')."where openid=$openid and create_time>= '$today_start' and create_time<='$today_end'");
         return $result;
 
     }

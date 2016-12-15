@@ -51,8 +51,10 @@ if ($judge == 1) {
 }
 $assist_record = AssistModel::getRecord($openid);//获取是否存在被当前用户砍价记录
 $result = AssistModel::getNum($oid); //获取本次订单已被帮忙砍价次数
-$assist_information=AssistModel::getOrder($oid); //获取本次订单已被帮忙砍价的详细信息
-$bargain_num = AssistModel::getCount($date);//获得当前用户今天砍价总次数
+$assist_information = AssistModel::getOrder($oid); //获取本次订单已被帮忙砍价的详细信息
+if (!empty($openid)) {
+    $bargain_num = AssistModel::getCount($date);//获得当前用户今天砍价总次数
+}
 //判断操作类型如果为help
 if ($op == 'help') {
     //判断如果openid为空则不允许砍价
