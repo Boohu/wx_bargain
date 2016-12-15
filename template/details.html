@@ -1,4 +1,28 @@
 {template 'common/header'}
-
-
+<div class="panel panel-default">
+    <div class="panel-body table-responsive">
+        <table class="table table-hover">
+            <thead class="navbar-inner">
+            <tr>
+                <th style="width:100px;">活动编号</th>
+                <th style="width:100px;">活动名称</th>
+                <th style="width:100px;">开始时间</th>
+                <th style="width:100px;">结束时间</th>
+                <th style="width:50px;">参与人数</th>
+                <th style="width:200px;">影响人数人数</th>
+            </tr>
+            </thead>
+            <tbody>
+            {loop $datas $data}
+            <tr>
+                <td>{$data['id']}</td>
+                <td>{$data['name']}</td>
+                <td>{$data['start_time']}</td>
+                <td>{$data['end_time']}</td>
+            </tr>
+            {/loop}
+            </tbody>
+        </table>
+    </div>
+</div>
 {template 'common/footer'}
