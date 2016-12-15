@@ -22,7 +22,6 @@ class ActiveModel
         global $_W;
         $weid = $_W['uniacid'];               //获取当前公众号ID
         $result= pdo_get('wx_bargain_activity', array('weid' => $weid,'id'=>$id),'active_state');
-        var_dump($result['active_state']);
         if ($result['active_state']==1){
             $result=pdo_update('wx_bargain_activity',array('active_state'=>0),array('id' => $id, 'weid' => $weid));
         }else{

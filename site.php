@@ -78,6 +78,15 @@ class Wx_bargainModuleSite extends WeModuleSite {
         require_once(dirname(__FILE__)."/inc/web/doWebAddRemarks.php");
     }
 
+    /*点击数查看*/
+    public function doWebClick(){
+        require_once(dirname(__FILE__)."/inc/web/doWebClick.php");
+    }
+
+
+
+
+
     public function doMobileIndex(){
     //活动主页
         require_once(dirname(__FILE__)."/inc/mobile/doMobileIndex.php");

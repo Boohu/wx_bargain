@@ -27,8 +27,12 @@
 		<menu>
 			<entry title="活动详情" do="details" state="" direct="false" />
 			<entry title="活动管理" do="manager" state="" direct="false" />
-			<entry title="订单管理" do="order" state="" direct="false" />
-            <entry title="多域名管理" do="domain" state="" direct="false" />
+
+            <entry title="点击数" do="click" state="" direct="false" />
+
+
+            <!--	<entry title="订单管理" do="order" state="" direct="false" />-->
+       <!--     <entry title="多域名管理" do="domain" state="" direct="false" />-->
 		</menu>
 		<home>
 			<entry title="砍价首页" do="bargain" state="" direct="true" />
@@ -131,6 +135,20 @@ CREATE TABLE `ims_wx_bargain_domain` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+
+
+CREATE TABLE `ims_wx_bargain_click` (
+  `id` int(11) NOT NULL,
+  `weid` int(11) NOT NULL,
+  `time_section` datetime NOT NULL,
+  `num` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `t1` (`weid`) USING BTREE,
+  KEY `t2` (`time_section`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
 ]]></install>
 	<uninstall><![CDATA[
 DROP TABLE IF EXISTS `ims_wx_bargain_pay`;
@@ -138,7 +156,7 @@ DROP TABLE IF EXISTS `ims_wx_bargain_order`;
 DROP TABLE IF EXISTS `ims_wx_bargain_activity`;
 DROP TABLE IF EXISTS `ims_wx_bargain_assist`;
 DROP TABLE IF EXISTS `ims_wx_bargain_domain`;
-
+DROP TABLE IF EXISTS `ims_wx_bargain_click`;
 ]]></uninstall>
 	<upgrade><![CDATA[]]></upgrade>
 </manifest>

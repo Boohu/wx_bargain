@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: DoubleWei
- * Date: 2016/12/5
- * Time: 17:58
- */
+
 
 require_once(dirname(__FILE__) . "/../../model/active.php");
 global $_GPC, $_W;
