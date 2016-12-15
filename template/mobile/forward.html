@@ -97,7 +97,7 @@
                        value="砍价">
                 <input id="sub" type="hidden" value="1">
                 <input id="follow" type="hidden" value="{$information['follow']}">
-                <input id="bargain_num" type="hidden" value="{$result['count']}">
+                <input id="bargain_num" type="hidden" value="{$bargain_num }">
                 <input id="bargain_max" type="hidden" value="{$activity[0]['bargain_max']}">
                 <input id="openid" type="hidden" value="{$openid}">
         </div>
@@ -108,8 +108,8 @@
         </div>
         {/if}
     </div>
-    <div style="width: 100%;padding:15px;background-color: white;margin: 5px auto;border-radius: 3px;text-align: center">
-        <a style="display:block;font-size: 30px;font-weight: bold;text-decoration:none;" href="{php echo $this->createMobileUrl('index',array('aid'=>$activity[0]['id']))}">我要发起砍价参加砍价</a>
+    <div style="text-align: center;margin: 5px auto;border-radius: 3px;">
+        <a style="display:block;width:100%;border:1px solid #f0ad4e;color:#f0ad4e; font-weight: bold;text-decoration:none;margin-bottom:10px;font-size: 20px;background:none;border-radius: 3px; " href="{php echo $this->createMobileUrl('index',array('aid'=>$activity[0]['id']))}">我也要发起砍价参加砍价</a>
     </div>
     <div style="padding: 3px;">
         <div style="background-color: #eeeeee;width: 100%;text-align: center;margin:5px auto; ">
@@ -125,9 +125,6 @@
             <h3 style="line-height: 50px;">活动规则</h3>
             {$html}
         </div>
-        <!--<div style="margin: 10px auto;background-color: #ffffff;text-align: center;padding: 10px;">-->
-        <!--<input type="button" style="outline: none;width:240px;height:30px;color:#ffffff;text-align:center;border-radius: 10px;background-color: #333333;" value="返回活动列表">-->
-        <!--</div>-->
     </div>
 
 </div>
@@ -163,7 +160,7 @@
         </div>
         <div class="line"></div>
         <div class="modal_code">
-            <p>你今天帮忙砍价次数已达上限，小伙伴明天再来吧</p>
+            <p>今天帮忙好友砍价次数已达上限，小伙伴明天再来吧</p>
         </div>
         <div class="line"></div>
         <div class="modal_btn">
@@ -191,7 +188,7 @@
             $("body").css({overflow:"hidden"});
 
         }else if(parseInt(bargain_num)>=parseInt(bargain_max)){
-            //今日砍价次数以达上限
+            //今日帮忙砍价已达上限砍价次数以达上限
             $('#bargain').show();
             $("body").css({overflow:"hidden"});
         }else {

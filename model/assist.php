@@ -29,6 +29,15 @@ class AssistModel
 
     }
     /**
+     * 查询该订单所有被帮忙砍价的信息
+     * @param $state 要添加的$openid
+     */
+    static function getOrder($oid)
+    {
+        return $result=pdo_getall('wx_bargain_assist',array('order_id'=>$oid));
+
+    }
+    /**
      * 查询本次订单已被帮忙砍价的次数
      * @param $state 要添加的$openid
      */
@@ -45,10 +54,10 @@ class AssistModel
     static function getCount($date)
     {
         global $_GPC;
-        $oid=$_GPC['oid'];
+        $openid=$_GPC['openid'];
         $today_start=$date." 00:00:00";//获得当天0点时间
         $today_end=$date." 23:59:59";//获得当天23:59:59时间
-        $result=pdo_fetch("select count(*) as count from".tablename('wx_bargain_assist')."where create_time>= '$today_start' and create_time<='$today_end'");
+        $result=pdo_fetch("select count(*) as count from".tablename('wx_bargain_assist')."where openid=$openid and create_time>= '$today_start' and create_time<='$today_end'");
         return $result;
 
     }
