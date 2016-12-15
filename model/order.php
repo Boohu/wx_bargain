@@ -9,6 +9,16 @@
 class OrderModel
 {
     /**
+     *  根据活动ID查询状态为2待核销或2以上的订单数量
+     * @param $activity_id为要查询订单的活动ID
+     */
+    static function getCount($activity_id)
+    {
+        $result=pdo_fetch("select count(*) as count from".tablename('wx_bargain_order')."where activity_id=$activity_id and order_status>=2 ");
+        return $result;
+    }
+
+    /**
      *  查询所有订单
      * @param
      */
@@ -18,7 +28,7 @@ class OrderModel
     }
 
     /**
-     * 根据openid查询当前用户是否有订单存在
+     * 根据openid和活动ID查询当前用户是否有订单存在
      * @param $id 要查询的活动id
      */
     static function getExistence($openid)

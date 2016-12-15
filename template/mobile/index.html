@@ -88,13 +88,14 @@
     </div>
     <div style="padding: 15px;background-color: #ffffff">
         <div><h3>{$activity[0]['name']}</h3></div>
-        <div style="margin:5px 5px auto">原价<strike>{$activity[0]['prize_old_price']}</strike></div>
+        <div style="margin:5px 0px auto">原价<strike>{$activity[0]['prize_old_price']}</strike></div>
         {if !empty($order)}
-        <div style="margin:5px 5px auto">当前价格<strong style="color:#f0ad4e;">{$order[0]['current_price']}</strong>元</div>
+        <div style="display:inline-block;width:150px;margin:5px 5px auto">当前价格<strong style="color:#f0ad4e;">{$order[0]['current_price']}</strong>元</div>
         {else}
-        <div style="margin:5px 5px auto">底价<strong style="color:#f0ad4e;">{$activity[0]['prize_floor_price']}</strong>元
+        <div style="display:inline-block;width:150px;；margin:5px 5px auto">底价<strong style="color:#f0ad4e;">{$activity[0]['prize_floor_price']}</strong>元
         </div>
         {/if}
+        <div style="display:inline-block;width:150px;float: right;text-align: right;margin:5px 5px auto">奖品剩余<strong style="color:#f0ad4e;">10</strong>份</div>
 
         {if $order[0]['order_status']!=0&&!empty($order)}
         <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
@@ -127,6 +128,7 @@
             <input id="sub" type="hidden" value="{$activity[0]['is_subscription_launch']}">
             <input id="follow" type="hidden" value="{$information['follow']}">
             <input id="openid" type="hidden" value="{$openid}">
+            <input id="start_time" type="hidden" value="{$judge2}">
         </div>
         {/if}
     </div>
@@ -151,7 +153,7 @@
         <!--</div>-->
     </div>
 </div>
-<div class="main">
+<div class="main" id="code">
     <div class="modal_main">
         <div class="modal_head">
             <h4>请先关注公众号</h4>
@@ -169,6 +171,23 @@
                  src="{php echo   'http://'.$_SERVER['SERVER_NAME'].'/attachment/'.$activity[0]['wx_qr_code'] }">
         </div>
 
+        <div class="line"></div>
+        <div class="modal_btn">
+            <label>确定</label>
+        </div>
+    </div>
+    <div class="background"></div>
+</div>
+<!--活动未开始提示-->
+<div class="main" id="activity">
+    <div class="modal_main">
+        <div class="modal_head">
+            <h3 style="color: red;font-weight: bold">活动未开始</h3>
+        </div>
+        <div class="line"></div>
+        <div class="modal_code">
+            <p style="color: red">该活动将于{$activity_start_time}开始</p>
+        </div>
         <div class="line"></div>
         <div class="modal_btn">
             <label>确定</label>
@@ -203,14 +222,15 @@
 
         /*未订阅提示JS*/
         $('#btn').bind('click', function () {
-
+            var start_time=$('#start_time').val();//获取活动是否开始状态
             var openid = $('#openid').val();//获取OPEIN
                 var sub = $('#sub').val();//获取是否需要关注
                 var follow = $('#follow').val();//获取是否有关注
-                //判断是否
-                //判断是否需要关注公众号或OEPENID 存在才能发起活动
-                if ((sub == 1 && follow == 0)||openid.length==0) {
-                    $('.main').show()
+                //判断活动是否开始
+            if (start_time==0){
+                $('#activity').show();
+            }else if ((sub == 1 && follow == 0)||openid.length==0) {   //判断是否需要关注公众号或OEPENID 存在才能发起活动
+                    $('#code').show()
                     $("body").css({overflow: "hidden"});
                 } else {
                     window.location = "{php echo $this->createMobileUrl('index',array('aid'=>$aid,'op'=>'join'));}";

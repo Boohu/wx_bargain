@@ -10,6 +10,7 @@ $openid = $_W['openid'];//获取单前用户ID
 $weid=$_W['uniacid'];//获取当前公众号ID
 $level=$_W['account']['level'];//获取公众号类型
 $information=$_W['fans'];//获取单前用户信息
+
 if($level!=4)$information=mc_fansinfo($openid);
 $nickname=$information['nickname'];//获取当前用户昵称
 
@@ -32,12 +33,18 @@ $active_state=$activity[0]['active_state'];//取出当前活动状态
 if (count($activity) != 1||$active_state==0) exit; /*活动不存在*/
 $timestamp=$_W['timestamp'];//获得当前时间戳
 $activity_end_time=strtotime($activity[0]['end_time']);//获得本次活动结束时间
+$activity_start_time=strtotime($activity[0]['start_time']);//获得本次活动开始时间
 $judge=$timestamp>$activity_end_time?1:0;//判断活动是否超时 1=未超时 0=超时
+$judge2=$timestamp>$activity_start_time?1:0;//判断活动是否开始
 //活动超时结束
 if ($judge==1){
     echo "该活动已结束";
     exit;
 }
+$success_order_num=OrderModel::getCount($aid);
+var_dump($success_order_num);
+$new_prize_num=$activity[0]['prize_num']-$success_order_num;
+var_dump($new_prize_num);
 $html=htmlspecialchars_decode($activity[0]["desc_html"]);//将富文本内容转化为html
 $order = OrderModel::getExistence($openid); //查询当前用户是否存在当前活动订单
 $_GPC['oid']=$order[0]['id'];//将订单ID付给全局
