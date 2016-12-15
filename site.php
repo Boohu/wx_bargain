@@ -11,7 +11,7 @@ class Wx_bargainModuleSite extends WeModuleSite {
 
     public function __construct(){
 
-        require_once(dirname(__FILE__) . "/model/click.php");
+       require_once(dirname(__FILE__) . "/model/click.php");
         clickModel::add();
         error_reporting(E_ALL ^ E_NOTICE );
     }
