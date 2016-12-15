@@ -268,24 +268,24 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>微信分享好友内容</label>
+                    <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>微信分享内容</label>
                     <div class="col-sm-9 col-xs-12">
                         <input type="text" name="wx_friend_centent" id="wx_friend_centent" class="form-control" value="{$datas[0]['wx_friend_centent']}" autocomplete="off" required="required">
-                        <span class="help-block">填写微信分享好友内容</span>
+                        <span class="help-block">填写微信分享内容</span>
                     </div>
                 </div>
-                <div class="form-group">
+<!--                <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label"><span style="color:red">*</span>微信分享好友圈内容</label>
                     <div class="col-sm-9 col-xs-12">
                         <input type="text" name="wx_circle_centent" id="wx_circle_centent" class="form-control" value="{$datas[0]['wx_circle_centent']}" autocomplete="off" required="required">
                         <span class="help-block">填写微信分享好友圈内容</span>
                     </div>
-                </div>
+                </div>-->
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label">微信二维码</label>
                     <div class="col-sm-9 col-xs-12">
                         {php echo tpl_form_field_image('qr_code',$datas[0]['wx_qr_code']);}
-                        <span class="help-block">添加微信二维码</span>
+                        <span class="help-block">添加微信当前公众号二维码</span>
                     </div>
                 </div>
 

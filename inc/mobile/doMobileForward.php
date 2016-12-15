@@ -13,6 +13,7 @@ $openid = $_W['openid'];//获取帮忙砍价用户openid
 $weid = $_W['uniacid'];//获取当前公众号ID
 $level = $_W['account']['level'];//获取公众号类型
 $op = $_GPC['op'];//获取操作类型
+
 /*判断用户是否是微信端打开*/
 /*if (empty($openid)) {
     echo " 该平台只能在微信端打开";
@@ -55,6 +56,7 @@ $assist_information = AssistModel::getOrder($oid); //获取本次订单已被帮
 if (!empty($openid)) {
     $bargain_num = AssistModel::getCount($date);//获得当前用户今天砍价总次数
 }
+
 //判断操作类型如果为help
 if ($op == 'help') {
     //判断如果openid为空则不允许砍价

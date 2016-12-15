@@ -72,7 +72,6 @@ CREATE TABLE `ims_wx_bargain_activity` (
   `wx_pic` text CHARACTER SET utf8 COLLATE utf8_bin NOT NULL COMMENT '微信分享图标',
   `wx_title` text NOT NULL COMMENT '微信分享标题',
   `wx_friend_centent` text NOT NULL COMMENT '微信分享好友内容',
-  `wx_circle_centent` text NOT NULL COMMENT '微信分享好友圈内容',
   `wx_qr_code` text NOT NULL COMMENT '微信二维码',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

@@ -98,7 +98,7 @@
         {/if}
         <div style="display:inline-block;width:150px;float: right;text-align: right;margin:5px 5px auto">奖品剩余<strong style="color:#f0ad4e;">{$new_prize_num}</strong>份</div>
 
-        {if $new_prize_num==0}
+        {if $new_prize_num==0&&$order[0]['order_status']<2}
         <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
             <h3 style="color:#f0ad4e;line-height: 30px;">很遗憾</h3>
             <p>奖品已经被其他小伙伴抢光了</p>
@@ -118,10 +118,10 @@
         {elseif !empty($order)&&$order[0]['order_status']==0&&$new_prize_num>0}
         <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
             <h3 style="color:#f0ad4e;line-height: 30px;">你已经参与砍价</h3>
-            <p>你可以点击右上角将链接分享给别人帮忙砍价</p>
+            <p>你可以点击右上角将链接分享给好友帮忙砍价</p>
 
         </div>
-        {elseif $order[0]['order_status']!=0&&!empty($order)&&$new_prize_num>0}
+        {elseif $order[0]['order_status']!=0&&!empty($order)}
         <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
             <h3 style="color:#f0ad4e;line-height: 30px;">恭喜你砍价成功</h3>
             {if $order[0]['order_status']==1}
@@ -211,7 +211,7 @@
     /*分享链接JS*/
     wx.ready(function () {
         sharedata = {
-            title: '{$activity[0]["name"]}',
+            title: '{$activity[0]["wx_title"]}',
             desc: '{$activity[0]["wx_friend_centent"]}',
 
             link: "{php echo   'http://'.$_SERVER['SERVER_NAME'] . str_replace('./','/',$this->createMobileUrl('forward',array('oid'=>$order[0]['id'])))  }",

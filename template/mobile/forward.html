@@ -97,7 +97,7 @@
                        value="砍价">
                 <input id="sub" type="hidden" value="1">
                 <input id="follow" type="hidden" value="{$information['follow']}">
-                <input id="bargain_num" type="hidden" value="{$bargain_num }">
+                <input id="bargain_num" type="hidden" value="{$bargain_num['count']}">
                 <input id="bargain_max" type="hidden" value="{$activity[0]['bargain_max']}">
                 <input id="openid" type="hidden" value="{$openid}">
         </div>
@@ -108,8 +108,8 @@
         </div>
         {/if}
     </div>
-    <div style="text-align: center;margin: 5px auto;border-radius: 3px;">
-        <a style="display:block;width:100%;border:1px solid #f0ad4e;color:#f0ad4e; font-weight: bold;text-decoration:none;margin-bottom:10px;font-size: 20px;background:none;border-radius: 3px; " href="{php echo $this->createMobileUrl('index',array('aid'=>$activity[0]['id']))}">我也要发起砍价参加砍价</a>
+    <div style="display:block;width: 100%;background-color: #ffffff;margin: 5px auto;padding: 5px;border-radius: 3px;">
+        <a style="display:block;text-align: center;margin: auto;width:80%;height:50px;background-color:#f0ad4e;color:#ffffff; padding-top: 10px;font-weight: bold;text-decoration:none;font-size: 20px;border-radius: 3px; " href="{php echo $this->createMobileUrl('index',array('aid'=>$activity[0]['id']))}">发起砍价请点我</a>
     </div>
     <div style="padding: 3px;">
         <div style="background-color: #eeeeee;width: 100%;text-align: center;margin:5px auto; ">
@@ -200,6 +200,7 @@
         $('.main').hide();
         $("body").css({overflow:"visible"});
     })
+
 
 </script>
 {template 'common/footer'}

@@ -53,7 +53,7 @@ $desc_html = $_GPC['content'];           //获取富文本编译器内容
 $wx_pic = $_GPC['wx_icon'];               //获取微信分享图标
 $wx_title = $_GPC['wx_title'];         //获取微信分享标题
 $wx_friend_centent = $_GPC['wx_friend_centent'];      //微信分享好友内容
-$wx_circle_centent = $_GPC['wx_circle_centent'];      //微信分享朋友圈内容
+/*$wx_circle_centent = $_GPC['wx_circle_centent'];      //微信分享朋友圈内容*/
 $wx_qr_code = $_GPC['qr_code'];                   //获取微信二维码
 
 $data = array(
@@ -81,7 +81,7 @@ $data = array(
     'wx_pic' => $wx_pic,
     'wx_title' => $wx_title,
     'wx_friend_centent' => $wx_friend_centent,
-    'wx_circle_centent' => $wx_circle_centent,
+/*    'wx_circle_centent' => $wx_circle_centent,*/
     'wx_qr_code' => $wx_qr_code
 );
 if(ActiveModel::save($data)){
