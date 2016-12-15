@@ -82,3 +82,16 @@ CREATE TABLE `domain` (
   `domain` text NOT NULL COMMENT '±∏”√µÿ÷∑',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+DROP TABLE IF EXISTS `click`;
+CREATE TABLE `click` (
+  `id` int(11) NOT NULL,
+  `weid` int(11) NOT NULL,
+  `time_section` datetime NOT NULL,
+  `num` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `t1` (`weid`) USING BTREE,
+  KEY `t2` (`time_section`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
