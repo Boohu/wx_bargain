@@ -1,0 +1,66 @@
+{template 'common/header'}
+<div id="main" style="width: 800px;height:600px;"></div>
+
+
+<script>
+    require(['../../../addons/wx_bargain/public/echarts.min.js']
+            , function(echarts){ // 输出变量(1)
+                // 基于准备好的dom，初始化echarts实例
+                var myChart = echarts.init(document.getElementById('main'));
+
+                // 指定图表的配置项和数据
+
+                option = {
+                    title: {
+                        text: '实时点击数'
+                    },
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data:['点击数']
+                    },
+                    toolbox: {
+                        feature: {
+                            saveAsImage: {}
+                        }
+                    },
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis : [
+                        {
+                            type : 'category',
+                            boundaryGap : false,
+                            data : {$ts}
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value'
+                        }
+                    ],
+                    series : [
+                        {
+                            name:'点击数',
+                            type:'line',
+                            stack: '点击数',
+                            areaStyle: {normal: {}},
+                            data:{$click}
+                        }
+                    ]
+                };
+
+
+                // 使用刚指定的配置项和数据显示图表。
+                myChart.setOption(option);
+            }
+    );
+</script>
+
+
+
+{template 'common/footer'}
