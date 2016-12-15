@@ -138,7 +138,7 @@ CREATE TABLE `ims_wx_bargain_domain` (
 
 
 CREATE TABLE `ims_wx_bargain_click` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `weid` int(11) NOT NULL,
   `time_section` datetime NOT NULL,
   `num` int(11) NOT NULL,
