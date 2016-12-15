@@ -41,10 +41,10 @@ if ($judge==1){
     echo "该活动已结束";
     exit;
 }
-$success_order_num=OrderModel::getCount($aid);
-var_dump($success_order_num);
-$new_prize_num=$activity[0]['prize_num']-$success_order_num;
-var_dump($new_prize_num);
+$result=OrderModel::getCount($aid);//获取该活动完成订单数
+var_dump($result);
+$success_order_num=$result['count'];//获取该活动完成订单数
+$new_prize_num=$activity[0]['prize_num']-$success_order_num;//计算当前剩余奖品数
 $html=htmlspecialchars_decode($activity[0]["desc_html"]);//将富文本内容转化为html
 $order = OrderModel::getExistence($openid); //查询当前用户是否存在当前活动订单
 $_GPC['oid']=$order[0]['id'];//将订单ID付给全局

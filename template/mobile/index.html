@@ -95,9 +95,15 @@
         <div style="display:inline-block;width:150px;；margin:5px 5px auto">底价<strong style="color:#f0ad4e;">{$activity[0]['prize_floor_price']}</strong>元
         </div>
         {/if}
-        <div style="display:inline-block;width:150px;float: right;text-align: right;margin:5px 5px auto">奖品剩余<strong style="color:#f0ad4e;">10</strong>份</div>
+        <div style="display:inline-block;width:150px;float: right;text-align: right;margin:5px 5px auto">奖品剩余<strong style="color:#f0ad4e;">{$new_prize_num}</strong>份</div>
 
-        {if $order[0]['order_status']!=0&&!empty($order)}
+        {if $order[0]['order_status']!=0&&!empty($order)&&$new_prize_num==0}
+        <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
+            <h3 style="color:#f0ad4e;line-height: 30px;">很遗憾</h3>
+            <p>奖品已经被其他小伙伴抢光了</p>
+            <p style="color: red">你可以进入公众号参与其他活动</p>
+        </div>
+        {elseif $order[0]['order_status']!=0&&!empty($order)}
         <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
             <h3 style="color:#f0ad4e;line-height: 30px;">恭喜你砍价成功</h3>
             {if $order[0]['order_status']==1}
