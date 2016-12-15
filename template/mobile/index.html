@@ -86,6 +86,7 @@
         <img src="{php echo   'http://'.$_SERVER['SERVER_NAME'].'/attachment/'.$activity[0]['head_pic'] }" alt=""
              width="100%">
     </div>
+
     <div style="padding: 15px;background-color: #ffffff">
         <div><h3>{$activity[0]['name']}</h3></div>
         <div style="margin:5px 0px auto">原价<strike>{$activity[0]['prize_old_price']}</strike></div>
@@ -97,35 +98,13 @@
         {/if}
         <div style="display:inline-block;width:150px;float: right;text-align: right;margin:5px 5px auto">奖品剩余<strong style="color:#f0ad4e;">{$new_prize_num}</strong>份</div>
 
-        {if $order[0]['order_status']!=0&&!empty($order)&&$new_prize_num==0}
+        {if $new_prize_num==0}
         <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
             <h3 style="color:#f0ad4e;line-height: 30px;">很遗憾</h3>
             <p>奖品已经被其他小伙伴抢光了</p>
             <p style="color: red">你可以进入公众号参与其他活动</p>
         </div>
-        {elseif $order[0]['order_status']!=0&&!empty($order)}
-        <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
-            <h3 style="color:#f0ad4e;line-height: 30px;">恭喜你砍价成功</h3>
-            {if $order[0]['order_status']==1}
-            <input id="pay" type="button"
-                   style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; "
-                   value="支付">
-            {elseif $order[0]['order_status']==2}
-            <input id="success" type="button"
-                   style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; "
-                   value="完善资料">
-            <p>请点击按钮填写或修改资料，耐心等待客服的联系</p>
-            {else}
-            <p>奖品已发出</p>
-            {/if}
-        </div>
-        {elseif !empty($order)&&$order[0]['order_status']==0}
-        <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
-            <h3 style="color:#f0ad4e;line-height: 30px;">你已经参与砍价</h3>
-            <p>你可以点击右上角将链接分享给别人帮忙砍价</p>
-
-        </div>
-        {else}
+        {elseif empty($order)&&$new_prize_num>0}
         <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
             <h3 style="color:#f0ad4e;line-height: 30px;">Ta已经砍价成功</h3>
             <input id="btn" type="button"
@@ -136,8 +115,32 @@
             <input id="openid" type="hidden" value="{$openid}">
             <input id="start_time" type="hidden" value="{$judge2}">
         </div>
+        {elseif !empty($order)&&$order[0]['order_status']==0&&$new_prize_num>0}
+        <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
+            <h3 style="color:#f0ad4e;line-height: 30px;">你已经参与砍价</h3>
+            <p>你可以点击右上角将链接分享给别人帮忙砍价</p>
+
+        </div>
+        {elseif $order[0]['order_status']!=0&&!empty($order)&&$new_prize_num>0}
+        <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
+            <h3 style="color:#f0ad4e;line-height: 30px;">恭喜你砍价成功</h3>
+            {if $order[0]['order_status']==1}
+            <input id="pay" type="button"
+                   style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; "
+                   value="支付">
+            {elseif $order[0]['order_status']==2}
+            <input id="success" type="button"
+                   style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; "
+                   value="完善资料">
+            <p >请点击按钮填写或修改资料，耐心等待客服的联系</p>
+            {else}
+            <p style="color:red;">奖品已发出,请保持电话畅通，方便快递联系您</p>
+            {/if}
+        </div>
         {/if}
     </div>
+
+
     <div style="padding: 3px;">
         {if !empty($order)}
         <div style="background-color: #eeeeee;width: 100%;text-align: center;margin:5px auto; ">
@@ -154,9 +157,6 @@
             <h3 style="line-height: 50px;">活动规则</h3>
             {$html}
         </div>
-        <!--<div style="margin: 10px auto;background-color: #ffffff;text-align: center;padding: 10px;">-->
-        <!--<input type="button" style="outline: none;width:240px;height:30px;color:#ffffff;text-align:center;border-radius: 10px;background-color: #333333;" value="返回活动列表">-->
-        <!--</div>-->
     </div>
 </div>
 <div class="main" id="code">

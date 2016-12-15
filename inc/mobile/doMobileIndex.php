@@ -42,7 +42,6 @@ if ($judge==1){
     exit;
 }
 $result=OrderModel::getCount($aid);//获取该活动完成订单数
-var_dump($result);
 $success_order_num=$result['count'];//获取该活动完成订单数
 $new_prize_num=$activity[0]['prize_num']-$success_order_num;//计算当前剩余奖品数
 $html=htmlspecialchars_decode($activity[0]["desc_html"]);//将富文本内容转化为html
