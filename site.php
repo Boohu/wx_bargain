@@ -17,8 +17,9 @@ class Wx_bargainModuleSite extends WeModuleSite {
 		//这个操作被定义用来呈现 功能封面
 	}
 	public function doWebDetails() {
-		//这个操作被定义用来呈现 管理中心导航菜单
-	}
+		//这个操作被定义用来呈现活动详情
+        require_once(dirname(__FILE__)."/inc/web/doWebDetails.php");
+    }
 	public function doWebOrder() {
 	//这个操作被定义用来呈现 管理中心导航菜单
         require_once(dirname(__FILE__)."/inc/web/doWebOrder.php");
