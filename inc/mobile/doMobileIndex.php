@@ -49,6 +49,8 @@ $order = OrderModel::getExistence($openid); //查询当前用户是否存在当�
 $_GPC['oid']=$order[0]['id'];//将订单ID付给全局
 if(!empty($order)){
     $assist_information=AssistModel::getOrder($order[0]['id']); //获取本次订单已被帮忙砍价的信息
+    $result = AssistModel::getNum($order[0]['id']); //获取本次订单已被帮忙砍价次数
+    $bargain_num=$result['count'];
 }
 $op = $_GPC['op']; //获取操作类型
 

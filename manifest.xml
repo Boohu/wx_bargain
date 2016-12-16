@@ -60,6 +60,7 @@ CREATE TABLE `ims_wx_bargain_activity` (
   `prize_name` text NOT NULL COMMENT '奖品名称',
   `prize_old_price` decimal(8,2) NOT NULL COMMENT '原价',
   `prize_floor_price` decimal(8,2) NOT NULL COMMENT '砍价底价',
+  `bargain_time_astrict` int(11) NOT NULL COMMENT '砍价限时',
   `bargain_max` int(11) NOT NULL COMMENT '每天最大砍价次数',
   `prize_num` int(11) NOT NULL COMMENT '奖品总数',
   `is_subscription_launch` int(11) NOT NULL DEFAULT '1' COMMENT '是否订阅才能发起1=是,0=否',

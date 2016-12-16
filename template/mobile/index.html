@@ -81,7 +81,7 @@
 </style>
 
 
-<div style="margin: 0;padding: 0;background-color: #eeeeee">
+<div style="margin: 0 0 30px 0;padding: 0;background-color: #eeeeee">
     <div class="mui-card-content">
         <img src="{php echo   'http://'.$_SERVER['SERVER_NAME'].'/attachment/'.$activity[0]['head_pic'] }" alt=""
              width="100%">
@@ -89,14 +89,22 @@
 
     <div style="padding: 15px;background-color: #ffffff">
         <div><h3>{$activity[0]['name']}</h3></div>
-        <div style="margin:5px 0px auto">原价<strike>{$activity[0]['prize_old_price']}</strike></div>
+        <div style="margin:5px 0 0 0 ">原价<strike>{$activity[0]['prize_old_price']}</strike></div>
         {if !empty($order)}
-        <div style="display:inline-block;width:150px;margin:5px 5px auto">当前价格<strong style="color:#f0ad4e;">{$order[0]['current_price']}</strong>元</div>
+        <div style="display:inline-block;width:150px;margin:5px 0 0 0 ">当前价格<strong style="color:#f0ad4e;">{$order[0]['current_price']}</strong>元</div>
         {else}
-        <div style="display:inline-block;width:150px;；margin:5px 5px auto">底价<strong style="color:#f0ad4e;">{$activity[0]['prize_floor_price']}</strong>元
+            {if $activity[0]['prize_floor_price']==0}
+        <div style="display:inline-block;width:150px;margin:5px 0 5px 0"><strong style="color:#f0ad4e;font-size: 20px">免费</strong>
+            {else}
+        <div style="display:inline-block;width:150px;margin:5px 0 5px 0">底价<strong style="color:#f0ad4e;">{$activity[0]['prize_floor_price']}</strong>元
+            {/if}
         </div>
         {/if}
         <div style="display:inline-block;width:150px;float: right;text-align: right;margin:5px 5px auto">奖品剩余<strong style="color:#f0ad4e;">{$new_prize_num}</strong>份</div>
+        <!--活动简介-->
+        <div style="display:block;text-align: center;background-color: #eeeeee;border-radius: 3px;padding: 5px;">
+            {$activity[0]['desc']}
+        </div>
 
         {if $new_prize_num==0&&$order[0]['order_status']<2}
         <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
@@ -109,7 +117,7 @@
             <h3 style="color:#f0ad4e;line-height: 30px;">Ta已经砍价成功</h3>
             <input id="btn" type="button"
                    style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; "
-                   value="我也要砍价">
+                   value="我要砍价">
             <input id="sub" type="hidden" value="{$activity[0]['is_subscription_launch']}">
             <input id="follow" type="hidden" value="{$information['follow']}">
             <input id="openid" type="hidden" value="{$openid}">
@@ -138,9 +146,12 @@
             {/if}
         </div>
         {/if}
+            {if !empty($order)}
+        <div style="display:block;text-align: center;background-color: #f0ad4e;border-radius: 3px;padding: 5px;">
+                已有<strong>{$bargain_num}</strong>位好友帮你砍价成功，现价<strong>{$order[0]['current_price']}</strong>元
+        </div>
+            {/if}
     </div>
-
-
     <div style="padding: 3px;">
         {if !empty($order)}
         <div style="background-color: #eeeeee;width: 100%;text-align: center;margin:5px auto; ">
@@ -159,6 +170,12 @@
         </div>
     </div>
 </div>
+<!--活动倒计时-->
+<div style="position:fixed;bottom:0;z-index:99;width:100%;padding:15px;background-color: #333333;color:#ffffff;box-shadow: #666 0px 0px 10px;">
+    活动剩余时间：<strong id="time_d"></strong>天<strong id="time_h"></strong>小时<strong id="time_m"></strong>分<strong id="time_s"></strong>秒
+    <input id="end_time" type="hidden" value="{$activity[0]['end_time']}">
+</div>
+
 <div class="main" id="code">
     <div class="modal_main">
         <div class="modal_head">
@@ -215,7 +232,7 @@
             desc: '{$activity[0]["wx_friend_centent"]}',
 
             link: "{php echo   'http://'.$_SERVER['SERVER_NAME'] . str_replace('./','/',$this->createMobileUrl('forward',array('oid'=>$order[0]['id'])))  }",
-            imgUrl: 'http://admin.codestorm.cn/attachment/{$activity[0]["head_pic"]}',
+            imgUrl: 'http://admin.codestorm.cn/attachment/{$activity[0]["wx_pic"]}',
             success: function () {
             },
             cancel: function () {
@@ -265,6 +282,49 @@
     $('#success').bind('click', function () {
         window.location = "{php echo $this->createMobileUrl('information',array('oid'=>$order[0]['id']));}";
     })
+
+    //活动倒计时
+    $(function(){
+        show_time();
+    });
+    var end_time=$('#end_time').val();
+    function show_time(){
+        var time_start = new Date().getTime(); //设定当前时间
+        var time_end =  new Date(end_time).getTime(); //设定目标时间
+        // 计算时间差
+        var time_distance = time_end - time_start;
+        // 天
+        var int_day = Math.floor(time_distance/86400000)
+        time_distance -= int_day * 86400000;
+        // 时
+        var int_hour = Math.floor(time_distance/3600000)
+        time_distance -= int_hour * 3600000;
+        // 分
+        var int_minute = Math.floor(time_distance/60000)
+        time_distance -= int_minute * 60000;
+        // 秒
+        var int_second = Math.floor(time_distance/1000)
+        // 时分秒为单数时、前面加零
+        if(int_day < 10){
+            int_day = "0" + int_day;
+        }
+        if(int_hour < 10){
+            int_hour = "0" + int_hour;
+        }
+        if(int_minute < 10){
+            int_minute = "0" + int_minute;
+        }
+        if(int_second < 10){
+            int_second = "0" + int_second;
+        }
+        // 显示时间
+        $("#time_d").html(int_day);
+        $("#time_h").html(int_hour);
+        $("#time_m").html(int_minute);
+        $("#time_s").html(int_second);
+        // 设置定时器
+        setTimeout("show_time()",1000);
+    }
 
 </script>
 {template 'common/footer'}

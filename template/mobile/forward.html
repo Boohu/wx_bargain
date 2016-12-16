@@ -73,14 +73,15 @@
 
 </style>
 
-<div style="margin: 0;padding: 0;background-color: #eeeeee">
+<div style="margin:0 0 30px 0;padding: 0;background-color: #eeeeee">
     <div class="mui-card-content">
         <img src="{php echo   'http://'.$_SERVER['SERVER_NAME'].'/attachment/'.$activity[0]['head_pic'] }" alt="" width="100%">
     </div>
     <div style="padding: 15px;background-color: #ffffff">
         <div><h3>{$activity[0]['name']}</h3></div>
-        <div style="margin:5px 5px auto">原价<strike>{$activity[0]['prize_old_price']}</strike></div>
-        <div style="margin:5px 5px auto">当前价格<strong style="color:#f0ad4e;">{$order[0]['current_price']}</strong>元</div>
+        <div style="margin:5px 0 0 0">原价<strike>{$activity[0]['prize_old_price']}</strike></div>
+        <div style="display:inline-block;margin:5px 0 5px 0 ">当前价格<strong style="color:#f0ad4e;">{$order[0]['current_price']}</strong>元</div>
+        <div style="display:inline-block;width:150px;float: right;text-align: right;margin:5px 5px auto">奖品剩余<strong style="color:#f0ad4e;">{$new_prize_num}</strong>份</div>
         <div style="display:inline-block;width:100%;background-color: #eee;padding:3px;margin-top:5px;border-radius: 3px;">
             <strong style="color:#f0ad4e;">{$order[0]['nickname']}</strong>正在参与“<strong style="color:#f0ad4e;">{$activity[0]['name']}</strong>”活动，把价格砍到底价，Ta就可以特惠抢购
         </div>
@@ -108,9 +109,6 @@
         </div>
         {/if}
     </div>
-    <div style="display:block;width: 100%;background-color: #ffffff;margin: 5px auto;padding: 5px;border-radius: 3px;">
-        <a style="display:block;text-align: center;margin: auto;width:80%;height:50px;background-color:#f0ad4e;color:#ffffff; padding-top: 10px;font-weight: bold;text-decoration:none;font-size: 20px;border-radius: 3px; " href="{php echo $this->createMobileUrl('index',array('aid'=>$activity[0]['id']))}">发起砍价请点我</a>
-    </div>
     <div style="padding: 3px;">
         <div style="background-color: #eeeeee;width: 100%;text-align: center;margin:5px auto; ">
             <h3 style="line-height:55px;">砍价记录</h3>
@@ -127,6 +125,12 @@
         </div>
     </div>
 
+</div>
+<!--活动倒计时-->
+<div style="position:fixed;bottom:0;z-index:99;width:100%;padding:15px;background-color: #333333;color:#ffffff;box-shadow: #666 0px 0px 10px;">
+    活动剩余时间：<strong id="time_d"></strong>天<strong id="time_h"></strong>小时<strong id="time_m"></strong>分<strong id="time_s">59</strong>秒
+    <a style="display:block;position:absolute;right:0;top:0;height:100px;width: 100px;background-color: #ffffff;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;color: #333333;text-align: center;font-size: 15px;font-weight:bold;color: #333333;padding: 15px;" href="{php echo $this->createMobileUrl('index',array('aid'=>$activity[0]['id']))}">我的砍价</a>
+    <input id="end_time" type="hidden" value="{$activity[0]['end_time']}">
 </div>
 <!--为订阅提示框-->
 <div class="main" id="code">
@@ -201,6 +205,48 @@
         $("body").css({overflow:"visible"});
     })
 
+    //活动倒计时
+    $(function(){
+        show_time();
+    });
+    var end_time=$('#end_time').val();
+    function show_time(){
+        var time_start = new Date().getTime(); //设定当前时间
+        var time_end =  new Date(end_time).getTime(); //设定目标时间
+        // 计算时间差
+        var time_distance = time_end - time_start;
+        // 天
+        var int_day = Math.floor(time_distance/86400000)
+        time_distance -= int_day * 86400000;
+        // 时
+        var int_hour = Math.floor(time_distance/3600000)
+        time_distance -= int_hour * 3600000;
+        // 分
+        var int_minute = Math.floor(time_distance/60000)
+        time_distance -= int_minute * 60000;
+        // 秒
+        var int_second = Math.floor(time_distance/1000)
+        // 时分秒为单数时、前面加零
+        if(int_day < 10){
+            int_day = "0" + int_day;
+        }
+        if(int_hour < 10){
+            int_hour = "0" + int_hour;
+        }
+        if(int_minute < 10){
+            int_minute = "0" + int_minute;
+        }
+        if(int_second < 10){
+            int_second = "0" + int_second;
+        }
+        // 显示时间
+        $("#time_d").html(int_day);
+        $("#time_h").html(int_hour);
+        $("#time_m").html(int_minute);
+        $("#time_s").html(int_second);
+        // 设置定时器
+        setTimeout("show_time()",1000);
+    }
 
 </script>
 {template 'common/footer'}

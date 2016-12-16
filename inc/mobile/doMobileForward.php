@@ -28,6 +28,10 @@ $information = $_W['fans'];//获取帮忙砍价用户信息
 if ($level != 4) $information = mc_fansinfo($openid);
 $nickname = $information['nickname'];//获取帮忙砍价用户昵称
 $oid = isset($_GPC['oid']) ? trim($_GPC['oid']) : ''; /*获取订单id*/
+if(empty($oid)){
+    echo  "打开方式错误";
+    exit;
+}
 $order = OrderModel::getOrder($oid); //根据订单ID查询需要帮助用户的订单信息
 //判断如果是该订单用户点开分享链接则跳到主页
 if ($openid == $order[0]['openid']) {
@@ -38,6 +42,10 @@ if ($openid == $order[0]['openid']) {
 
 $activity = ActiveModel::get($order[0]['activity_id']); /*取出当前活动*/
 $html = htmlspecialchars_decode($activity[0]["desc_html"]);//将富文本内容转化为html
+
+$result=OrderModel::getCount($activity[0]['id']);//获取该活动完成订单数
+$success_order_num=$result['count'];//获取该活动完成订单数
+$new_prize_num=$activity[0]['prize_num']-$success_order_num;//计算当前剩余奖品数
 
 $timestamp = $_W['timestamp'];//获得当前时间戳
 $date = date("Y-m-d");//获得当天日期
