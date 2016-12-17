@@ -35,7 +35,10 @@ if ($openid == $order[0]['openid']) {
     exit;
 }
 
+
 $activity = ActiveModel::get($order[0]['activity_id']); /*取出当前活动*/
+$_GPC['aid']=$activity[0]['id'];//将当前活动ID 赋值给全局
+$order_existence=OrderModel::getExistence($openid);//查看当前用户是否存在订单
 $html = htmlspecialchars_decode($activity[0]["desc_html"]);//将富文本内容转化为html
 
 $result=OrderModel::getCount($activity[0]['id']);//获取该活动完成订单数
