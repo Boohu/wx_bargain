@@ -1,5 +1,5 @@
 {template 'common/header'}
-
+{php echo register_jssdk(false);}
 <style>
     .footer {
         display: none;
@@ -233,7 +233,7 @@
             desc: '{$activity[0]["wx_friend_centent"]}',
 
             link: "{php echo   'http://'.$_SERVER['HTTP_HOST'] . str_replace('./','/',$this->createMobileUrl('forward',array('oid'=>$order[0]['id'])))  }",
-            imgUrl: 'http://admin.codestorm.cn/attachment/{$activity[0]["wx_pic"]}',
+            imgUrl: 'http://'+"{php echo $_SERVER['HTTP_HOST']}"+'/attachment/{$activity[0]["wx_pic"]}',
             success: function () {
             },
             cancel: function () {
