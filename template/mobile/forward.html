@@ -173,7 +173,11 @@
         </div>
         <div class="line"></div>
         <div class="modal_code">
+            {if $timestamp>$activity_end_time}
+            <p>超时无法砍价</p>
+            {else}
             <p>今天帮忙好友砍价次数已达上限，小伙伴明天再来吧</p>
+            {/if}
         </div>
         <div class="line"></div>
         <div class="modal_btn">
@@ -255,7 +259,10 @@
         $("#time_m").html(int_minute);
         $("#time_s").html(int_second);
         // 设置定时器
-        setTimeout("activity_time()",1000);
+        if (int_day!=0||int_hour!=0||int_minute!=0||int_second!=0){
+            setTimeout("activity_time()",1000);
+        }
+
     }
 /*砍价限时*/
 
@@ -294,7 +301,11 @@
         $("#order_m").html(int_minute);
         $("#order_s").html(int_second);
         // 设置定时器
-        setTimeout("bargain_time()",1000);
+        if (int_day!=0||int_hour!=0||int_minute!=0||int_second!=0)
+        {
+            setTimeout("bargain_time()",1000);
+        }
+
     }
 
 </script>

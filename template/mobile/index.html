@@ -323,7 +323,10 @@
         $("#time_m").html(int_minute);
         $("#time_s").html(int_second);
         // 设置定时器
-        setTimeout("show_time()",1000);
+        if (int_day!=0||int_hour!=0||int_minute!=0||int_second!=0){
+            setTimeout("show_time()",1000);
+        }
+
     }
 
 </script>
