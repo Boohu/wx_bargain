@@ -29,7 +29,7 @@ $nickname=$information['nickname'];//获取当前用户昵称
 $aid = isset($_GPC['aid']) ? trim($_GPC['aid']) : ''; /*获取活动id*/
 if ($aid == "") exit; /*活动id不存在*/
 $top_data=OrderModel::getTop($aid);//查询本次活动价格最低排名前20的用户
-var_dump($top_data);
+
 $activity = ActiveModel::get($aid); /*取出当前活动*/
 $active_state=$activity[0]['active_state'];//取出当前活动状态
 if (count($activity) != 1||$active_state==0) exit; /*活动不存在*/
