@@ -174,21 +174,21 @@
                 {$html}
             </div>
             <div style="text-align: center;margin: 10px 0 0 0">
-                <div style="display: block;text-align: center;color:#f0ad4e ;font-size: 20px;">砍价前二十排行榜</div>
-                <table  style="display:block;width:100%;background-color: #ffffff;border-radius: 3px;;border: 2px solid #f0ad4e">
-                    <thead style="width: 100%;text-align: center">
+                <div style="display: block;text-align: center;color:#f0ad4e ;font-size: 30px;padding: 5px auto;margin:0;">砍价前二十排行榜</div>
+                <table  style="display:block;width:100%;background-color: #ffffff;border-radius: 5px;border: 2px solid #f0ad4e">
+                    <thead >
                     <tr>
                         <th style="width: 200px;text-align: center;">排名</th>
                         <th style="width: 400px;text-align: center;">昵称</th>
                         <th style="width: 200px;text-align: center">价格</th>
                     </tr>
                     </thead>
-                    <tbody style="width: 100%;text-align: center">
+                    <tbody >
                     {loop $top_data $datas}
                     <tr>
-                        <td style="width: 200px;text-align: center">111</td>
-                        <td style="width: 400px;text-align: center">{$datas['nickname']}</td>
-                        <td style="width: 200px;text-align: center">{$datas['current_price']}</td>
+                        <td >111</td>
+                        <td >{$datas['nickname']}</td>
+                        <td >{$datas['current_price']}</td>
                     </tr>
                     {/loop}
                     </tbody>
