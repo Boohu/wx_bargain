@@ -14,16 +14,7 @@ $weid = $_W['uniacid'];//获取当前公众号ID
 $level = $_W['account']['level'];//获取公众号类型
 $op = $_GPC['op'];//获取操作类型
 
-/*判断用户是否是微信端打开*/
-/*if (empty($openid)) {
-    echo " 该平台只能在微信端打开";
-    exit;
-}*/
-//判断如果是非认证服务号
-//if($level!=4){
-//    echo "请先关注公众号，并按公众号的提示帮忙砍价活动！";
-//    exit;
-//};
+
 $information = $_W['fans'];//获取帮忙砍价用户信息
 if ($level != 4) $information = mc_fansinfo($openid);
 $nickname = $information['nickname'];//获取帮忙砍价用户昵称
@@ -33,6 +24,10 @@ if(empty($oid)){
     exit;
 }
 $order = OrderModel::getOrder($oid); //根据订单ID查询需要帮助用户的订单信息
+if(empty($order)){
+    echo "该订单已经不存在";
+    exit;
+}
 //判断如果是该订单用户点开分享链接则跳到主页
 if ($openid == $order[0]['openid']) {
     $_GPC['aid'] = $order[0]['activity_id'];
@@ -51,6 +46,14 @@ $timestamp = $_W['timestamp'];//获得当前时间戳
 $date = date("Y-m-d");//获得当天日期
 $time = date('Y-m-d H:i:s', $timestamp);//将当前时间戳转化为时间格式
 $activity_end_time = strtotime($activity[0]['end_time']);//获得本次活动结束时间
+
+$hour=$activity[0]['bargain_time_astrict'];//获取砍价时间限制单位小时
+$order_start_time=strtotime($order[0]['create_time']);//获取本次订单开始时间戳
+$bargain_end_time=$order_start_time+$hour*60*60*1000;//计算本次订单帮忙砍价结束时间
+var_dump($hour);
+var_dump($order_start_time);
+var_dump($bargain_end_time);
+exit;
 
 $judge = $timestamp > $activity_end_time ? 1 : 0;//判断活动是否超时 1=未超时 0=超时
 /*活动超时结束*/

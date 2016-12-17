@@ -224,7 +224,7 @@
                 <div class="form-group">
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label">砍价限时</label>
                     <div class="input-group col-sm-3" style="padding-left:15px;padding-right:15px">
-                        <input type="text" class="form-control" id="bargain_time_astrict" name="bargain_time_astrict" value="{$datas[0]['bargain_time_astrict']}" >
+                        <input type="text" class="form-control" id="bargain_time_astrict" name="bargain_time_astrict" value="{$datas[0]['bargain_time_astrict']}"   required="required">
                         <span class="input-group-addon">小时</span>
                     </div>
                 </div>
@@ -285,7 +285,7 @@
                     <label class="col-xs-12 col-sm-3 col-md-2 control-label">微信二维码</label>
                     <div class="col-sm-9 col-xs-12">
                         {php echo tpl_form_field_image('qr_code',$datas[0]['wx_qr_code']);}
-                        <span class="help-block">添加微信当前公众号二维码</span>
+                        <span class="help-block">添加当前微信公众号二维码</span>
                     </div>
                 </div>
 
@@ -388,6 +388,12 @@
         var prize_num = parseInt($("input[name='prize_num']").val())
         if(  isNaN(prize_num) || prize_num<=0 ){
             alert("奖品总数填写错误")
+            return false
+        }
+
+        var bargain_time_astrict = parseInt($("input[name='bargain_time_astrict']").val())
+        if(  isNaN(bargain_time_astrict) || prize_num<=0 ){
+            alert("砍价限时填写错误")
             return false
         }
 
