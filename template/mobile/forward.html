@@ -105,7 +105,7 @@
                 <input id="bargain_num" type="hidden" value="{$bargain_num['count']}">
                 <input id="bargain_max" type="hidden" value="{$activity[0]['bargain_max']}">
                 <input id="openid" type="hidden" value="{$openid}">
-                <input id="o_time_end" value="{$timestamp}">
+                <input id="o_time_end" type="hidden" value="{$timestamp}">
         </div>
         {else}
         <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
@@ -189,11 +189,12 @@
 <script>
     var end_time=$('#end_time').val();//获取活动结束时间
     var order_end_time=$('#order_end_time').val();//获取订单结束时间
+    var now_time=new Date().getTime(); //设定当前时间
     /*未订阅提示JS*/
     $('.main').hide();
     $('#btn').bind('click', function () {
 
-        var now_time=new Date().getTime(); //设定当前时间
+
         var openid = $('#openid').val();
         var sub = $('#sub').val();
         var follow = $('#follow').val();
@@ -204,7 +205,7 @@
             $('#code').show();
             $("body").css({overflow:"hidden"});
 
-        }else if(parseInt(bargain_num)>=parseInt(bargain_max)||now_time>(order_end_time*1000)){
+        }else if(parseInt(bargain_num)>=parseInt(bargain_max)||parseInt(now_time)>parseInt(order_end_time*1000)){
             //今日帮忙砍价已达上限砍价次数以达上限
             $('#bargain').show();
             $("body").css({overflow:"hidden"});
@@ -220,8 +221,12 @@
 
     //活动倒计时
     $(function(){
-        activity_time();
-        bargain_time();
+        if(parseInt(now_time)<=parseInt(end_time*1000)) {
+            activity_time();
+        }
+        if(parseInt(now_time)<=parseInt(order_end_time*1000)) {
+            bargain_time();
+        }
     });
 
     function activity_time(){

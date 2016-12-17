@@ -284,11 +284,15 @@
         window.location = "{php echo $this->createMobileUrl('information',array('oid'=>$order[0]['id']));}";
     })
 
+    var end_time=$('#end_time').val();//获得活动结束时间
+    var now_time=new Date().getTime(); //设定当前时间
     //活动倒计时
     $(function(){
+        if(parseInt(now_time)<=parseInt(end_time*1000)){
         show_time();
+        }
     });
-    var end_time=$('#end_time').val();
+
     function show_time(){
         var time_start = new Date().getTime(); //设定当前时间
         var time_end =  new Date(end_time).getTime(); //设定目标时间
