@@ -9,6 +9,15 @@
 class OrderModel
 {
     /**
+     *  根据活动ID查询价格最低的前20名
+     * @param $activity_id为要查询订单的活动ID
+     */
+    static function getTop($activity_id)
+    {
+        $result=pdo_fetch("select top 20 * from".tablename('wx_bargain_order')."where activity_id=$activity_id order by create_time,current_price");
+        return $result;
+    }
+    /**
      *  根据活动ID查询状态为2待核销或2以上的订单数量
      * @param $activity_id为要查询订单的活动ID
      */
