@@ -173,7 +173,7 @@
 </div>
 <!--活动倒计时-->
 <div style="position:fixed;bottom:0;z-index:99;width:100%;padding:15px;background-color: #333333;color:#ffffff;box-shadow: #666 0px 0px 10px;">
-    活动剩余时间：<strong id="time_d"></strong>天<strong id="time_h"></strong>小时<strong id="time_m"></strong>分<strong id="time_s"></strong>秒
+    活动剩余时间：<strong id="time_d">00</strong>天<strong id="time_h">00</strong>小时<strong id="time_m">00</strong>分<strong id="time_s">00</strong>秒
     <input id="end_time" type="hidden" value="{$activity[0]['end_time']}">
 </div>
 
@@ -285,10 +285,11 @@
     })
 
     var end_time=$('#end_time').val();//获得活动结束时间
+    var time_end =  new Date(end_time).getTime(); //设定目标时间
     var now_time=new Date().getTime(); //设定当前时间
     //活动倒计时
     $(function(){
-        if(parseInt(now_time)<=parseInt(end_time*1000)){
+        if(parseInt(now_time)<=parseInt(time_end*1000)){
         show_time();
         }
     });

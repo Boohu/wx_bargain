@@ -114,7 +114,7 @@
         </div>
         {/if}
         <div style="display: block;background-color: #f0ad4e;margin: 5px auto;text-align:center;border-radius: 3px; ">
-            砍价剩余时间：<strong id="order_d"></strong>天<strong id="order_h"></strong>小时<strong id="order_m"></strong>分<strong id="order_s"></strong>秒
+            砍价剩余时间：<strong id="order_d">00</strong>天<strong id="order_h">00</strong>小时<strong id="order_m">00</strong>分<strong id="order_s">00</strong>秒
             <input type="hidden" id="order_end_time" value="{$order_end_time}">
         </div>
     </div>
@@ -137,8 +137,8 @@
 </div>
 <!--活动倒计时-->
 <div style="position:fixed;bottom:0;z-index:99;width:100%;padding:15px;background-color: #333333;color:#ffffff;box-shadow: #666 0px 0px 10px;">
-    活动剩余时间：<strong id="time_d"></strong>天<strong id="time_h"></strong>小时<strong id="time_m"></strong>分<strong id="time_s"></strong>秒
-    <a style="display:block;position:absolute;right:0;top:0;height:100px;width: 100px;background-color: #ffffff;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;color: #333333;text-align: center;font-size: 15px;font-weight:bold;color: #333333;padding: 15px;" href="{php echo $this->createMobileUrl('index',array('aid'=>$activity[0]['id']))}">我的砍价</a>
+    活动剩余时间：<strong id="time_d">00</strong>天<strong id="time_h">00</strong>小时<strong id="time_m">00</strong>分<strong id="time_s">00</strong>秒
+    <a style="display:block;position:absolute;right:0;top:0;height:100px;width: 100px;background-color: #ffffff;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;color: #333333;text-align: center;font-size: 15px;font-weight:bold;color: #333333;padding: 15px;" href="{php echo $this->createMobileUrl('index',array('aid'=>$activity[0]['id']))}">我要砍价</a>
     <input id="end_time" type="hidden" value="{$activity[0]['end_time']}">
 </div>
 <!--为订阅提示框-->
@@ -188,6 +188,7 @@
 </div>
 <script>
     var end_time=$('#end_time').val();//获取活动结束时间
+    var time_end =  new Date(end_time).getTime(); //设定目标时间
     var order_end_time=$('#order_end_time').val();//获取订单结束时间
     var now_time=new Date().getTime(); //设定当前时间
     /*未订阅提示JS*/
@@ -218,10 +219,9 @@
         $('.main').hide();
         $("body").css({overflow:"visible"});
     })
-
     //活动倒计时
     $(function(){
-        if(parseInt(now_time)<=parseInt(end_time*1000)) {
+        if(parseInt(now_time)<=parseInt(time_end*1000)) {
             activity_time();
         }
         if(parseInt(now_time)<=parseInt(order_end_time*1000)) {
