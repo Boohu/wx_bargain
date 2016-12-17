@@ -91,7 +91,7 @@
                     </td>
                     <td>
                         <a href="{php echo $this->createWebUrl('joinList',array('aid'=>$data['id']))}" class="btn btn-primary btn-sm">参与列表</a>
-                        <a  url="{php echo   'http://'.$_SERVER['SERVER_NAME'] . str_replace('./','/',$this->createMobileUrl('index',array('aid'=>$data['id'])))  }"
+                        <a  url="{php echo   'http://'.$_SERVER['HTTP_HOST'] . str_replace('./','/',$this->createMobileUrl('index',array('aid'=>$data['id'])))  }"
                             class="btn btn-primary btn-sm showUrl">活动链接</a>
                     </td>
                     <!--<td>-->
