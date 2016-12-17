@@ -49,11 +49,7 @@ $activity_end_time = strtotime($activity[0]['end_time']);//获得本次活动结
 
 $hour=$activity[0]['bargain_time_astrict'];//获取砍价时间限制单位小时
 $order_start_time=strtotime($order[0]['create_time']);//获取本次订单开始时间戳
-$bargain_end_time=$order_start_time+$hour*60*60*1000;//计算本次订单帮忙砍价结束时间
-var_dump($hour);
-var_dump($order_start_time);
-var_dump($bargain_end_time);
-exit;
+$order_end_time=$order_start_time+$hour*60*60;//计算本次订单帮忙砍价结束时间
 
 $judge = $timestamp > $activity_end_time ? 1 : 0;//判断活动是否超时 1=未超时 0=超时
 /*活动超时结束*/

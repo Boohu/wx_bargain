@@ -85,12 +85,16 @@
         <div style="display:inline-block;width:100%;background-color: #eee;padding:3px;margin-top:5px;border-radius: 3px;">
             <strong style="color:#f0ad4e;">{$order[0]['nickname']}</strong>正在参与“<strong style="color:#f0ad4e;">{$activity[0]['name']}</strong>”活动，把价格砍到底价，Ta就可以特惠抢购
         </div>
-        {if $order[0]['order_status']!=0}
+        {if $timestamp>=$order_end_time&&$order[0]['order_status']==0}
+        <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
+            <h3 style="color:#f0ad4e;line-height: 30px;">砍价超时</h3>
+        </div>
+        {elseif $order[0]['order_status']!=0}
         <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
             <h3 style="color:#f0ad4e;line-height: 30px;">砍价完成</h3>
             <p>已经砍价到底价，感谢您的帮忙</p>
         </div>
-        {elseif empty($assist_record)}
+        {elseif empty($assist_record)&&$order[0]['order_status']==0}
         <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
             <h3 style="color:#f0ad4e;line-height: 30px;">帮TA砍价</h3>
                 <input id="btn" type="button"
@@ -101,6 +105,7 @@
                 <input id="bargain_num" type="hidden" value="{$bargain_num['count']}">
                 <input id="bargain_max" type="hidden" value="{$activity[0]['bargain_max']}">
                 <input id="openid" type="hidden" value="{$openid}">
+                <input id="o_time_end" value="{$timestamp}">
         </div>
         {else}
         <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
@@ -108,7 +113,10 @@
             <p>你可以将连接分享给好友帮Ta砍价</p>
         </div>
         {/if}
-        <div style="display: block;background-color: #f0ad4e;"></div>
+        <div style="display: block;background-color: #f0ad4e;margin: 5px auto;text-align:center;border-radius: 3px; ">
+            砍价剩余时间：<strong id="order_d"></strong>天<strong id="order_h"></strong>小时<strong id="order_m"></strong>分<strong id="order_s"></strong>秒
+            <input type="hidden" id="order_end_time" value="{$order_end_time}">
+        </div>
     </div>
     <div style="padding: 3px;">
         <div style="background-color: #eeeeee;width: 100%;text-align: center;margin:5px auto; ">
@@ -129,7 +137,7 @@
 </div>
 <!--活动倒计时-->
 <div style="position:fixed;bottom:0;z-index:99;width:100%;padding:15px;background-color: #333333;color:#ffffff;box-shadow: #666 0px 0px 10px;">
-    活动剩余时间：<strong id="time_d"></strong>天<strong id="time_h"></strong>小时<strong id="time_m"></strong>分<strong id="time_s">59</strong>秒
+    活动剩余时间：<strong id="time_d"></strong>天<strong id="time_h"></strong>小时<strong id="time_m"></strong>分<strong id="time_s"></strong>秒
     <a style="display:block;position:absolute;right:0;top:0;height:100px;width: 100px;background-color: #ffffff;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;color: #333333;text-align: center;font-size: 15px;font-weight:bold;color: #333333;padding: 15px;" href="{php echo $this->createMobileUrl('index',array('aid'=>$activity[0]['id']))}">我的砍价</a>
     <input id="end_time" type="hidden" value="{$activity[0]['end_time']}">
 </div>
@@ -175,16 +183,16 @@
     <div class="background"></div>
 </div>
 <script>
+    var end_time=$('#end_time').val();//获取活动结束时间
+    var order_end_time=$('#order_end_time').val();//获取订单结束时间
     /*未订阅提示JS*/
     $('.main').hide();
     $('#btn').bind('click', function () {
 
-
+        var now_time=new Date().getTime(); //设定当前时间
         var openid = $('#openid').val();
         var sub = $('#sub').val();
         var follow = $('#follow').val();
-
-
         var bargain_num=$('#bargain_num').val();
         var bargain_max=$('#bargain_max').val();
         //判断是否需要关注公众号才能发起活动
@@ -192,7 +200,7 @@
             $('#code').show();
             $("body").css({overflow:"hidden"});
 
-        }else if(parseInt(bargain_num)>=parseInt(bargain_max)){
+        }else if(parseInt(bargain_num)>=parseInt(bargain_max)||now_time>(order_end_time*1000)){
             //今日帮忙砍价已达上限砍价次数以达上限
             $('#bargain').show();
             $("body").css({overflow:"hidden"});
@@ -211,7 +219,7 @@
         activity_time();
         bargain_time();
     });
-    var end_time=$('#end_time').val();
+
     function activity_time(){
         var time_start = new Date().getTime(); //设定当前时间
         var time_end =  new Date(end_time).getTime(); //设定目标时间
@@ -247,12 +255,13 @@
         $("#time_m").html(int_minute);
         $("#time_s").html(int_second);
         // 设置定时器
-        setTimeout("show_time()",1000);
+        setTimeout("activity_time()",1000);
     }
 /*砍价限时*/
+
     function bargain_time(){
         var time_start = new Date().getTime(); //设定当前时间
-        var time_end =  new Date(end_time).getTime(); //设定目标时间
+        var time_end =  order_end_time*1000 //设定目标时间
         // 计算时间差
         var time_distance = time_end - time_start;
         // 天
@@ -280,12 +289,12 @@
             int_second = "0" + int_second;
         }
         // 显示时间
-        $("#time_d").html(int_day);
-        $("#time_h").html(int_hour);
-        $("#time_m").html(int_minute);
-        $("#time_s").html(int_second);
+        $("#order_d").html(int_day);
+        $("#order_h").html(int_hour);
+        $("#order_m").html(int_minute);
+        $("#order_s").html(int_second);
         // 设置定时器
-        setTimeout("show_time()",1000);
+        setTimeout("bargain_time()",1000);
     }
 
 </script>
