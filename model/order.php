@@ -70,7 +70,9 @@ class OrderModel
         $time=date('Y-m-d H:i:s', $timestamp);//将当前时间戳转化为时间格式
         $data['create_time']=$time;//为新增订单添加创建时间
         $data['update_time']=$time;//为新增订单添加更新时间
-        return $result = pdo_insert('wx_bargain_order', $data);
+        if(!empty($data['openid'])){
+            return $result = pdo_insert('wx_bargain_order', $data);
+        }
     }
     /**
      * 订单更新
