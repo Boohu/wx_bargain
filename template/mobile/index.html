@@ -174,10 +174,10 @@
                 {$html}
             </div>
             <div style="display: block;text-align: center;margin: 15px 0 30px 0;width: 100%;">
-                <div style="display: block;text-align: center;height: 50px;color:#000;font-weight: bold;border-top-left-radius: 15px;border-top-right-radius: 15px;background-color: #f0ad4e;font-size: 20px;line-height: 30px;">砍价前二十排行榜</div>
-                <table  style="display:block;width:100%;background-color: #ffffff;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;border: 5px solid #f0ad4e">
+                <div style="display: block;text-align: center;height: 50px;color:#000;font-weight: bold;border-top-left-radius: 15px;border-top-right-radius: 15px;background-color: #f0ad4e;font-size: 20px;line-height: 50px;">砍价前二十排行榜</div>
+                <table  style="display:block;width:100%;background-color: #ffffff;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;border: 5px solid #f0ad4e;font-size: 15px;">
                     <thead >
-                    <tr>
+                    <tr >
                         <th style="width: 200px;text-align: center;padding: 3px;background-color: #eeeeee;color: #f0ad4e">排名</th>
                         <th style="width: 400px;text-align: center;padding: 3px;background-color: #eeeeee;color: #f0ad4e">昵称</th>
                         <th style="width: 200px;text-align: center;padding: 3px;background-color: #eeeeee;color: #f0ad4e">价格</th>
@@ -185,7 +185,7 @@
                     </thead>
                     <tbody >
                     {loop $top_data $datas}
-                    <tr>
+                    <tr style="border-bottom: 1px solid #eeeeee">
                         <td >{$datas['id']}</td>
                         <td >{$datas['nickname']}</td>
                         <td >{$datas['current_price']}</td>
