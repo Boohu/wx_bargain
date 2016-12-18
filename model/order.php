@@ -14,7 +14,7 @@ class OrderModel
      */
     static function getTop($activity_id)
     {
-        $result=pdo_fetchall("select top 20  * from".tablename('wx_bargain_order')."where activity_id=$activity_id order by create_time,current_price");
+        $result=pdo_fetchall("select * from".tablename('wx_bargain_order')."where activity_id=$activity_id order by current_price,create_time limit 20");
         return $result;
     }
     /**
