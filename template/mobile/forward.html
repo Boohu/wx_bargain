@@ -136,8 +136,10 @@
 
 </div>
 <!--活动倒计时-->
-<div style="position:fixed;bottom:0;z-index:99;width:100%;padding:15px;background-color: #333333;color:#ffffff;box-shadow: #666 0px 0px 10px;">
+<div style="position:fixed;bottom:0;z-index:99;width:100%;padding:15px 0;background-color: #333333;color:#ffffff;box-shadow: #666 0px 0px 10px;">
+    <div style="display: inline-block;width: 65%;font-size:13px;padding-left: 10px;">
     活动剩余时间：<strong id="time_d">00</strong>天<strong id="time_h">00</strong>小时<strong id="time_m">00</strong>分<strong id="time_s">00</strong>秒
+    </div>
     {if !empty($order_existence)}
     <a style="display:block;position:absolute;right:0;top:0;height:100px;width: 100px;background-color: #ffffff;-webkit-border-radius: 3px;-moz-border-radius: 3px;border-radius: 3px;color: #333333;text-align: center;font-size: 15px;font-weight:bold;color: #333333;padding: 15px;" href="{php echo $this->createMobileUrl('index',array('aid'=>$activity[0]['id']))}">我的砍价</a>
     {else}
