@@ -151,6 +151,10 @@
             </div>
             {/if}
             {if !empty($order)}
+            <div style="display: block;background-color: #f0ad4e;margin: 5px auto;text-align:center;border-radius: 3px; ">
+                砍价剩余时间：<strong id="order_d">00</strong>天<strong id="order_h">00</strong>小时<strong id="order_m">00</strong>分<strong id="order_s">00</strong>秒
+                <input type="hidden" id="order_end_time" value="{$order_end_time}">
+            </div>
             <div style="display:block;text-align: center;background-color: #f0ad4e;border-radius: 3px;padding: 5px;">
                 已有<strong>{$bargain_num}</strong>位好友帮你砍价成功，现价<strong>{$order[0]['current_price']}</strong>元
             </div>
@@ -310,12 +314,16 @@
         })
 
         var end_time = $('#end_time').val();//获得活动结束时间
+        var order_end_time=$('#order_end_time').val();//获取订单结束时间
         var time_end = new Date(end_time.replace('-', '/').replace('-', '/')).getTime(); //设定目标时间
         var now_time = new Date().getTime(); //设定当前时间
         //活动倒计时
         $(function () {
             if (parseInt(now_time) <= parseInt(time_end * 1000)) {
                 show_time();
+            }
+            if(parseInt(now_time)<=parseInt(order_end_time*1000)) {
+                bargain_time();
             }
         });
 
@@ -356,6 +364,50 @@
             // 设置定时器
             if (int_day != 0 || int_hour != 0 || int_minute != 0 || int_second != 0) {
                 setTimeout("show_time()", 1000);
+            }
+
+        }
+
+        /*砍价限时*/
+
+        function bargain_time(){
+            var time_start = new Date().getTime(); //设定当前时间
+            var time_end =  order_end_time*1000 //设定目标时间
+            // 计算时间差
+            var time_distance = time_end - time_start;
+            // 天
+            var int_day = Math.floor(time_distance/86400000)
+            time_distance -= int_day * 86400000;
+            // 时
+            var int_hour = Math.floor(time_distance/3600000)
+            time_distance -= int_hour * 3600000;
+            // 分
+            var int_minute = Math.floor(time_distance/60000)
+            time_distance -= int_minute * 60000;
+            // 秒
+            var int_second = Math.floor(time_distance/1000)
+            // 时分秒为单数时、前面加零
+            if(int_day < 10){
+                int_day = "0" + int_day;
+            }
+            if(int_hour < 10){
+                int_hour = "0" + int_hour;
+            }
+            if(int_minute < 10){
+                int_minute = "0" + int_minute;
+            }
+            if(int_second < 10){
+                int_second = "0" + int_second;
+            }
+            // 显示时间
+            $("#order_d").html(int_day);
+            $("#order_h").html(int_hour);
+            $("#order_m").html(int_minute);
+            $("#order_s").html(int_second);
+            // 设置定时器
+            if (int_day!=0||int_hour!=0||int_minute!=0||int_second!=0)
+            {
+                setTimeout("bargain_time()",1000);
             }
 
         }

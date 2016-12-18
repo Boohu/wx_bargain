@@ -56,6 +56,10 @@ if(!empty($order)){
 }
 $op = $_GPC['op']; //获取操作类型
 
+$hour=$activity[0]['bargain_time_astrict'];//获取砍价时间限制单位小时
+$order_start_time=strtotime($order[0]['create_time']);//获取本次订单开始时间戳
+$order_end_time=$order_start_time+$hour*60*60;//计算本次订单帮忙砍价结束时间
+
 //判断如果操作为join 执行
 if ($op == 'join') {
         //判断该用户是否已经参与过该活动
