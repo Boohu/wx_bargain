@@ -32,6 +32,9 @@ $top_data=OrderModel::getTop($aid);//查询本次活动价格最低排名前20�
 
 $activity = ActiveModel::get($aid); /*取出当前活动*/
 $active_state=$activity[0]['active_state'];//取出当前活动状态
+
+$title=$activity[0]['name']; /*设置页面标题为活动名称*/
+
 if (count($activity) != 1||$active_state==0) exit; /*活动不存在*/
 $timestamp=$_W['timestamp'];//获得当前时间戳
 $activity_end_time=strtotime($activity[0]['end_time']);//获得本次活动结束时间

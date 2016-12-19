@@ -37,6 +37,11 @@ if ($openid == $order[0]['openid']) {
 
 
 $activity = ActiveModel::get($order[0]['activity_id']); /*取出当前活动*/
+
+
+$title=$activity[0]['name']; /*设置页面标题为活动名称*/
+
+
 $_GPC['aid']=$activity[0]['id'];//将当前活动ID 赋值给全局
 $order_existence=OrderModel::getExistence($openid);//查看当前用户是否存在订单
 $html = htmlspecialchars_decode($activity[0]["desc_html"]);//将富文本内容转化为html
