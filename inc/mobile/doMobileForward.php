@@ -70,6 +70,7 @@ $result = AssistModel::getNum($oid); //获取本次订单已被帮忙砍价次�
 $assist_information = AssistModel::getOrder($oid); //获取本次订单已被帮忙砍价的详细信息
 if (!empty($openid)) {
     $bargain_num = AssistModel::getCount($date);//获得当前用户今天砍价总次数
+    $bargain_num=$bargain_num['count'];
 }
 
 //判断操作类型如果为help

@@ -98,7 +98,7 @@ if($op=='pay'){
             'openid' => $openid,
             'weid' => $weid,
             'order_id' => $order[0]['id'],
-            'num' => $order[0]['current_price'],
+            'num' => floatval($order[0]['current_price']) ,
         );
 
         $params = array(
@@ -110,8 +110,8 @@ if($op=='pay'){
         );
 
         $status = $order[0]['order_status'];
-        $this->pay($params);
-        PayModel::add($pay_data);//添加一条支付记录
-    exit;
+    	PayModel::add($pay_data);//添加一条支付记录
+		$this->pay($params);
+	    exit;
 }
 include $this->template("index");//读取模板

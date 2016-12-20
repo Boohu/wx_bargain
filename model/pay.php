@@ -35,10 +35,10 @@ class PayModel
     {
         global  $_W;
         $timestamp=$_W['timestamp'];//获得当前时间戳
-        $time=date('Y-m-d H:i:s', $timestamp);//将当前时间戳转化为时间格式
+        $time=date('Y-m-d H:i:s', $data['tid']);//将当前时间戳转化为时间格式
         $data['create_time']=$time;//为新增付款记录时间
         $data['update_time']=$time;//为付款记录更新时间
-        return $result = pdo_insert('wx_bargain_pay', $data);
+        return   pdo_insert('wx_bargain_pay', $data);
     }    /**
  * 更新付款记录
  * @param $data 要更新的记录的信息
