@@ -88,11 +88,11 @@
              width="100%">
     </div>
 
-    <div style="padding: 15px;background-color: #ffffff">
+    <div style="padding:5px 15px;background-color: #ffffff">
         <div><h3>{$activity[0]['name']}</h3></div>
         <div style="margin:5px 0 0 0 ">原价<strike>{$activity[0]['prize_old_price']}</strike></div>
         {if !empty($order)}
-        <div style="display:inline-block;width:150px;margin:5px 0 0 0 ">当前价格<strong style="color:#f0ad4e;">{$order[0]['current_price']}</strong>元
+        <div style="display:inline-block;margin:5px 0 0 0 ">当前价格<strong style="color:#f0ad4e;">{$order[0]['current_price']}</strong>元
         </div>
         {else}
         {if $activity[0]['prize_floor_price']==0}
@@ -106,43 +106,43 @@
                     style="color:#f0ad4e;">{$new_prize_num}</strong>份
             </div>
             <!--活动简介-->
-            <div style="display:block;text-align: center;background-color: #eeeeee;border-radius: 3px;padding: 5px;">
+            <div style="display:block;background-color: #eeeeee;border-radius: 3px;padding: 5px; margin: 10px 0px;">
                 {$activity[0]['desc']}
             </div>
 
             {if $new_prize_num==0&&$order[0]['order_status']<2}
-            <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
-                <h3 style="color:#f0ad4e;line-height: 30px;">很遗憾</h3>
+            <div style="border:1px solid #f56924;text-align: center;margin: 5px auto;border-radius: 3px;">
+                <h3 style="color:#f56924;line-height: 30px;">很遗憾</h3>
                 <p>奖品已经被其他小伙伴抢光了</p>
                 <p style="color: red">你可以进入公众号参与其他活动</p>
             </div>
             {elseif empty($order)&&$new_prize_num>0}
-            <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
-                <h3 style="color:#f0ad4e;line-height: 30px;">Ta已经砍价成功</h3>
-                <input id="btn" type="button"
-                       style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; "
-                       value="我要砍价">
+            <div style="text-align: center;margin: 5px auto;border-radius: 3px; background: #f56924;">
+                <input id="btn" type="button" style="background: #f56924;padding: 5px;font-size: 18px;color:#ffffff;border: none;" value="我要砍价">
                 <input id="sub" type="hidden" value="{$activity[0]['is_subscription_launch']}">
                 <input id="follow" type="hidden" value="{$information['follow']}">
                 <input id="openid" type="hidden" value="{$openid}">
                 <input id="start_time" type="hidden" value="{$judge2}">
             </div>
             {elseif !empty($order)&&$order[0]['order_status']==0&&$new_prize_num>0}
-            <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
-                <h3 style="color:#f0ad4e;line-height: 30px;">你已经参与砍价</h3>
-                <p>你可以点击右上角将链接分享给好友帮忙砍价</p>
+
+            <div style="border:1px solid #f56924;text-align: center;margin: 5px auto;border-radius: 3px; padding: 8px;">
+                砍价剩余时间：<strong id="order_d">00</strong>天<strong id="order_h">00</strong>小时<strong id="order_m">00</strong>分<strong id="order_s">00</strong>秒
+                <input type="hidden" id="order_end_time" value="{$order_end_time}">
 
             </div>
+
             {elseif $order[0]['order_status']!=0&&!empty($order)}
-            <div style="border:1px solid #f0ad4e;text-align: center;margin: 5px auto;border-radius: 3px;">
-                <h3 style="color:#f0ad4e;line-height: 30px;">恭喜你砍价成功</h3>
+            <div style="border:1px solid #f56924;text-align: center;margin: 5px auto;border-radius: 3px;">
                 {if $order[0]['order_status']==1}
+                <h3 style="color:#f56924;line-height: 30px;">恭喜你砍价成功</h3>
                 <input id="pay" type="button"
-                       style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; "
+                       style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f56924;color:#ffffff;border-radius: 3px; "
                        value="支付">
                 {elseif $order[0]['order_status']==2}
+                <h3 style="color:#f56924;line-height: 30px;">恭喜你支付成功</h3>
                 <input id="success" type="button"
-                       style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f0ad4e;color:#ffffff;border-radius: 3px; "
+                       style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f56924;color:#ffffff;border-radius: 3px; "
                        value="完善资料">
                 <p>请点击按钮填写或修改资料，耐心等待客服的联系</p>
                 {else}
@@ -150,54 +150,76 @@
                 {/if}
             </div>
             {/if}
-            {if !empty($order)}
-            <div style="display: block;background-color: #f0ad4e;margin: 5px auto;text-align:center;border-radius: 3px; ">
-                砍价剩余时间：<strong id="order_d">00</strong>天<strong id="order_h">00</strong>小时<strong id="order_m">00</strong>分<strong id="order_s">00</strong>秒
-                <input type="hidden" id="order_end_time" value="{$order_end_time}">
-            </div>
-            <div style="display:block;text-align: center;background-color: #f0ad4e;border-radius: 3px;padding: 5px;">
+
+            <!--判断有没人砍价-->
+            {if !empty($order) && $bargain_num>0}
+            <div style="display:block;text-align: center;background-color: #f56924;border-radius: 3px;padding: 5px; color: #fff; margin: 10px 0px;">
                 已有<strong>{$bargain_num}</strong>位好友帮你砍价成功，现价<strong>{$order[0]['current_price']}</strong>元
             </div>
+            {elseif !empty($order) && $bargain_num == 0}
+            <div style="display:block;text-align: center;background-color: #f0ad4e;border-radius: 3px;padding: 5px; color: #fff;margin: 10px 0px;">
+                暂时还没有好友帮你砍价
+            </div>
             {/if}
+
+
+
+
+
         </div>
-        <div style="padding: 3px;">
-            {if !empty($order)}
-            <div style="background-color: #eeeeee;width: 100%;text-align: center;margin:5px auto; ">
-                <h3 style="line-height:55px;">砍价记录</h3>
+        <div>
+
+            <div style="background-color: #fff;width: 100%;text-align: center;margin: 3px 0 0 0; padding-bottom: 10px; ">
+                <span style="line-height: 50px; font-size: 18px; font-weight: bold;">砍价记录</span>
+
+                {if !empty($order) && $bargain_num>0}
                 {loop $assist_information $data}
                 <div style="text-align: left;padding:2px 10px"><strong
                         style="color: #f0ad4e">{$data['nickname']}</strong>帮你砍掉了<strong
                         style="color: #f0ad4e">{$data['price']}</strong>元。
                 </div>
                 {/loop}
-                <span style="display:block;width:100%;height:20px;color: #333333;overflow: hidden;">-----------------------------------------------------------------------------------------------------------</span>
+                {elseif !empty($order) && $bargain_num == 0}
+                <div style="text-align: center;padding:2px 10px">
+                    你还没有好友帮你砍价哦！
+                </div>
+                {/if}
             </div>
-            {/if}
-            <div style="text-align: center;padding: 5px;background-color: #ffffff">
-                <h3 style="line-height: 50px;">活动规则</h3>
+
+
+
+
+            <div style="text-align: center;padding: 10px;background-color: #ffffff; margin: 3px 0 0 0;">
+                <span style="line-height: 50px; font-size: 18px; font-weight: bold;">活动规则</span>
                 {$html}
             </div>
-            <div style="display: block;text-align: center;margin: 15px 0 30px 0;width: 100%;">
-                <div style="display: block;text-align: center;height: 50px;color:#000;font-weight: bold;border-top-left-radius: 15px;border-top-right-radius: 15px;background-color: #f0ad4e;font-size: 20px;line-height: 50px;">砍价前二十排行榜</div>
-                <table  style="display:block;width:100%;background-color: #ffffff;border-bottom-left-radius: 15px;border-bottom-right-radius: 15px;border: 5px solid #f0ad4e;font-size: 15px;">
+
+
+            <div style="display: block;text-align: center;margin: 3px 0 130px 0;width: 100%;background-color: #ffffff;">
+
+
+                <span style="line-height: 50px; font-size:18px; font-weight: bold; ">砍价排行榜</span>
+                <table style=" display:block;width:94%;background-color: #ffffff;font-size: 15px; margin: 0 auto;">
                     <thead >
                     <tr >
-                        <th style="width: 200px;text-align: center;padding: 3px;background-color: #eeeeee;color: #f0ad4e">排名</th>
-                        <th style="width: 400px;text-align: center;padding: 3px;background-color: #eeeeee;color: #f0ad4e">昵称</th>
-                        <th style="width: 200px;text-align: center;padding: 3px;background-color: #eeeeee;color: #f0ad4e">价格</th>
+                        <th style="width: 200px;text-align: center;padding: 3px;background-color: #eeeeee;color: #999">排名</th>
+                        <th style="width: 400px;text-align: center;padding: 3px;background-color: #eeeeee;color: #999">昵称</th>
+                        <th style="width: 200px;text-align: center;padding: 3px;background-color: #eeeeee;color: #999">价格</th>
                     </tr>
                     </thead>
-                    <tbody >
+                    <tbody  >
                     {loop $top_data $datas}
-                    <tr style="border-top: 1px solid #eeeeee">
-                        <td style="text-align: center;">{$datas['top']}</td>
-                        <td style="text-align: center;">{$datas['nickname']}</td>
-                        <td style="text-align: center;">{$datas['current_price']}</td>
+                    <tr style="border-bottom: 1px dashed #eeeeee;">
+                        <td style="text-align: center; padding: 5px 0px;">{$datas['top']}</td>
+                        <td style="text-align: center;padding: 5px 0px;">{$datas['nickname']}</td>
+                        <td style="text-align: center;padding: 5px 0px;">{$datas['current_price']}</td>
                     </tr>
                     {/loop}
                     </tbody>
                 </table>
             </div>
+
+
         </div>
     </div>
     <!--活动倒计时-->
@@ -205,6 +227,7 @@
         活动剩余时间：<strong id="time_d">00</strong>天<strong id="time_h">00</strong>小时<strong id="time_m">00</strong>分<strong
             id="time_s">00</strong>秒
             <input id="end_time" type="hidden" value="{$activity[0]['end_time']}">
+
     </div>
 
     <div class="main" id="code">
