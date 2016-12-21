@@ -134,7 +134,7 @@
                 {/if}
             </div>
             {/if}
-            <div style="display:inline-block;width:150px;float: right;text-align: right;margin:5px 5px auto">奖品剩余<strong
+            <div style="display:inline-block;float: right;text-align: right;margin:5px 5px auto">奖品剩余<strong
                     style="color:#f0ad4e;">{$new_prize_num}</strong>份
             </div>
             <!--活动简介-->
@@ -177,7 +177,7 @@
                        {if empty($order[0]['phone'])} value="提交资料" {else} value="修改资料"{/if} >
                 <p>请点击按钮填写或修改资料，耐心等待客服的联系</p>
                 {else}
-                <p style="color:red;">奖品已发出,请保持电话畅通，方便快递联系您</p>
+                <p style="color:red; padding-top: 10px">已经核销</p>
                 {/if}
             </div>
             {/if}
@@ -306,10 +306,10 @@
         <div class="modal_main">
             <div class="modal_code">
                 <h4>温馨提示</h4>
-                <p style="color: red;">
-                    请长按二维码关注公众号<br/>
+                <p style="color: red; line-height: 2em;">
+                    请长按二维码进入公众号<br/>
                     {if $level!=4}
-                    并按回复cj{$aid}发起发砍价
+                    并回复<span style="background-color:#f7f7f7; border: 1px solid #a8a8a8; padding: 3px 10px;border-radius: 3px; margin: 0px 5px; font-size: 18px;">cj{$aid}</span>发起砍价
                     {/if}
                 </p>
                 <img class="img" src="{php echo   'http://'.$_SERVER['HTTP_HOST'].'/attachment/'.$activity[0]['wx_qr_code'] }">

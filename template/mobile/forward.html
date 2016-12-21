@@ -278,10 +278,10 @@
 
         <div class="modal_code">
             <h4>温馨提示</h4>
-            <p style="color: red">
-                请长按二维码关注公众号<br />
+            <p style="color: red; line-height: 2em;">
+                请长按二维码进入公众号<br />
                 {if $level!=4}
-                回复kj{$oid}帮忙好友砍价
+                并回复<span style="background-color:#f7f7f7; border: 1px solid #a8a8a8; padding: 3px 10px;border-radius: 3px; margin: 0px 5px; font-size: 18px;">kj{$oid}</span>帮TA砍价
                 {/if}
             </p>
             <img class="img" src="{php echo   'http://'.$_SERVER['HTTP_HOST'].'/attachment/'.$activity[0]['wx_qr_code'] }">
