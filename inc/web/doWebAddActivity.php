@@ -44,6 +44,7 @@ if(trim($bargain_max)==""){
 }
 $is_subscription_launch = $_GPC['is_subscription_launch'];  //获取订阅才发起是否开启
 $is_subscription_lassist = $_GPC['is_subscription_lassist']; //获取订阅才发起帮助是否开启*/
+$is_cashier_close=$_GPC['is_cashier_close'];//获取是否关闭收银台
 $bargain_time_astrict = $_GPC['bargain_time_astrict'];   //获取砍价限时
 $bargain_section_start = $_GPC['bargain_section_start'];  //获取砍价区间-开始值
 $bargain_section_end = $_GPC['bargain_section_end'];       //获取砍价区间-结束值
@@ -72,6 +73,7 @@ $data = array(
     'prize_num' => $prize_num,
     'is_subscription_launch' => $is_subscription_launch,
     'is_subscription_lassist' => $is_subscription_lassist,
+    'is_cashier_close'=>$is_cashier_close,
     'bargain_time_astrict' => $bargain_time_astrict,
     'bargain_section_start' => $bargain_section_start,
     'bargain_section_end' => $bargain_section_end,
