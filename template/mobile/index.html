@@ -31,10 +31,10 @@
         position: relative;
         z-index: 9999;
         display: block;
-        margin: 50px auto;
+        margin: 80px auto;
         width: 300px;
         background-color: #ffffff;
-        border-radius: 15px;
+        border-radius: 3px;
         overflow: hidden;
         box-shadow: #666 0px 0px 10px;
 
@@ -56,11 +56,11 @@
     .modal_btn {
         display: block;
         width: 300px;
-        height: 40px;
+        height: 48px;
         text-align: center;
-        font-size: 20px;
-        padding: 10px;
-        color: #007aff;
+        font-size: 18px;
+        line-height: 48px;
+        color: #3CC51F;
         cursor: pointer;
     }
 
@@ -68,15 +68,15 @@
         display: block;
         margin: 0;
         height: 1px;
-        background-color: #adadad;
+        background-color: #D5D5D6;
         width: 300px;
     }
 
     .modal_code img {
         display: block;
         margin: auto;
-        width: 270px;
-        height: 270px;
+        width: 200px;
+        height: 200px;
     }
 
 </style>
@@ -87,7 +87,6 @@
         <img src="{php echo   'http://'.$_SERVER['HTTP_HOST'].'/attachment/'.$activity[0]['head_pic'] }" alt=""
              width="100%">
     </div>
-
     <div style="padding:5px 15px;background-color: #ffffff">
         <div><h3>{$activity[0]['name']}</h3></div>
         <div style="margin:5px 0 0 0 ">原价<strike>{$activity[0]['prize_old_price']}</strike></div>
@@ -143,7 +142,7 @@
                 <h3 style="color:#f56924;line-height: 30px;">恭喜你支付成功</h3>
                 <input id="success" type="button"
                        style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f56924;color:#ffffff;border-radius: 3px; "
-                       value="完善资料">
+                       {if empty($order[0]['phone'])} value="提交资料" {else} value="修改资料"{/if} >
                 <p>请点击按钮填写或修改资料，耐心等待客服的联系</p>
                 {else}
                 <p style="color:red;">奖品已发出,请保持电话畅通，方便快递联系您</p>
@@ -161,11 +160,6 @@
                 暂时还没有好友帮你砍价
             </div>
             {/if}
-
-
-
-
-
         </div>
         <div>
 
@@ -186,18 +180,12 @@
                 {/if}
             </div>
 
-
-
-
-            <div style="text-align: center;padding: 10px;background-color: #ffffff; margin: 3px 0 0 0;">
-                <span style="line-height: 50px; font-size: 18px; font-weight: bold;">活动规则</span>
+            <div style="padding: 10px;background-color: #ffffff; margin: 3px 0 0 0;">
+                <p style="text-align: center;line-height: 50px; font-size: 18px; font-weight: bold;">活动规则</p>
                 {$html}
             </div>
 
-
-            <div style="display: block;text-align: center;margin: 3px 0 130px 0;width: 100%;background-color: #ffffff;">
-
-
+            <div style="display: block;text-align: center;margin: 3px 0 60px 0;width: 100%;background-color: #ffffff;">
                 <span style="line-height: 50px; font-size:18px; font-weight: bold; ">砍价排行榜</span>
                 <table style=" display:block;width:94%;background-color: #ffffff;font-size: 15px; margin: 0 auto;">
                     <thead >
@@ -218,39 +206,29 @@
                     </tbody>
                 </table>
             </div>
-
-
         </div>
     </div>
     <!--活动倒计时-->
-    <div style="position:fixed;bottom:0;z-index:99;width:100%;padding:15px;background-color: #333333;color:#ffffff;box-shadow: #666 0px 0px 10px;text-align: center">
+    <div style="position:fixed;bottom:0;z-index:99;width:100%;padding:15px;background-color: #ffffff;color:#000;text-align: center;">
         活动剩余时间：<strong id="time_d">00</strong>天<strong id="time_h">00</strong>小时<strong id="time_m">00</strong>分<strong
             id="time_s">00</strong>秒
             <input id="end_time" type="hidden" value="{$activity[0]['end_time']}">
-
     </div>
-
     <div class="main" id="code">
         <div class="modal_main">
-            <div class="modal_head">
-                <h4>请先关注公众号</h4>
-
-            </div>
-            <div class="line"></div>
             <div class="modal_code">
+                <h4>温馨提示</h4>
                 <p style="color: red;">
                     请长按二维码关注公众号<br/>
                     {if $level!=4}
                     并按回复cj{$aid}发起发砍价
                     {/if}
                 </p>
-                <img class="img"
-                     src="{php echo   'http://'.$_SERVER['HTTP_HOST'].'/attachment/'.$activity[0]['wx_qr_code'] }">
+                <img class="img" src="{php echo   'http://'.$_SERVER['HTTP_HOST'].'/attachment/'.$activity[0]['wx_qr_code'] }">
             </div>
-
             <div class="line"></div>
             <div class="modal_btn">
-                <label>确定</label>
+               知道了
             </div>
         </div>
         <div class="background"></div>
@@ -258,19 +236,15 @@
     <!--活动未开始提示-->
     <div class="main" id="activity">
         <div class="modal_main">
-            <div class="modal_head">
-                <h3 style="color: red;font-weight: bold">活动未开始</h3>
-            </div>
-            <div class="line"></div>
             <div class="modal_code">
+                <h3 style="color: red;">活动未开始</h3>
                 <p>该活动将于<strong style="color: red">{$activity[0]['start_time']}</strong>开始</p>
-                <p>请长按二维码，<span style="color: red">关注公众号</span>了解更多详情</p>
-                <img class="img"
-                     src="{php echo   'http://'.$_SERVER['HTTP_HOST'].'/attachment/'.$activity[0]['wx_qr_code'] }">
+                <p>请长按二维码，<span style="color: red">进入公众号</span>了解更多详情</p>
+                <img class="img" src="{php echo   'http://'.$_SERVER['HTTP_HOST'].'/attachment/'.$activity[0]['wx_qr_code'] }">
             </div>
             <div class="line"></div>
             <div class="modal_btn">
-                <label>确定</label>
+                知道了
             </div>
         </div>
         <div class="background"></div>

@@ -2,7 +2,6 @@
 <style>
     body{
         background-color: #eeeeee;
-        padding: 5px;
     }
     .footer {
         display: none;
@@ -10,29 +9,30 @@
     /*头部样式*/
     .head{
         display: block;
-        margin-bottom:  20px;
+        margin-bottom:  5px;
         width: 100%;
         height: 50px;
         background: #ffffff;
         color:#007aff ;
-        box-shadow: #666 0px 0px 10px;
         padding: 2px;
         text-align: center;
+    }
+    .head p{
+        font-size: 24px;
+        line-height: 50px;
     }
     /*输入表单框样式*/
     .form {
         display: block;
-        margin: 0;
+        margin: 0px 0px 20px 0px;
         padding:0;
         width: 100%;
         background-color: #ffffff;
-        box-shadow: #666 0px 0px 10px;
 
     }
     .form div{
         display: block;
         width: 100%;
-        height: 50px;
 
 
     }
@@ -61,8 +61,8 @@
     /*输入表单按钮框样式*/
     .btn{
         display: inline-block;
-        width: 100px;
-        height: 32px;
+        width: 90%;
+        height: 46px;
         border-radius: 5px;
         margin: 10px 5px;
         color: #ffffff;
@@ -81,21 +81,20 @@
 
 </style>
 <div class="head">
-    <h2>完善信息</h2>
+    <p>完善信息</p>
 </div>
 
     <form  method="post" class="form" role="form" action="{php echo $this->createMobileUrl('addInformation',array('oid'=>$order[0]['id'],'aid'=>$order[0]['activity_id']))}">
         <div class="input">
             <span>姓名</span><input type="text" name="name"  placeholder="请输入姓名" value="{$order[0]['name']}">
         </div>
-        <div style="margin: 0 auto;width: 90%;background-color: #adadad;height: 1px"></div>
+        <div style="margin: 0 auto;width: 90%;background-color:#D9D9D9;height: 1px"></div>
         <div class="input">
             <span>手机号</span><input type="text" name="phone"  placeholder="请输入手机号" value="{$order[0]['phone']}">
         </div>
-        <div style="margin: 0 auto;width: 90%;background-color: #adadad;height: 1px"></div>
-        <div style="text-align: center">
-            <input type="submit" value="保存" id="save" class="btn" style="border: 1px solid #007aff;background-color:#007aff ">
-            <input class="btn" value="取消" type="button"style="border: 1px solid #dd524d;background-color:#dd524d">
+        <div style="margin: 0 auto;width: 90%;background-color: #D9D9D9;height: 1px;margin-bottom: 20px;"></div>
+        <div style="text-align: center; background-color:#eeeeee;">
+            <input type="submit" value="保存" id="save" class="btn" style="border: 1px solid #007aff; font-size:18px;background-color:#007aff; color:#fff;margin-top: 20px; ">
         </div>
     </form>
 <div class="prompt">
