@@ -239,6 +239,28 @@
     <div class="background"></div>
 </div>
 <script>
+    /*分享链接JS*/
+    wx.ready(function () {
+        sharedata = {
+            title: '{$activity[0]["wx_title"]}',
+            desc: '{$activity[0]["wx_friend_centent"]}',
+
+            link: "{php echo   'http://'.$_SERVER['HTTP_HOST'] . str_replace('./','/',$this->createMobileUrl('forward',array('oid'=>$oid)))  }",
+            imgUrl: 'http://' + "{php echo $_SERVER['HTTP_HOST']}" + '/attachment/{$activity[0]["wx_pic"]}',
+            success: function () {
+            },
+            cancel: function () {
+            }
+        };
+        wx.onMenuShareAppMessage(sharedata);
+
+        wx.hideMenuItems({
+            menuList: ["menuItem:copyUrl", "menuItem:share:qq", "menuItem:originPage", "menuItem:share:QZone", "menuItem:openWithQQBrowser", "menuItem:openWithSafari"] // 要显示的菜单项，所有menu项见附录3
+        });
+
+    });
+
+
     var end_time=$('#end_time').val();//获取活动结束时间
     var time_end =  new Date(end_time.replace('-','/').replace('-','/')).getTime(); //设定目标时间
     var order_end_time=$('#order_end_time').val();//获取订单结束时间
