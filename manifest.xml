@@ -32,7 +32,7 @@
 
 
             <!--	<entry title="订单管理" do="order" state="" direct="false" />-->
-       <!--     <entry title="多域名管理" do="domain" state="" direct="false" />-->
+            <entry title="多域名管理" do="domain" state="" direct="false" />
 		</menu>
 		<home>
 			<entry title="砍价首页" do="bargain" state="" direct="true" />

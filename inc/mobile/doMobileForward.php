@@ -8,6 +8,13 @@
 require_once(dirname(__FILE__) . "/../../model/active.php");
 require_once(dirname(__FILE__) . "/../../model/order.php");
 require_once(dirname(__FILE__) . "/../../model/assist.php");
+
+require_once(dirname(__FILE__) . "/../../model/domain.php");
+
+$domainname=Domain::getRandom();
+
+
+
 global $_GPC, $_W;
 $openid = $_W['openid'];//获取帮忙砍价用户openid
 $weid = $_W['uniacid'];//获取当前公众号ID
