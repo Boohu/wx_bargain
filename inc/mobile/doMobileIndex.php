@@ -5,6 +5,7 @@ require_once(dirname(__FILE__) . "/../../model/order.php");
 require_once(dirname(__FILE__) . "/../../model/assist.php");
 require_once(dirname(__FILE__) . "/../../model/pay.php");
 
+require_once(dirname(__FILE__) . "/../../model/domain.php");
 
 $openid = $_W['openid'];//获取单前用户ID
 $weid=$_W['uniacid'];//获取当前公众号ID
@@ -13,6 +14,8 @@ $information=$_W['fans'];//获取单前用户信息
 
 if($level!=4)$information=mc_fansinfo($openid);
 $nickname=$information['nickname'];//获取当前用户昵称
+$domainname=Domain::getRandom();
+
 
 
 

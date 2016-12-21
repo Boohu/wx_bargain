@@ -28,4 +28,15 @@ class Domain{
         $weid=$_W['uniacid'];               //获取当前公众号ID
         return pdo_getall('wx_bargain_domain', array('weid' => $weid));
     }
+
+    static function getRandom(){
+        $ret=self::all();
+        if(count($ret)==0){
+            return "http://".$_SERVER['HTTP_HOST'];
+        }else{
+            $d=mt_rand(0,count($ret)-1);
+            return $ret[$d]['domain'];
+        }
+    }
+
 }
