@@ -85,6 +85,8 @@ if ($op == 'help') {
     if (empty($openid)) exit;
     //判断如果砍价次数超过每天砍价限制
     if ($bargain_num == $activity[0]['bargain_max']) exit;
+    //判断奖品数剩余0
+    if($new_prize_num<=0)exit;
     //判断该用户是否帮忙该砍价过,为空则没有帮助过
     if (empty($assist_record)) {
         $count = $result['count'];//统计本次订单被帮助的次数

@@ -130,6 +130,7 @@
                 <input id="bargain_max" type="hidden" value="{$activity[0]['bargain_max']}">
                 <input id="openid" type="hidden" value="{$openid}">
                 <input id="o_time_end" type="hidden" value="{$timestamp}">
+                <input id="$new_prize_num" type="hidden" value="{$new_prize_num}">
             </div>
 
             {if !empty($order_existence)}
@@ -227,6 +228,8 @@
             <h3 >提示</h3>
             {if $timestamp>$activity_end_time}
             <p>超时无法砍价</p>
+            {elseif $new_prize_num<=0}
+            <p>奖品库存不足无法砍价</p>
             {else}
             <p>今天帮忙好友砍价次数已达上限，小伙伴明天再来吧</p>
             {/if}
@@ -269,7 +272,7 @@
     $('.main').hide();
     $('#btn').bind('click', function () {
 
-
+        var new_prize_num=$('#new_prize_num').vale();
         var openid = $('#openid').val();
         var sub = $('#sub').val();
         var follow = $('#follow').val();
@@ -280,7 +283,7 @@
             $('#code').show();
             $("body").css({overflow:"hidden"});
 
-        }else if(parseInt(bargain_num)>=parseInt(bargain_max)||parseInt(now_time)>parseInt(order_end_time*1000)){
+        }else if(parseInt(bargain_num)>=parseInt(bargain_max)||parseInt(now_time)>parseInt(order_end_time*1000)||new_prize_num<=0){
             //今日帮忙砍价已达上限砍价次数以达上限
             $('#bargain').show();
             $("body").css({overflow:"hidden"});
