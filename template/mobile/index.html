@@ -78,6 +78,39 @@
         width: 200px;
         height: 200px;
     }
+    .main_title{
+        background-color: #fff;width: 100%;margin: 3px 0 0 0; padding: 1px 10px 10px 10px;
+    }
+    .text_c{
+        text-align: center;
+    }
+    .title_line{
+        display: inline-block;
+        width:10%;
+    }
+    .title_line .linea{
+        display: inline-block;
+        width: 40%;
+        border-bottom: 1px solid #000;
+        vertical-align: middle;
+    }
+    .title_line .lineb{
+        display: inline-block;
+        width: 8px;
+        height: 8px;
+        border-radius: 100%;
+        border: 1px solid #000;
+        vertical-align: middle;
+    }
+    .title_text{
+        display: inline-block;
+        padding: 3px 15px;
+        color: #000;
+        font-size: 18px;
+        margin-top: 8px;
+        font-weight: bold;
+        vertical-align: middle;
+    }
 
 </style>
 
@@ -163,8 +196,26 @@
         </div>
         <div>
 
-            <div style="background-color: #fff;width: 100%;text-align: center;margin: 3px 0 0 0; padding-bottom: 10px; ">
-                <span style="line-height: 50px; font-size: 18px; font-weight: bold;">砍价记录</span>
+
+            <div class="main_title">
+                    <div class="text_c" style="margin-top:10px;">
+                        <div class="title_line" style="margin-right: -10px;">
+                            <span class="linea"></span>
+                            <span class="lineb"></span>
+                        </div>
+                        <div class="title_text">
+                            <p style="min-width: 1em; color: rgb(0, 0, 0); font-size: 18px; line-height: 18px; font-weight: bold;">
+                                &nbsp;砍价记录&nbsp;
+                            </p>
+                        </div>
+                        <div  class="title_line" style="margin-left: -10px;">
+                            <span class="lineb"></span>
+                            <span class="linea"></span>
+                        </div>
+                    </div>
+                <p style="text-align: center;margin-top:-10px;">
+                    <span style="font-size: 12px; color: rgb(127, 127, 127);">BARGAIN RECORD</span>
+                </p>
 
                 {if !empty($order) && $bargain_num>0}
                 {loop $assist_information $data}
@@ -182,14 +233,50 @@
             <style>
                 .bargain_img img{max-width: 100%;}
             </style>
-            <div style="padding: 10px;background-color: #ffffff; margin: 3px 0 0 0;" class="bargain_img">
-                <p style="text-align: center;line-height: 50px; font-size: 18px; font-weight: bold;">活动规则</p>
+            <div class="main_title bargain_img">
+                    <div class="text_c" style="margin-top:10px;">
+                        <div class="title_line" style="margin-right: -10px;">
+                            <span class="linea"></span>
+                            <span class="lineb"></span>
+                        </div>
+                        <div class="title_text">
+                            <p style="min-width: 1em; color: rgb(0, 0, 0); font-size: 18px; line-height: 18px; font-weight: bold;">
+                                &nbsp;活动简介&nbsp;
+                            </p>
+                        </div>
+                        <div  class="title_line" style="margin-left: -10px;">
+                            <span class="lineb"></span>
+                            <span class="linea"></span>
+                        </div>
+                    </div>
+                <p style="text-align: center;margin-top:-10px;">
+                    <span style="font-size: 12px; color: rgb(127, 127, 127);">BARGAIN INTRODUCTION</span>
+                </p>
+
+
                 {$html}
             </div>
 
-            <div style="display: block;text-align: center;margin: 3px 0 60px 0;width: 100%;background-color: #ffffff;">
-                <span style="line-height: 50px; font-size:18px; font-weight: bold; ">砍价排行榜</span>
-                <table style=" display:block;width:94%;background-color: #ffffff;font-size: 15px; margin: 0 auto;">
+            <div class="main_title" style="margin-bottom: 60px;">
+                    <div class="text_c" style="margin-top:10px;">
+                        <div class="title_line" style="margin-right: -10px;">
+                            <span class="linea"></span>
+                            <span class="lineb"></span>
+                        </div>
+                        <div class="title_text">
+                            <p style="min-width: 1em; color: rgb(0, 0, 0); font-size: 18px; line-height: 18px; font-weight: bold;">
+                                &nbsp;砍价排行&nbsp;
+                            </p>
+                        </div>
+                        <div  class="title_line" style="margin-left: -10px;">
+                            <span class="lineb"></span>
+                            <span class="linea"></span>
+                        </div>
+                    </div>
+                <p style="text-align: center;margin-top:-10px;">
+                    <span style="font-size: 12px; color: rgb(127, 127, 127);">BARGAIN RANKING</span>
+                </p>
+                <table style=" display:block;width:96%;background-color: #ffffff;font-size: 15px; margin: 0 auto;">
                     <thead >
                     <tr >
                         <th style="width: 200px;text-align: center;padding: 3px;background-color: #eeeeee;color: #999">排名</th>
@@ -211,7 +298,7 @@
         </div>
     </div>
     <!--活动倒计时-->
-    <div style="position:fixed;bottom:0;z-index:99;width:100%;padding:15px;background-color: #ffffff;color:#000;text-align: center;">
+    <div style="position:fixed;bottom:0;z-index:99;width:100%;padding:15px;background-color: #ffffff;color:#000;text-align: center; box-shadow:0px -1px 2px #f7f7f7;">
         活动剩余时间：<strong id="time_d">00</strong>天<strong id="time_h">00</strong>小时<strong id="time_m">00</strong>分<strong
             id="time_s">00</strong>秒
             <input id="end_time" type="hidden" value="{$activity[0]['end_time']}">
@@ -251,6 +338,7 @@
         </div>
         <div class="background"></div>
     </div>
+</div>
 
     <script>
         $('.main').hide() //隐藏提示框
