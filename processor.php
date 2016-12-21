@@ -34,6 +34,7 @@ class Wx_bargainModuleProcessor extends WeModuleProcessor
             }
         } elseif ($op == "kj") {
             $order = OrderModel::getOrder($id);
+            $activity = ActiveModel::get($order[0]['activity_id']);//获取活动信息
             if (empty($order)) {
                 $reply = "订单编号错误";
                 return $this->respText($reply);
@@ -42,7 +43,7 @@ class Wx_bargainModuleProcessor extends WeModuleProcessor
                 return $this->respNews(array(
                     'Title' => "订单编号" . $order[0]['id'],
                     'Description' => 快点开链接帮你的小伙伴砍价吧,
-                    'PicUrl' => tomedia('/preview.jpg'),
+                    'PicUrl' => tomedia($activity[0]['head_pic']),
                     'Url' => $this->createMobileUrl('forward', array('oid' => $id)),
                 ));
             }
