@@ -1,4 +1,5 @@
 {template 'common/header'}
+{php echo register_jssdk(false);}
 <style>
     /*未关注提示框样式*/
     .main {
@@ -248,7 +249,7 @@
             title: '{$activity[0]["wx_title"]}',
             desc: '{$activity[0]["wx_friend_centent"]}',
 
-            link: "{php echo   'http://'.$_SERVER['HTTP_HOST'] . str_replace('./','/',$this->createMobileUrl('forward',array('oid'=>$oid)))  }",
+            link: "{php echo   $domainname . str_replace('./','/',$this->createMobileUrl('forward',array('oid'=>$oid)))  }",
             imgUrl: 'http://' + "{php echo $_SERVER['HTTP_HOST']}" + '/attachment/{$activity[0]["wx_pic"]}',
             success: function () {
             },
