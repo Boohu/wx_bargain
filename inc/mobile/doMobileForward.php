@@ -45,7 +45,6 @@ if ($openid == $order[0]['openid']) {
 
 $activity = ActiveModel::get($order[0]['activity_id']); /*取出当前活动*/
 
-
 $title=$activity[0]['name']; /*设置页面标题为活动名称*/
 
 
@@ -123,13 +122,17 @@ if ($op == 'help') {
                 $updata = array('current_price' => $floor_price);//将该活动底价添加到数组
                 OrderModel::update($updata);//更新订单当前价格价格为底价
                 //判断如果底价为0
-                if ($activity[0]['prize_floor_price'] == 0) {
+                if ($activity[0]['prize_floor_price'] == 0||$activity[0]['is_cashier_close']==1) {
                     $updata = array('order_status' => 2);//将订单状态2=待核销传给数组
                     OrderModel::update($updata);//更新订单状态
                 } else {
                     $updata = array('order_status' => 1);//将订单状态1=待付款传给数组
                     OrderModel::update($updata);//更新订单状态
                 }
+                if($activity[0]['is_cashier_close']==1){
+
+                }
+
             }
             message('砍价成功！', '../../app/' . $this->createMobileUrl('forward', array('oid' => $oid), 'success'));
         }
