@@ -105,7 +105,7 @@
                     style="color:#f0ad4e;">{$new_prize_num}</strong>份
             </div>
             <!--活动简介-->
-            <div style="display:block;background-color: #eeeeee;border-radius: 3px;padding: 5px; margin: 10px 0px;">
+            <div style="display:block;background-color: #f7f7f7;border-radius: 3px;padding: 5px;line-height: 2em; margin: 10px 0px;">
                 {$activity[0]['desc']}
             </div>
 
@@ -179,8 +179,10 @@
                 </div>
                 {/if}
             </div>
-
-            <div style="padding: 10px;background-color: #ffffff; margin: 3px 0 0 0;">
+            <style>
+                .bargain_img img{max-width: 100%;}
+            </style>
+            <div style="padding: 10px;background-color: #ffffff; margin: 3px 0 0 0;" class="bargain_img">
                 <p style="text-align: center;line-height: 50px; font-size: 18px; font-weight: bold;">活动规则</p>
                 {$html}
             </div>
