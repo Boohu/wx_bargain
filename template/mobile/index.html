@@ -169,10 +169,9 @@
                 {if $order[0]['order_status']==1}
                 <h3 style="color:#f56924;line-height: 30px;">恭喜你砍价成功</h3>
                 <input id="pay" type="button"
-                       style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f56924;color:#ffffff;border-radius: 3px; "
-                       value="支付">
+                       style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f56924;color:#ffffff;border-radius: 3px; " value="支付">
                 {elseif $order[0]['order_status']==2}
-                <h3 style="color:#f56924;line-height: 30px;">恭喜你支付成功</h3>
+                <h3 style="color:#f56924;line-height: 30px;">{if $activity[0]['is_cashier_close']==0}恭喜你支付成功{else}恭喜你砍价成功{/if}</h3>
                 <input id="success" type="button"
                        style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f56924;color:#ffffff;border-radius: 3px; "
                        {if empty($order[0]['phone'])} value="提交资料" {else} value="修改资料"{/if} >
