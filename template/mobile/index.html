@@ -179,6 +179,8 @@
                     <p>请点击按钮填写资料，务必填写正确信息</p>
                     {elseif !empty($verification_code)&&!empty($order[0]['phone'])}
                     <input id="verification" type="button" style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f56924;color:#ffffff;border-radius: 3px; " value="核销">
+                    {else}
+                    <p>请点耐心等待客服的联系</p>
                     {/if}
                 {else}
                 <p style="color:red; padding-top: 10px">已经核销</p>
