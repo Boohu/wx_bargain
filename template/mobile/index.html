@@ -172,10 +172,15 @@
                        style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f56924;color:#ffffff;border-radius: 3px; " value="支付">
                 {elseif $order[0]['order_status']==2}
                 <h3 style="color:#f56924;line-height: 30px;">{if $activity[0]['is_cashier_close']==0}恭喜你支付成功{else}恭喜你砍价成功{/if}</h3>
+                    {if empty($verification_code)}
                 <input id="success" type="button"
                        style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f56924;color:#ffffff;border-radius: 3px; "
                        {if empty($order[0]['phone'])} value="提交资料" {else} value="修改资料"{/if} >
                 <p>请点击按钮填写或修改资料，耐心等待客服的联系</p>
+                    {elseif !empty($verification_code)}
+                    <input id="verification" type="button" style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f56924;color:#ffffff;border-radius: 3px; ">
+                    <p>请点击按钮填写或修改资料，耐心等待客服的联系</p>
+                    {/if}
                 {else}
                 <p style="color:red; padding-top: 10px">已经核销</p>
                 {/if}
@@ -397,6 +402,11 @@
         //填写资料跳转
         $('#success').bind('click', function () {
             window.location = "{php echo $this->createMobileUrl('information',array('oid'=>$order[0]['id']));}";
+        })
+
+        //核销跳转按钮
+        $('#verification').bind('click', function () {
+            window.location = "{php echo $this->createMobileUrl('verification',array('oid'=>$order[0]['id'],'aid'=>$aid));}";
         })
 
         var end_time = $('#end_time').val();//获得活动结束时间

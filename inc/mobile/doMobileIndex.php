@@ -35,7 +35,7 @@ $top_data=OrderModel::getTop($aid);//查询本次活动价格最低排名前20�
 
 $activity = ActiveModel::get($aid); /*取出当前活动*/
 $active_state=$activity[0]['active_state'];//取出当前活动状态
-
+$verification_code=$activity[0]['verification_code'];//取出当前核销码
 $title=$activity[0]['name']; /*设置页面标题为活动名称*/
 
 if (count($activity) != 1||$active_state==0) exit; /*活动不存在*/

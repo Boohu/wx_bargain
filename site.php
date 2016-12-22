@@ -105,6 +105,13 @@ class Wx_bargainModuleSite extends WeModuleSite {
         require_once(dirname(__FILE__) . "/inc/mobile/doMobileInformation.php");
 
     }
+
+    public function doMobileVerification(){
+        //核销页面
+        require_once(dirname(__FILE__) . "/inc/mobile/doMobileVerification.php");
+
+    }
+
     public function doMobileAddInformation(){
         //资料更新控制器
         require_once(dirname(__FILE__) . "/inc/mobile/doMobileAddInformation.php");
