@@ -172,14 +172,13 @@
                        style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f56924;color:#ffffff;border-radius: 3px; " value="支付">
                 {elseif $order[0]['order_status']==2}
                 <h3 style="color:#f56924;line-height: 30px;">{if $activity[0]['is_cashier_close']==0}恭喜你支付成功{else}恭喜你砍价成功{/if}</h3>
-                    {if empty($verification_code)}
-                <input id="success" type="button"
+                    {if empty($order[0]['phone'])}
+                    <input id="success" type="button"
                        style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f56924;color:#ffffff;border-radius: 3px; "
-                       {if empty($order[0]['phone'])} value="提交资料" {else} value="修改资料"{/if} >
-                <p>请点击按钮填写或修改资料，耐心等待客服的联系</p>
-                    {elseif !empty($verification_code)}
+                        value="提交资料"  >
+                    <p>请点击按钮填写资料，务必填写正确信息</p>
+                    {elseif !empty($verification_code)&&!empty($order[0]['phone'])}
                     <input id="verification" type="button" style="margin-bottom:10px;font-size: 20px;border:none;background-color:#f56924;color:#ffffff;border-radius: 3px; " value="核销">
-                    <p>请点击按钮填写或修改资料，耐心等待客服的联系</p>
                     {/if}
                 {else}
                 <p style="color:red; padding-top: 10px">已经核销</p>
