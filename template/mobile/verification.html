@@ -1,3 +1,37 @@
 {template 'common/header'}
-1111
+<style>
+
+    body{
+        background-color: #eeeeee;
+    }
+    .footer {
+        display: none;
+    }
+</style>
+
+<div style="display: block;width: 100%;background-color: #ffffff">
+    <div style="display: block;width: 100%;margin: 5px;padding: 0 10px">
+        <label>活动编号：</label>{$order[0]['id']}
+    </div>
+    <div style="display: block;width: 100%;margin: 5px;padding: 0 10px">
+        <label>昵称：</label>{$order[0]['nickname']}
+    </div>
+    <div style="display: block;width: 100%;margin: 5px;padding: 0 10px">
+        <label>价格：</label>{$order[0]['current_price']}
+    </div>
+    <div style="display: block;width: 100%;margin: 5px;padding: 0 10px">
+        <label>完成时间：</label>{$order[0]['update_time']}
+    </div>
+</div>
+<div style="display: block;width: 100%;margin:10px auto;background-color: #ffffff">
+    <form action="{php echo $this->createMobileUrl('verification',array('op'=>'verification','aid'=>$aid,'oid'=>$oid))}"  method="post" class="form" role="form">
+        <div style="display: block;width: 100%;text-align: center;">
+            <label>核销码：</label><input  type="text" name="verification_code" id="verification_code">
+        </div>
+        <div style="display: block;width: 100%;text-align: center">
+            <input id="btn" type="submit" value="核销">
+        </div>
+    </form>
+</div>
+
 {template 'common/footer'}
