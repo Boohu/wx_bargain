@@ -13,8 +13,11 @@ $op=$_GPC['op'];//获取当前操作类型
 $oid=$_GPC['oid'];//获得当前订单信息
 $aid=$_GPC['aid'];//获得当前活动ID
 $order=OrderModel::getOrder($oid);//获取当前订单信息
+var_dump($op);
+var_dump($oid);
+var_dump($aid);
 
-//如果操作为verification执行核销操作
+/*//如果操作为verification执行核销操作
 if($op=='verification'){
     $input_verification_code=$_GPC['verification_code'];//获取输入的核销码
     $order=OrderModel::getExistence($openid);//根据openid和活动ID查询当前订单信息
@@ -29,5 +32,4 @@ if($op=='verification'){
         message('核销失败活动！', '../../app/' . $this->createMobileUrl('index',array('aid'=>$aid),'error'));
 
     }
-}
-include $this->template("verification");
+}*/
