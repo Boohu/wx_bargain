@@ -33,3 +33,4 @@ if($op=='verification'){
 
     }
 }*/
+include $this->template('verification');
