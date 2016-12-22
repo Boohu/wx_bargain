@@ -77,11 +77,12 @@
 
 
     .bargain_btn {
-        display:block;width:49%;background-color:#f56924;font-size: 18px;color:#ffffff; border:none;border-radius: 3px; padding: 5px; text-align: center;
+        display:block;width:49%;background-color:#f56924;font-size: 18px;
+        color:#ffffff; border:none;border-radius: 3px; padding: 7px; text-align: center;
     }
 
     .main_title{
-        background-color: #fff;width: 100%;margin: 3px 0 0 0; padding: 1px 10px 10px 10px;
+        background-color: #fff;width: 100%;margin: 10px 0 0 0; padding: 1px 10px 10px 10px;
     }
     .text_c{
         text-align: center;
@@ -161,7 +162,7 @@
         {elseif empty($assist_record)&&$order[0]['order_status']==0}
         <div style="height: 50px;">
             <div style="margin: 10px 0px ; ">
-                <input id="btn" type="button" class="bargain_btn" style="float: left;" value="帮TA砍价">
+                <input id="btn" type="button"  style=" width:49%;float: left;background-color:#f56924;font-size: 18px;color:#ffffff; border:none;border-radius: 3px; padding: 5px; " value="帮TA砍价">
                 <input id="sub" type="hidden" value="1">
                 <input id="follow" type="hidden" value="{$information['follow']}">
                 <input id="bargain_num" type="hidden" value="{$bargain_num['count']}">
@@ -182,7 +183,7 @@
         {else}
         <div style="height: 45px;">
             <div style="margin: 10px 0px ;">
-                <input  type="button" class="bargain_btn" style="float: left;" value="已砍">
+                <input  type="button" style=" width:49%;float: left;background-color:#f56924;font-size: 18px;color:#ffffff; border:none;border-radius: 3px; padding: 5px; " value="已砍">
             </div>
             {if !empty($order_existence)}
             <a class="bargain_btn" style="float:right;text-decoration: none; color: #fff;" href="{php echo $this->createMobileUrl('index',array('aid'=>$activity[0]['id']))}">我的砍价</a>
